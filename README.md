@@ -1,1 +1,2 @@
 "# increscendo_app" 
+APP EN DESARROLLO,NO ROBAR, A DIOSITO NO LE GUSTA ESO
