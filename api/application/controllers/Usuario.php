@@ -7,6 +7,7 @@ class Usuario extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Usuario_model');
+		$this->t_sesion = 14400;
 	}
 
 	public function getRol()
@@ -42,6 +43,7 @@ class Usuario extends CI_Controller {
 						"html" 		 => $password
 					]);
 					$data['mensaje'] = "si se pudo";
+					$data['exito']	 = 1;
  				}
 			}
 		}
@@ -51,16 +53,37 @@ class Usuario extends CI_Controller {
 
 	public function login()
 	{
-		$response = ["exito" => 0, "mensaje" => "usuario y/o contraseña incorrectos"];
+		$response = [
+			"exito"   => false, 
+			"mensaje" => "usuario y/o contraseña incorrectos"
+		];
+
 		$datos = json_decode(file_get_contents('php://input'));
+		
 		if (isset($datos->usuario) && isset($datos->password)) {
 			$args = [
 				"usuario"  => $datos->usuario,
 				"password" => sha1($datos->password)
 			];
+			$logued = $this->Usuario_model->login($args);
+			if ($logued) {
+				$this->load->library('Token');
+				$token = new Token();
 
-			if ($this->Usuario_model->login($args)) {
-				$response["mensaje"] = "logueado correctamente";
+				$t_vida  = time() + $this->t_sesion;
+
+				$s_token = $token->_setToken_([
+					"expira" => time()+7200,
+					"data"   => $logued
+				]);
+
+				$this->config->set_item('usuario', $logued);
+
+				$response["token"]    = $s_token;
+				$response["mensaje"]  = "logueado correctamente";
+				$response["exito"]    = true;
+				$response["expira"]   = $this->t_sesion;
+				$response["registro"] = $logued;
 			}
 		}
 		$this->output->set_output(json_encode($response));
