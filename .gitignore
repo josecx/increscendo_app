@@ -1,0 +1,60 @@
+#---------- FRONTEND ----------#
+interfaz/.DS_Store
+interfaz/node_modules
+interfaz/dist
+
+# local env files
+interfaz/.env.local
+interfaz/.env.*.local
+
+# Log files
+vtc/npm-debug.log*
+vtc/yarn-debug.log*
+vtc/yarn-error.log*
+vtc/pnpm-debug.log*
+
+# Editor directories and files
+interfaz/.idea
+interfaz/.vscode
+interfaz/*.suo
+interfaz/*.ntvs*
+interfaz/*.njsproj
+interfaz/*.sln
+interfaz/*.sw?
+
+#---------- BACKEND ----------#
+api/.DS_Store
+
+api/application/cache/*
+api/!application/cache/index.html
+
+api/application/logs/*
+api/!application/logs/index.html
+
+api/!application/*/.htaccess
+
+api/composer.lock
+
+api/user_guide_src/build/*
+api/user_guide_src/cilexer/build/*
+api/user_guide_src/cilexer/dist/*
+api/user_guide_src/cilexer/pycilexer.egg-info/*
+api/vendor/
+#api/application/config/database.php
+# IDE Files
+#-------------------------
+api/nbproject/
+api/.idea/*
+
+## Sublime Text cache files
+api/*.tmlanguage.cache
+api/*.tmPreferences.cache
+api/*.stTheme.cache
+api/*.sublime-workspace
+api/*.sublime-project
+api/tests/tests/
+api/tests/results/
+
+#---------- PRODUCCION ----------#
+#/assets
+#/index.html
