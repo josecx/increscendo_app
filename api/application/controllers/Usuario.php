@@ -17,73 +17,125 @@ class Usuario extends CI_Controller {
 		]));
 	}
 
+	public function getSexo()
+	{
+		$this->output->set_output(json_encode([
+			'lista' => $this->Usuario_model->getSexo($_GET)
+		]));
+	}
+
+	public function validarCorreo()
+	{	
+		$response = ["exito" => false];
+		$correo = $this->Usuario_model->validarCorreo($_GET["correo"]);
+		if ($correo) {
+			$response["exito"]    = true;
+			$response["mensaje"]  = "Ya existe una cuenta registrada con el correo ".$_GET["correo"];
+			$response["registro"] = $correo;
+		}
+		$this->output->set_output(json_encode($response));
+	}
+
 	public function guardar()
 	{
-		$data  = ['exito' => 0];
-		$datos = json_decode(file_get_contents('php://input'));
+		$response = ['exito' => 0];
+		$datos    = json_decode(file_get_contents('php://input'));
 		if (isset($datos->correo)) {
 			if ($this->Usuario_model->validarCorreo($datos->correo)) {
-				$data['mensaje'] = "el correo que intentas introducir ya existe";
+				$response['mensaje'] = "el correo que intentas introducir ya existe";
 			} else {
-				$password = randomPassword();
+				$password = randomPassword(20);
 				$datos_guardar = [
-					"apellido"  => (isset($datos->apellido)) ? $datos->apellido : '',
-					"nombre"    => (isset($datos->nombre))   ? $datos->nombre   : '',
-					"usuario"   => (isset($datos->usuario))  ? $datos->usuario  : '',
+					"apellido"  => (isset($datos->apellido)) 	 ? $datos->apellido 	: '',
+					"nombre"    => (isset($datos->nombre))   	 ? $datos->nombre   	: '',
+					"usuario"   => (isset($datos->usuario))      ? $datos->usuario  	: '',
+					"sexo_id"	=> (isset($datos->sexo_id['0'])) ? $datos->sexo_id['0'] : '',
 					"correo"    => $datos->correo,
 					"password"  => sha1($password),
-					"estado_id" => '1'
+					"estado_id" => '1',
  				];
-
- 				if ($this->Usuario_model->guardar($datos_guardar)) {
-					enviarEmail([
-						"to_email" 	 => $datos->correo,
-						"to_name" 	 => "ELSEÑOR",
-						"subject"	 => "SIGNUP",
+ 				$insert_id = $this->Usuario_model->guardar($datos_guardar);
+ 				if ($insert_id) {
+					$mail = enviarEmail([
+						"to_email" 	 => $datos_guardar['correo'],
+						"to_name" 	 => $datos_guardar['nombre']." ".$datos_guardar['apellido'],
+						"subject"	 => "Bienvenido a Increscendo App",
 						"html" 		 => $password
 					]);
-					$data['mensaje'] = "si se pudo";
-					$data['exito']	 = 1;
+
+					if ($mail) {
+						$response['mensaje'] = "Usuario creado correctamente. Hemos enviado un correo con tu contraseña";
+						$response['exito']	 = true;
+					} else {
+						$this->Usuario_model->eliminarUsuario($insert_id);
+						$response['mensaje'] = "Ha ocurrido un error al enviar el correo de confirmación. Intenta nuevamenta.";
+						$response['exito']	 = false;
+					}
  				}
 			}
 		}
 
-		$this->output->set_output(json_encode($data));
+		$this->output->set_output(json_encode($response));
 	}
 
-	public function login()
+	public function recuperarPassword()
 	{
 		$response = [
-			"exito"   => false, 
-			"mensaje" => "usuario y/o contraseña incorrectos"
+			'exito'   => 0, 
+			'mensaje' => 'Hacen falta datos para continuar.'
 		];
-
 		$datos = json_decode(file_get_contents('php://input'));
-		
-		if (isset($datos->usuario) && isset($datos->password)) {
-			$args = [
-				"usuario"  => $datos->usuario,
-				"password" => sha1($datos->password)
+		if (isset($datos->correo)) {
+			$password = randomPassword(20);
+			$datos_update = [
+				"password" => sha1($password)
 			];
-			$logued = $this->Usuario_model->login($args);
-			if ($logued) {
-				$this->load->library('Token');
-				$token = new Token();
 
-				$t_vida  = time() + $this->t_sesion;
-
-				$s_token = $token->_setToken_([
-					"expira" => time()+7200,
-					"data"   => $logued
+			if ($this->Usuario_model->guardar($datos_update, $datos->registro->id)) {
+				$mail = enviarEmail([
+					"to_email" 	 => $datos->correo,
+					"to_name" 	 => $datos->registro->nombre." ".$datos->registro->apellido,
+					"subject"	 => "Reenvio de contraseña",
+					"html" 		 => $password
 				]);
 
-				$this->config->set_item('usuario', $logued);
+				if ($mail) {
+					$response['mensaje'] = "Hemos enviado un correo con tu nueva contraseña.";
+					$response['exito']	 = true;
+				} else {
+					$response['mensaje'] = "Ha ocurrido un error al completar el proceso. Intenta nuevamenta.";
+					$response['exito']	 = false;
+				}
+			}
 
-				$response["token"]    = $s_token;
-				$response["mensaje"]  = "logueado correctamente";
-				$response["exito"]    = true;
-				$response["expira"]   = $this->t_sesion;
-				$response["registro"] = $logued;
+		}
+		$this->output->set_output(json_encode($response));	
+	}
+
+	public function cambiarPassword()
+	{
+		$datos = json_decode(file_get_contents('php://input'));
+		if (isset($datos->pass_actual) && 
+			isset($datos->pass_nuevo) && 
+			isset($datos->usuario)) {
+			$args = [
+				"usuario"  => $datos->usuario->usuario,
+				"password" => $datos->pass_actual
+			];
+			if ($this->Usuario_model->login($args)) {
+				$datos_update = [
+					"password" => $datos->pass_nuevo
+				];
+				if ($this->Usuario_model->guardar($datos_update, $datos->usuario->id)) {
+					$response["mensaje"]  = "Contraseña actualizada correctamente";
+					$response["exito"]    = true;					
+				} else {
+					$response["mensaje"]  = "Algo salió mal, intentalo nuevamente";
+					$response["exito"]    = false;
+				}
+			} else {
+				$response["mensaje"]  = "Asegurate de ingresar tu contraseña actual para poder continuar";
+				$response["exito"]    = false;
 			}
 		}
 		$this->output->set_output(json_encode($response));

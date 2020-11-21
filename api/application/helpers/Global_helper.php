@@ -24,12 +24,12 @@ if (!function_exists('enviarEmail'))
 }
 
 if (!function_exists('randomPassword')) {
-	function randomPassword() 
+	function randomPassword($size) 
 	{
 	    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 	    $password = array(); 
 	    $alpha_length = strlen($alphabet) - 1; 
-	    for ($i = 0; $i < 15; $i++) 
+	    for ($i = 0; $i < $size; $i++) 
 	    {
 	        $n = rand(0, $alpha_length);
 	        $password[] = $alphabet[$n];
