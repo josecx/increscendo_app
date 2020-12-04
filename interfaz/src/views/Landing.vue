@@ -2,7 +2,7 @@
 	<div>
 		<header class="mobile-hader">
 			<img src="../assets/img/logo_secundario_en_fondo_oscuro.svg" alt="logo-increscendo" height="30px">
-			<button class="btn-sandwich"><font-awesome-icon :icon="['fas', 'birthday-cake']" /></button>
+			<button class="btn-sandwich"><font-awesome-icon :icon="['fas', 'bars']" /></button>
 		</header>
 		<div class="sidebar-menu">
 			<div class="menu-head-contain">
