@@ -1,0 +1,157 @@
+/*Mobile Header*/
+
+.mobile-hader {
+	height: 60px;
+	width: 100%;
+	background: var(--btn-primary);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-sizing: border-box;
+	padding: 0rem 2rem;
+}
+
+.btn-sandwich {
+	background: transparent;
+	color: #fff;
+}
+
+/*Sidebar Menú*/
+.sidebar-menu {
+	position: absolute;
+	left: 0;
+	width: 80%;
+	background: #0e4273;
+	height: 100vh;
+	overflow-y: auto;
+	transition: all .8s ease;
+}
+
+/*Encabezado de aside con logo*/
+
+.menu-head-contain {
+	height: 150px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.menu-head-contain img {
+	height: 150px;
+	width: 150px;
+	object-fit: contain;
+}
+
+/*Contenedor de sección de búsqueda de aside*/
+
+.menu-search-contain {
+	width: 90%;
+	margin: auto;
+	height: auto;
+	padding: 0.2rem;
+	background: green;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: nowrap;
+	background: #fff;
+	border-radius: 25px;
+}
+
+.menu-search-contain input {
+	width: 80%;
+	margin-right: 5px;
+	border: none;
+}
+
+/*Boton e Input de Búsqueda*/
+
+.btn-icon-search {
+	height: auto !important;
+	width: auto !important;
+	background: transparent;
+	padding: 0;
+	color: #757575;
+}
+
+.btn-icon-search:hover {
+	color: var(--btn-primary);
+	background: transparent;
+}
+
+/*Contenedor de items del menú*/
+
+.menu-links-contain {
+	height: auto;
+}
+
+.menu-links-contain nav ul {
+	padding: 0;
+}
+
+.menu-links-contain nav ul a li {
+	box-sizing: border-box;
+	width: 100%;
+	background: rgba(255,255,255,0.0);
+	padding: 1rem 1rem;
+}
+
+.menu-links-contain nav ul a li:hover {
+	background: rgba(255,255,255,0.1);
+}
+
+/*Responsive Sidebar Menu*/
+
+/*Max width menu hide*/
+
+@media (max-width: 992px) {
+	.sidebar-menu {
+		left: 0%;
+		height: calc(100vh - 60px);
+	}
+
+	.menu-head-contain {
+		height: 2rem;
+	}
+
+	#logo-sidebar-menu {
+		display: none;
+	}
+}
+
+/*Min width*/
+
+@media (min-width: 576px) {
+	.sidebar-menu {
+		width: 50%;
+	}
+}
+
+@media (min-width: 748px) {
+	.sidebar-menu {
+		width: 300px;
+	}
+
+	.menu-search-contain {
+		width: 85%;
+	}
+
+	.menu-links-contain nav ul a li {
+		padding: 1rem 1.5rem;
+	}
+}
+
+@media (min-width: 992px) {
+	.mobile-hader {
+		display: none;
+	}
+
+	.sidebar-menu {
+		width: 280px;
+	}
+}
+
+@media (min-width: 1200px) {
+	
+}
