@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<p>componente seguro</p>
 	</div>
 </template>
 <script>

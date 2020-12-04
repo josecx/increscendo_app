@@ -2,9 +2,15 @@
 	<div>
 		<header class="mobile-hader">
 			<img src="../assets/img/logo_secundario_en_fondo_oscuro.svg" alt="logo-increscendo" height="30px">
-			<button class="btn-sandwich"><font-awesome-icon :icon="['fas', 'bars']" /></button>
+			<button 
+				class="btn-sandwich" 
+				ref="sidebarButton"
+				v-on:click="togleSlider()"
+			>
+					<font-awesome-icon :icon="['fas', 'bars']" />
+			</button>
 		</header>
-		<div class="sidebar-menu">
+		<div class="sidebar-menu" ref="sidebarMenu">
 			<div class="menu-head-contain">
 				<img src="../assets/img/logo_en_fondo_oscuro.svg" alt="logo-increscendo" id="logo-sidebar-menu">
 			</div>
@@ -17,34 +23,34 @@
 			<div class="menu-links-contain">
 				<nav>
 					<ul>
-						<a href="">
+						<a v-on:click="togleSlider()">
 							<li class="cl-blanco">Inicio</li>
 						</a>
-						<a href="">
+						<a v-on:click="togleSlider()">
 							<li class="cl-blanco">Quiénes Somos</li>
 						</a>
-						<a href="">
+						<a v-on:click="togleSlider()">
 							<li class="cl-blanco">¿Qué hacemos?</li>
 						</a>
-						<a href="">
+						<a v-on:click="togleSlider()">
 							<li class="cl-blanco">Programas</li>
 						</a>
-						<a href="">
+						<a v-on:click="togleSlider()">
 							<li class="cl-blanco">Increscendo Store</li>
 						</a>
-						<a href="">
+						<a v-on:click="togleSlider()">
 							<li class="cl-blanco">Galería</li>
 						</a>
-						<a href="">
+						<a v-on:click="togleSlider()">
 							<li class="cl-blanco">Opiniones</li>
 						</a>
-						<a href="">
+						<a v-on:click="togleSlider()">
 							<li class="cl-blanco">Equipo Increscendo</li>
 						</a>
-						<a href="">
+						<a v-on:click="togleSlider()">
 							<li class="cl-blanco">Recursos para Padres</li>
 						</a>
-						<a href="">
+						<a v-on:click="togleSlider()">
 							<li class="cl-blanco">Contacto</li>
 						</a>
 					</ul>
@@ -86,6 +92,29 @@
 <script>
 	import "../assets/css/menu-landing.css";
 	export default {
-		name: "Landing"
+		name: "Landing",
+		data: () => {
+			return{
+				toggled: true,
+				windowWidth: window.innerWidth
+			}
+		},
+		created(){
+			if (this.windowWidth <= 992) {
+				this.toggled = false
+			}
+		},
+		methods: {
+			togleSlider(){
+				let $ref = this.$refs["sidebarMenu"]
+				if (this.toggled) {
+					$ref.style.left = "-100%"
+					this.toggled = false
+				} else {
+					$ref.style.left = "0%"
+					this.toggled = true
+				}
+			}
+		}
 	}
 </script>
