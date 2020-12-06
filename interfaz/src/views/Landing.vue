@@ -23,34 +23,34 @@
 			<div class="menu-links-contain">
 				<nav>
 					<ul>
-						<a v-on:click="togleSlider()">
+						<a>
 							<li class="cl-blanco">Inicio</li>
 						</a>
-						<a v-on:click="togleSlider()">
+						<a>
 							<li class="cl-blanco">Quiénes Somos</li>
 						</a>
-						<a v-on:click="togleSlider()">
+						<a>
 							<li class="cl-blanco">¿Qué hacemos?</li>
 						</a>
-						<a v-on:click="togleSlider()">
+						<a>
 							<li class="cl-blanco">Programas</li>
 						</a>
-						<a v-on:click="togleSlider()">
+						<a>
 							<li class="cl-blanco">Increscendo Store</li>
 						</a>
-						<a v-on:click="togleSlider()">
+						<a>
 							<li class="cl-blanco">Galería</li>
 						</a>
-						<a v-on:click="togleSlider()">
+						<a>
 							<li class="cl-blanco">Opiniones</li>
 						</a>
-						<a v-on:click="togleSlider()">
+						<a>
 							<li class="cl-blanco">Equipo Increscendo</li>
 						</a>
-						<a v-on:click="togleSlider()">
+						<a>
 							<li class="cl-blanco">Recursos para Padres</li>
 						</a>
-						<a v-on:click="togleSlider()">
+						<a>
 							<li class="cl-blanco">Contacto</li>
 						</a>
 					</ul>

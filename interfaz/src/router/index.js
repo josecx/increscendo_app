@@ -7,8 +7,14 @@ Vue.use(VueRouter)
 const routes = [
 	{
 		path: "/",
-		name: "Landing",
-		component: () => import ('../views/Landing.vue')
+		component: () => import('../views/Landing.vue'),
+		children: [
+			{
+				path: "",
+				name: "Landing",
+				component: () => import ('../views/Landing.vue')
+			},
+		]
 	},
 	{
 		path: '/app/',
@@ -52,10 +58,13 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.name == 'Landing') next()
-  else if (to.name == "SignUp") next()
-  else if (to.name == "RecuperarPassword") next()
-  else if (to.name !== 'Login' && !store.getters.isLoggedIn) next({name:'Login'})
+	if([
+		"Landing",
+		"SignUp",
+		"RecuperarPassword",
+		"Login"
+		].includes(to.name)) next()
+  else if (to.name !== 'Login' && !store.getters.isLoggedIn) next({name:'Landing'})
   else if (to.name == 'Login' && store.getters.isLoggedIn) next({name:'Principal'})
   else next()
 });

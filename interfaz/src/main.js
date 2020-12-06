@@ -19,7 +19,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
 
-Vue.prototype.urlBase = '/index.php'
+Vue.prototype.urlBase = '/increscendo.php'
 
 Vue.prototype.$http = axios.create();
 Vue.prototype.$http.defaults.headers.common['Authorization'] = store.state.token;
