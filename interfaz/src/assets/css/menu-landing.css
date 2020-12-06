@@ -150,6 +150,16 @@
 	.sidebar-menu {
 		width: 280px;
 	}
+
+	/*IMG responsive logo Increscendo*/
+
+	.menu-head-contain {
+		height: 100px;
+	}
+		.menu-head-contain img {
+		height: 100px;
+		width: 100px;
+	}
 }
 
 @media (min-width: 1200px) {
