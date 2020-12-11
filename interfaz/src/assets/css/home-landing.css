@@ -147,12 +147,6 @@
 	}
 	/**/
 
-	.content-img-slider:before {
-		height: 70vh;
-		width: 100%;
-		z-index: 1;
-	}
-
 	.card-actions-slider {
 		align-items: flex-start;
 		padding: 3rem;
