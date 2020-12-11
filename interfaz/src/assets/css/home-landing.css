@@ -1,0 +1,79 @@
+/*#slider {
+	background: red;
+}*/
+
+.contenedor-slider {
+	position: relative;
+	width: 100%;
+	height: calc(100vh - 60px);
+}
+
+.content-img-slider {
+	width: 100%;
+	height: auto;
+}
+
+.content-img-slider:before {
+	content: "";
+	background: url(../img/bfrwhite.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 500px;
+	width: 100%;
+	z-index: 1;
+}
+
+#bg-home {
+	position: relative;
+	width: 100%;
+	height: calc(100vh - 60px);
+	object-fit: cover;
+	z-index: 0;
+}
+
+.card-actions-slider {
+	box-sizing: border-box;
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 2.5rem 0;
+	z-index: 1;
+}
+
+
+.content-btn-slider {
+	padding: 0px;
+}
+
+/*RESPONSIVE DESIGN*/
+
+@media (min-width: 576px) {
+	
+}
+
+@media (min-width: 748px) {
+	
+}
+
+@media (min-width: 992px) {
+	
+}
+
+@media (min-width: 1200px) {
+	.content-img-slider:before {
+		height: 70vh;
+		width: 100%;
+		z-index: 1;
+	}
+
+	.card-actions-slider {
+		align-items: flex-start;
+	}
+}

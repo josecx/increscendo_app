@@ -10,7 +10,7 @@
 					<font-awesome-icon :icon="['fas', 'bars']" />
 			</button>
 		</header>
-		<div class="sidebar-menu" ref="sidebarMenu" style="display: none;">
+		<div class="sidebar-menu" ref="sidebarMenu">
 			<div class="menu-head-contain">
 				<img src="../assets/img/logo_en_fondo_oscuro.svg" alt="logo-increscendo" id="logo-sidebar-menu">
 			</div>
@@ -66,13 +66,15 @@
 			<!-- Slider -->
 			<section id="slider">
 				<div class="contenedor-slider">
-					<img src="" alt="slider-img">
+					<div class="content-img-slider">
+						<img id="bg-home" src="../assets/img/bgslide.jpg" height="100vh" alt="slider-img">
+					</div>
 					<div class="card-actions-slider">
-						<h1>Bienvenidos a</h1>
+						<h4>Bienvenidos a</h4>
 						<h1>Increscendo</h1>
 						<div class="content-btn-slider">
-							<button class="btn-primary">Primary</button>
-							<button class="btn-secondary">secondary</button>
+							<button class="btn-primary">Iniciar Sesión</button>
+							<button class="btn-secondary">Registrarse</button>
 						</div>
 					</div>
 				</div>
@@ -111,6 +113,7 @@
 </template>
 <script>
 	import "../assets/css/menu-landing.css";
+	import "../assets/css/home-landing.css";
 	export default {
 		name: "Landing",
 		data: () => {
