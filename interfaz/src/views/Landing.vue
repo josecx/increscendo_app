@@ -23,10 +23,10 @@
 			<div class="menu-links-contain">
 				<nav>
 					<ul>
-						<a>
+						<a href="#slider">
 							<li class="cl-blanco">Inicio</li>
 						</a>
-						<a>
+						<a href="#quienesomos">
 							<li class="cl-blanco">Quiénes Somos</li>
 						</a>
 						<a>
@@ -69,17 +69,24 @@
 					<div class="content-img-slider">
 						<img id="bg-home" src="../assets/img/bgslide.jpg" height="100vh" alt="slider-img">
 					</div>
-					<div class="card-actions-slider">
-						<h4>Bienvenidos a</h4>
-						<h1>Increscendo</h1>
-						<div class="content-btn-slider">
-							<button class="btn-primary">Iniciar Sesión</button>
-							<button class="btn-secondary">Registrarse</button>
+					<div class="contenedor-sec-slider">
+						<div class="card-actions-slider">
+							<h4 id="bien-title">Bienvenidos a</h4>
+							<h1 id="in-title">Increscendo</h1>
+							<div class="content-btn-slider">
+								<button class="btn-primary">Iniciar Sesión</button>
+								<button class="btn-secondary">Registrarse</button>
+							</div>
 						</div>
+						<img src="../assets/img/logo-principal.svg" alt="logo-increscendo" id="in-slider-logo">
 					</div>
 				</div>
 			</section>
 			<!-- Fin Slider -->
+			<!-- Quiénes somos -->
+			<section id="quienesomos" style="height: 100vh; width: 100%;">
+				
+			</section>
 		</section>
 
 

@@ -2,6 +2,7 @@
 	background: red;
 }*/
 
+
 .contenedor-slider {
 	position: relative;
 	width: 100%;
@@ -19,7 +20,7 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 	position: absolute;
-	bottom: 0;
+	bottom: -5px;
 	left: 0;
 	height: 500px;
 	width: 100%;
@@ -33,10 +34,39 @@
 	object-fit: cover;
 	z-index: 0;
 }
+/*Contenedor de titulos y botones de slider*/
+.contenedor-sec-slider {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+	margin: 0 10%;
+	width: 80%;
+}
+/**/
+
+/*in-titles*/
+#bien-title {
+	color: var(--btn-primary);
+}
+
+#in-title {
+	color: var(--btn-secondary);
+}
+
+#in-slider-logo {
+	display: none;
+	z-index: 2;
+}
+/**/
 
 .card-actions-slider {
 	box-sizing: border-box;
-	position: absolute;
+	position: relative;
 	bottom: 0px;
 	width: 100%;
 	height: auto;
@@ -52,6 +82,14 @@
 	padding: 0px;
 }
 
+/*Main*/
+
+.main {
+	position: absolute;
+	width: 100%;
+	left: 0;
+}
+
 /*RESPONSIVE DESIGN*/
 
 @media (min-width: 576px) {
@@ -59,14 +97,56 @@
 }
 
 @media (min-width: 748px) {
-	
+	/*in-titles*/
+	#bien-title {
+		font-size: 2rem;
+	}
+
+	#in-title {
+		font-size: 4rem;
+	}
+	/**/
+	.content-img-slider:before {
+		height: 600px;
+	}
 }
 
 @media (min-width: 992px) {
-	
+	/*in-titles*/
+	#bien-title {
+		font-size: 2rem;
+	}
+
+	#in-title {
+		font-size: 5rem;
+	}
+	/**/
+
+	.main {
+		width: calc(100% - 280px);
+		left: 280px;
+	}
+
+	.card-actions-slider {
+		padding: 3rem;
+		justify-content: flex-start;
+	}
+
+	.content-img-slider:before {
+		height: 650px;
+	}
 }
 
 @media (min-width: 1200px) {
+	/*ligo increscendo slider*/
+	#in-slider-logo {
+		display: block;
+		height: 300px;
+		width: 300px;
+		object-fit: contain;
+	}
+	/**/
+
 	.content-img-slider:before {
 		height: 70vh;
 		width: 100%;
