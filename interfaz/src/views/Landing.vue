@@ -10,7 +10,7 @@
 					<font-awesome-icon :icon="['fas', 'bars']" />
 			</button>
 		</header>
-		<div class="sidebar-menu" ref="sidebarMenu">
+		<div class="sidebar-menu" ref="sidebarMenu" style="display: none;">
 			<div class="menu-head-contain">
 				<img src="../assets/img/logo_en_fondo_oscuro.svg" alt="logo-increscendo" id="logo-sidebar-menu">
 			</div>
@@ -62,6 +62,26 @@
 
 			<!-- Main-Landing-Content -->
 		</div>
+		<section class="main">
+			<!-- Slider -->
+			<section id="slider">
+				<div class="contenedor-slider">
+					<img src="" alt="slider-img">
+					<div class="card-actions-slider">
+						<h1>Bienvenidos a</h1>
+						<h1>Increscendo</h1>
+						<div class="content-btn-slider">
+							<button class="btn-primary">Primary</button>
+							<button class="btn-secondary">secondary</button>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- Fin Slider -->
+		</section>
+
+
+
 			<!-- <section>
 				<div class="contain">
 					<h1>h1</h1>

@@ -101,6 +101,12 @@
 	background: rgba(255,255,255,0.1);
 }
 
+/*Main comportamiento*/
+
+.main {
+	position: relative;
+}
+
 /*Responsive Sidebar Menu*/
 
 /*Max width menu hide*/
