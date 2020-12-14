@@ -51,11 +51,11 @@
 
 /*in-titles*/
 #bien-title {
-	color: var(--btn-primary);
+	color: var(--color-primary);
 }
 
 #in-title {
-	color: var(--btn-secondary);
+	color: var(--color-secondary);
 }
 
 #in-slider-logo {

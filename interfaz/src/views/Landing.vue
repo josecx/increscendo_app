@@ -57,11 +57,10 @@
 				</nav>
 			</div>
 			<div class="menu-footer-contain">
-				
 			</div>
-
-			<!-- Main-Landing-Content -->
 		</div>
+		
+		<!-- Main-Landing-Content -->
 		<section class="main">
 			<!-- Slider -->
 			<section id="slider">
@@ -84,8 +83,47 @@
 			</section>
 			<!-- Fin Slider -->
 			<!-- Quiénes somos -->
-			<section id="quienesomos" style="height: 100vh; width: 100%;">
-				
+			<section id="quienesomos">
+				<div class="header-sec">
+					<img src="" alt="">
+				</div>
+				<div class="contain">
+					<div class="content-text">
+						<h3>Misión</h3>
+						<p>Lorem, ipsum, dolor sit amet consectetur adipisicing elit. Esse, sit adipisci quod est optio, officia ea neque blanditiis, eum omnis mollitia error dolorum, inventore eius assumenda eveniet debitis. Ab, veniam.</p>
+					</div>
+					<div class="content-text">
+						<h3>Visión</h3>
+						<p>Lorem, ipsum, dolor sit amet consectetur adipisicing elit. Esse, sit adipisci quod est optio, officia ea neque blanditiis, eum omnis mollitia error dolorum, inventore eius assumenda eveniet debitis. Ab, veniam.</p>
+					</div>
+					<div class="contain-iframe-qs">
+						<iframe width="500" height="315" src="https://www.youtube.com/embed/QhAjVAwRP_k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</div>
+					<div class="content-text">
+						<h3>Quienes somos</h3>
+						<p>Lorem, ipsum, dolor sit amet consectetur adipisicing elit. Esse, sit adipisci quod est optio, officia ea neque blanditiis, eum omnis mollitia error dolorum, inventore eius assumenda eveniet debitis. Ab, veniam.</p>
+					</div>
+					<div class="card-img-quienes-somos">
+						<div class="cnt-img-card">
+							<img src="https://img5.goodfon.com/wallpaper/nbig/b/3e/deadpool-vector-marvel-comics-wade-wilson-ryan-reynolds-movi.jpg" alt="">
+							<p>Título para la imagen de esta imagen</p>
+						</div>
+						<div class="cnt-img-card">
+							<img src="https://img5.goodfon.com/wallpaper/nbig/b/3e/deadpool-vector-marvel-comics-wade-wilson-ryan-reynolds-movi.jpg" alt="">
+							<p>Título para la imagen de esta imagen</p>
+						</div>
+						<div class="cnt-img-card">
+							<img src="https://img5.goodfon.com/wallpaper/nbig/b/3e/deadpool-vector-marvel-comics-wade-wilson-ryan-reynolds-movi.jpg" alt="">
+							<p>Título para la imagen de esta imagen</p>
+						</div>
+					</div>
+					<div class="separador-quienes-somos"></div>
+					<div class="content-text-phrase">
+						<h2>Lorem ipsum dolor, sit amet consectetur adipisicing, elit. Quam error ipsam numquam voluptatum quaerat sequi.</h2>
+						<span>Lorem ipsum dolor des</span>
+					</div>
+					<div class="separador-quienes-somos"></div>
+				</div>
 			</section>
 		</section>
 
@@ -121,6 +159,7 @@
 <script>
 	import "../assets/css/menu-landing.css";
 	import "../assets/css/home-landing.css";
+	import "../assets/css/quienes-somos.css";
 	export default {
 		name: "Landing",
 		data: () => {

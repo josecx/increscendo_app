@@ -1,0 +1,73 @@
+.content-text h3 {
+	color: var(--color-primary);
+}
+
+.content-text p {
+	color: var(--color-gray);
+}
+.content-text {
+	margin: 5rem 0px;
+}
+
+.contain-iframe-qs {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.card-img-quienes-somos {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.cnt-img-card {
+	height: auto;
+	max-height: 400px;
+	width: 100%;
+	max-width: 300px;
+	overflow: hidden;
+	background: #1CB4ED;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	margin: 1.5rem;
+	padding: 1rem;
+	box-shadow: var(--shadow-normal)
+}
+
+.cnt-img-card img {
+	height: 200px;
+	width: 200px;
+	object-fit: cover;
+}
+
+.cnt-img-card p {
+	width: 80%;
+	color: #fff;
+	text-align: center;
+}
+
+.separador-quienes-somos {
+	margin: 5rem 0rem;
+	height: 3rem;
+	width: 100%;
+	background: url(https://media.gettyimages.com/vectors/music-festival-watercolor-texture-design-vector-id959376126?s=612x612);
+}
+
+.content-text-phrase {
+
+}
+
+.content-text-phrase h2 {
+	text-align: center;
+}
+
+.content-text-phrase span {
+	margin: 2rem 0rem;
+	float: right;
+	font-size: 1.5rem;
+}
