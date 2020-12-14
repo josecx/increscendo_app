@@ -1,0 +1,78 @@
+#quehacemos {
+	background: url(../img/bebe-qh-min.png) no-repeat;
+	background-attachment: fixed;
+	background-size: contain;
+	background-position: bottom right;
+	padding-top: 2rem;
+}
+#quehacemos h2 {
+	color: var(--color-primary);
+	margin: 1rem 0rem 4rem 0rem;
+}
+
+.card-char-qh {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 2rem 0rem;
+	background: rgba(255,255,255,0.5);
+}
+
+.cntnt-icn-ttle-qh {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: left;
+}
+
+.cntnt-icn-ttle-qh h3 {
+	color: var(--color-primary);
+}
+
+.cntnt-icn-ttle-qh img {
+	height: 2rem;
+	width: 2rem;
+	object-fit: contain;
+	margin-right: 0.5rem;
+}
+
+.card-char-qh ul li {
+	font-size: 1rem;
+	line-height: 1.5rem;
+	color: var(--color-gray);
+}
+
+.card-char-qh ul li::before {
+  content: "\2022";
+  color: var(--color-gray);
+  font-weight: bold;
+  display: inline-block;
+  width: 0.2rem;
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+@media (min-width: 576px) {
+	.card-char-qh ul li {
+		font-size: 1.3rem;
+		line-height: 1.7rem;
+	}
+
+	.card-char-qh {
+		background: rgba(255,255,255,0);
+	}
+}
+
+@media (min-width: 748px) {
+	.card-char-qh ul li {
+		font-size: 1.5rem;
+		line-height: 2rem;
+	}
+}
+
+@media (min-width: 992px) {
+	
+}
+
+@media (min-width: 1200px) {
+	
+}

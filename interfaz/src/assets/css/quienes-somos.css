@@ -10,9 +10,16 @@
 }
 
 .contain-iframe-qs {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	width: 100%;
+	height: 0;
+	padding-bottom: 56.25%;
+	position: relative;
+}
+
+.contain-iframe-qs iframe {
+	position: absolute;
+	width: 100%;
+	height: 100%;
 }
 
 .card-img-quienes-somos {
@@ -55,7 +62,8 @@
 	margin: 5rem 0rem;
 	height: 3rem;
 	width: 100%;
-	background: url(https://media.gettyimages.com/vectors/music-festival-watercolor-texture-design-vector-id959376126?s=612x612);
+	background: url(../img/notas.png) no-repeat;
+	background-size: contain;
 }
 
 .content-text-phrase {
@@ -63,10 +71,12 @@
 }
 
 .content-text-phrase h2 {
+	color: var(--color-gray);
 	text-align: center;
 }
 
 .content-text-phrase span {
+	color: var(--color-gray);
 	margin: 2rem 0rem;
 	float: right;
 	font-size: 1.5rem;

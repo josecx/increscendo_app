@@ -29,7 +29,7 @@
 						<a href="#quienesomos">
 							<li class="cl-blanco">Quiénes Somos</li>
 						</a>
-						<a>
+						<a href="#quehacemos">
 							<li class="cl-blanco">¿Qué hacemos?</li>
 						</a>
 						<a>
@@ -85,7 +85,7 @@
 			<!-- Quiénes somos -->
 			<section id="quienesomos">
 				<div class="header-sec">
-					<img src="" alt="">
+					<img src="../assets/img/fondo qh-min.png" alt="" width="100%">
 				</div>
 				<div class="contain">
 					<div class="content-text">
@@ -125,6 +125,74 @@
 					<div class="separador-quienes-somos"></div>
 				</div>
 			</section>
+			<!-- Fin Quénes somos -->
+			<!-- Qué hacemos -->
+			<section id="quehacemos">
+				<div class="contain">
+					<h2>Beneficios de la estimulación temprana</h2>
+					<div class="card-char-qh">
+						<div class="cntnt-icn-ttle-qh">
+							<img src="../assets/img/icons/icon-nota.svg" alt="">
+							<h3>title</h3>
+						</div>
+						<ul>
+							<li>char one</li>
+							<li>char two</li>
+							<li>char tree</li>
+							<li>char for</li>
+						</ul>
+					</div>
+					<div class="card-char-qh">
+						<div class="cntnt-icn-ttle-qh">
+							<img src="../assets/img/icons/icon-childs.svg" alt="">
+							<h3>title</h3>
+						</div>
+						<ul>
+							<li>char one</li>
+							<li>char two</li>
+							<li>char tree</li>
+							<li>char for</li>
+						</ul>
+					</div>
+					<div class="card-char-qh">
+						<div class="cntnt-icn-ttle-qh">
+							<img src="../assets/img/icons/icon-baby.svg" alt="">
+							<h3>title</h3>
+						</div>
+						<ul>
+							<li>char one</li>
+							<li>char two</li>
+							<li>char tree</li>
+							<li>char for</li>
+						</ul>
+					</div>
+					<div class="card-char-qh">
+						<div class="cntnt-icn-ttle-qh">
+							<img src="../assets/img/icons/icon-com.svg" alt="">
+							<h3>title</h3>
+						</div>
+						<ul>
+							<li>char one</li>
+							<li>char two</li>
+							<li>char tree</li>
+							<li>char for</li>
+						</ul>
+					</div>
+					<div class="card-char-qh">
+						<div class="cntnt-icn-ttle-qh">
+							<img src="../assets/img/icons/icon-brain.svg" alt="">
+							<h3>title</h3>
+						</div>
+						<ul>
+							<li>char one</li>
+							<li>char two</li>
+							<li>char tree</li>
+							<li>char for</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<!-- Fin qué hacemos -->
 		</section>
 
 
@@ -160,6 +228,7 @@
 	import "../assets/css/menu-landing.css";
 	import "../assets/css/home-landing.css";
 	import "../assets/css/quienes-somos.css";
+	import "../assets/css/que-hacemos.css";
 	export default {
 		name: "Landing",
 		data: () => {
