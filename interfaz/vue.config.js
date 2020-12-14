@@ -1,4 +1,4 @@
-const version = '0.001'
+const version = '0.002'
 module.exports = {
 	filenameHashing: false,
 	publicPath: process.env.NODE_ENV === 'production' ? '/increscendo/assets' : '/',
