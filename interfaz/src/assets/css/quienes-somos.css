@@ -1,3 +1,20 @@
+/*Cards img de quienes somos config*/
+
+#card-qs-one {
+	background: #0097b3;
+}
+
+#card-qs-two {
+	background: #ff931e;
+	position: relative;
+	top: -20px;
+}
+
+#card-qs-three {
+	background: #ee3f89;
+}
+
+/*Estilos generales*/
 .content-text h3 {
 	color: var(--color-primary);
 }
@@ -25,7 +42,7 @@
 .card-img-quienes-somos {
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	flex-wrap: wrap;
 }
 
@@ -50,20 +67,24 @@
 	height: 200px;
 	width: 200px;
 	object-fit: cover;
+	border: solid 10px #fff;
 }
 
-.cnt-img-card p {
+.cnt-img-card h4 {
 	width: 80%;
 	color: #fff;
 	text-align: center;
+	font-size: 1.5rem !important;
+	margin: 1rem 0rem;
 }
 
 .separador-quienes-somos {
 	margin: 5rem 0rem;
-	height: 3rem;
+	height: 1.5rem;
 	width: 100%;
 	background: url(../img/notas.png) no-repeat;
 	background-size: contain;
+	background-position: center;
 }
 
 .content-text-phrase {

@@ -38,7 +38,7 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    isLoggedIn: state => !!state.token
+    isLoggedIn: state => !!state.token,
   },
   plugins: [
     createPersistedState({key: 'vuex-incresc'}),

@@ -1,13 +1,8 @@
-import Vue 	    	from 'vue';
-import VueToast 	from 'vue-toast-notification';
-import VueScrollTo  from 'vue-scrollto';
+import Vue 	    from 'vue';
+import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
 Vue.use(VueToast);
-Vue.use(VueScrollTo, {
-	duration: 1600,
-	easing: "ease"
-})
 
 export default {
 	name: "GlobalMixin",
