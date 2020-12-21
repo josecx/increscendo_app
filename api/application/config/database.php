@@ -5,10 +5,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sql260.main-hosting.eu',
-	'username' => 'u287992413_increscendo',
-	'password' => '@Increscendo123**',
-	'database' => 'u287992413_increscendo',
+	'hostname' => '165.22.3.37',
+	'username' => 'admin',
+	'password' => 'abc123**',
+	'database' => 'increscendo',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

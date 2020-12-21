@@ -21,6 +21,20 @@ class Token{
 
 		return JWT::encode($token, $this->secret_key);
     }
+
+    public function token_activo($token)
+    {
+        if (is_string($token) && !empty($token)) {
+            try {
+                $decoded = JWT::decode($token, $this->secret_key, $this->encrypt);
+                return true;
+            } catch (Exception $e) {
+                return false;
+            }
+        }
+
+        return false;
+    }   
 }
 
 ?>

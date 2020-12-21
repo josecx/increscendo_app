@@ -68,7 +68,7 @@ CREATE TABLE `sexo` (
 
 LOCK TABLES `sexo` WRITE;
 /*!40000 ALTER TABLE `sexo` DISABLE KEYS */;
-INSERT INTO `sexo` VALUES (1,'Hombre'),(2,'Mujer'),(3,'Otro'),(4,'Motor de lancha');
+INSERT INTO `sexo` VALUES (1,'Hombre'),(2,'Mujer');
 /*!40000 ALTER TABLE `sexo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,9 +99,4 @@ CREATE TABLE `usuario` (
   CONSTRAINT `fk_rol` FOREIGN KEY (`rol_id`) REFERENCES `rol` (`id`),
   CONSTRAINT `fk_sexo` FOREIGN KEY (`sexo_id`) REFERENCES `sexo` (`id`)
 ) ENGINE=InnoDB ;
-
---
--- Dumping data for table `usuario`
---
-
 -- Dump completed on 2020-11-26 23:32:44

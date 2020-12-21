@@ -23,13 +23,13 @@
 			<div class="menu-links-contain">
 				<nav>
 					<ul>
-						<a href="#slider">
+						<a v-scroll-to="'#slider'">
 							<li class="cl-blanco">Inicio</li>
 						</a>
-						<a href="#quienesomos">
+						<a v-scroll-to="'#quienesomos'">
 							<li class="cl-blanco">Quiénes Somos</li>
 						</a>
-						<a href="#quehacemos">
+						<a v-scroll-to="'#quehacemos'">
 							<li class="cl-blanco">¿Qué hacemos?</li>
 						</a>
 						<a>
@@ -73,8 +73,12 @@
 							<h4 id="bien-title">Bienvenidos a</h4>
 							<h1 id="in-title">Increscendo</h1>
 							<div class="content-btn-slider">
+							<router-link :to="{ name:'Login' }">
 								<button class="btn-primary">Iniciar Sesión</button>
+							</router-link>
+							<router-link :to="{ name:'SignUp' }">
 								<button class="btn-secondary">Registrarse</button>
+							</router-link>
 							</div>
 						</div>
 						<img src="../assets/img/logo-principal.svg" alt="logo-increscendo" id="in-slider-logo">
@@ -229,8 +233,10 @@
 	import "../assets/css/home-landing.css";
 	import "../assets/css/quienes-somos.css";
 	import "../assets/css/que-hacemos.css";
+	import GlobalMixin from "../mixins/global-mixin.js";
 	export default {
 		name: "Landing",
+		mixins: [GlobalMixin],
 		data: () => {
 			return{
 				toggled: true,

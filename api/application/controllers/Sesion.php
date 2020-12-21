@@ -7,7 +7,7 @@ class Sesion extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Usuario_model');
-		$this->t_sesion = 14400;
+		$this->t_sesion = 300;
 	}
 
 	public function login()
