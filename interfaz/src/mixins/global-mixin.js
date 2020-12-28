@@ -68,7 +68,6 @@ export default {
 			})
 		},
 		_enviarDatos(args){
-			console.log(this.urlBase)
 			return new Promise((resolve, reject) => {
 				this.$http
 				.post(`${this.urlBase}`+args.url+args.arg, args.data)
