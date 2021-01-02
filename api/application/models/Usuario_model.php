@@ -8,6 +8,26 @@ class Usuario_model extends CI_Model {
 		parent::__construct();
 	}
 
+	public function getUsuario($args=[])
+	{
+		return $this->db
+			->select(
+				"id,
+				 apellido,
+				 nombre,
+				 usuario,
+				 correo,
+				 rol_id,
+				 sexo_id,
+				 activo
+				"
+			)
+			->from("usuario")
+			->where("activo", 1)
+			->get()
+			->result();
+	}
+
 	public function validarCorreo($correo)
 	{
 		return $this->db

@@ -24,6 +24,13 @@ class Usuario extends CI_Controller {
 		]));
 	}
 
+	public function getUsuario()
+	{
+		$this->output->set_output(json_encode([
+			'lista' => $this->Usuario_model->getUsuario($_GET)
+		]));	
+	}
+
 	public function validarCorreo()
 	{	
 		$response = ["exito" => false];

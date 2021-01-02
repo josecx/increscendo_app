@@ -63,7 +63,6 @@ export default {
 					resolve(res.data)
 				}).catch(e => {
 					reject(e)
-					this._notificarError("Error "+e)
 				})
 			})
 		},
@@ -77,7 +76,6 @@ export default {
 						this._notificarSuccess(res.data.mensaje)
 					}
 				}).catch(e => {
-					this._notificarError("Error "+e)
 					reject(e)
 				})
 			})
