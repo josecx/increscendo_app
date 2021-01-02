@@ -1,36 +1,56 @@
 <template>
-	<div>
-		<form @submit.prevent="guardarUsuario()">
-			<label for="">Nombre
-				<span style="color: red">*</span>
-			</label>
-			<input type="text" v-model="form.nombre">
-			<br>
-			<label for="">Apellido
-				<span style="color: red">*</span>
-			</label>
-			<input type="text" v-model="form.apellido">
-			<br>
-			<label for="">Correo
-				<span style="color: red">*</span>
-			</label>
-			<input type="text" v-model="form.correo" @change="validarCorreo()">
-			<br>
-			<label for="">Usuario
-				<span style="color: red">*</span>
-			</label>
-			<input type="text" v-model="form.usuario">
-			<br>
-			<div v-for="(sexo, index) in sexos" :key="index">			
-				<input type="checkbox" :value="sexo.id" v-model="form.sexo_id" v-on:click= "check_one()">
-				<label>{{sexo.nombre}}</label><br>
-				<br>
+	<div id="bg-login">
+		<div class="content-form-login">
+			<div class="form-login">
+				<form @submit.prevent="guardarUsuario()">
+				<div class="logo-label">	
+					<img src="../assets/img/logo_secundario_en_fondo_oscuro.svg" alt="logo-increscendo" id="logo-sidebar-menu">
+				</div>
+				<div class="user-label">	
+					<label for="">Nombre
+						<span style="color: red">*</span>
+					</label>
+					<input type="text" v-model="form.nombre">
+				</div>
+				<div class="password-label">
+					<label for="">Apellido
+						<span style="color: red">*</span>
+					</label>
+					<input type="text" v-model="form.apellido">
+				</div>
+				<div class="password-label">
+					<label for="">Correo
+						<span style="color: red">*</span>
+					</label>
+					<input type="text" v-model="form.correo" @change="validarCorreo()">
+				</div>
+				<div class="password-label">
+					<label for="">Usuario
+						<span style="color: red">*</span>
+					</label>
+					<input type="text" v-model="form.usuario">
+				</div>
+				<div class="password-label">
+					<div v-for="(sexo, index) in sexos" :key="index">			
+						<input type="checkbox" :value="sexo.id" v-model="form.sexo_id" v-on:click= "check_one()">
+						<label>{{sexo.nombre}}</label><br>
+					</div>
+				</div>
+				<div class="submit-label">
+					<button type="submit">Registrarme</button>
+				</div>
+				</form>
 			</div>
-			<button type="submit">Sign up</button>
-		</form>
+		</div>
 	</div>
-</template>
+
+
+
+
+
+</template> 
 <script>
+	import "../assets/css/login.css";
 	import GlobalMixin from "../mixins/global-mixin.js";
 	export default{
 		name:   'SignUp',

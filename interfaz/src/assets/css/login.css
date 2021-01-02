@@ -1,0 +1,163 @@
+#bg-login {
+	background: url(../img/bgslide.jpg);
+	background-position: cover;
+	background-position: center top;
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.content-form-login {
+	height: 100vh;
+	width: 100%;
+	padding: 10%;
+	background: rgba(22,58,107,0.7);
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+}
+
+.form-login {
+	height: auto;
+	width: 100%;
+}
+
+/*titulos, margins y padings*/
+
+.user-label, .password-label, .submit-label {
+	margin: 1rem 0rem;
+}
+
+.user-label label, .password-label label, .submit-label label, .logo-label {
+	font-size: 1rem;
+	margin-bottom: 0.5rem;
+	color: #fff;
+}
+
+/*Logo Login*/
+
+.logo-label {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.logo-label img {
+	width: 200px;
+	height: 100px;
+	object-fit: contain;
+}
+
+/*Usuario*/
+
+.user-label {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.user-label input {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 5px 10px;
+	border-radius: 25px;
+	border: none;
+}
+
+/*Contraseña*/
+
+.password-label {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.password-label input {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 5px 10px;
+	border-radius: 25px;
+	border: none;
+}
+
+/*Boton*/
+
+.submit-label {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.submit-label button {
+	margin: 0px 0px 0px 10px;
+	padding: 10px 15px;
+	background: rgba(255,255,255,0.2);
+	color: #fff;
+}
+
+.submit-label button:hover {
+	background: #FFA400;
+	color: #fff;
+}
+
+/*Forgot Password*/
+
+.forgot-label {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	padding-bottom: 1rem;
+}
+
+.forgot-label a {
+	color: #fff;
+}
+
+.forgot-label a:hover {
+	border-bottom: solid 1px;
+}
+
+@media (min-width: 576px) {
+	.form-login {
+		width: 400px;
+	}
+}
+
+@media (min-width: 748px) {
+
+}
+
+@media (min-width: 992px) {
+	.user-label, .password-label {
+		align-items: flex-start;
+	}
+
+	.submit-label {
+		align-items: flex-end;
+	}
+
+	.content-form-login {
+		max-width: 600px;
+	}
+
+	#bg-login {
+		justify-content: flex-end;
+	}
+
+	.submit-label {
+		justify-content: flex-end;
+	}
+}
+
+@media (min-width: 1200px) {
+	
+}

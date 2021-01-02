@@ -1,19 +1,33 @@
 <template>
-	<div>
-		<label for="">usuario</label>
-		<input type="text" v-model="form.usuario">
-		<br>
-		<label for="">contraseña</label>
-		<input type="password" v-model="form.password">
-		<br>
-		<button v-on:click="login()">LOGIN</button>
-		<br>
-		<router-link :to="{ name:'RecuperarPassword' }">
-			¿Se te olvidó tu contraseña?
-		</router-link>
+	<div id="bg-login">
+		<div class="content-form-login">
+			<div class="form-login">
+				<div class="logo-label">	
+					<img src="../assets/img/logo_secundario_en_fondo_oscuro.svg" alt="logo-increscendo" id="logo-sidebar-menu">
+				</div>
+				<div class="user-label">	
+					<label for="">Usuario</label>
+					<input type="text" v-model="form.usuario" placeholder="Ingrese su usuario">
+				</div>
+				<div class="password-label">
+					<label for="">Contraseña</label>
+					<input type="password" v-model="form.password" placeholder="Ingrese su contraseña">
+				</div>
+				<div class="submit-label">
+					<button>Inicio</button>
+					<button v-on:click="login()">Entrar</button>
+				</div>
+				<div class="forgot-label">
+					<router-link :to="{ name:'RecuperarPassword' }">
+						¿Se te olvidó tu contraseña?
+					</router-link>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 <script>
+	import "../assets/css/login.css";
 	import GlobalMixin from "../mixins/global-mixin.js";
 	export default {
 		name:   "Login",

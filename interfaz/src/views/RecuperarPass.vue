@@ -1,14 +1,25 @@
 <template>
-	<div>
-		<form @submit.prevent="recuperarPass()">
-			<label>Correo</label>
-			<input type="text" :required="true" v-model="datos.correo">
-			<br>
-			<button type="submit">Recuperar contraseña</button>
-		</form>
+	<div id="bg-login">
+		<div class="content-form-login">
+			<div class="form-login">
+				<form @submit.prevent="recuperarPass()">
+				<div class="logo-label">	
+					<img src="../assets/img/logo_secundario_en_fondo_oscuro.svg" alt="logo-increscendo" id="logo-sidebar-menu">
+				</div>
+				<div class="user-label">	
+					<label>Correo</label>
+					<input type="text" :required="true" v-model="datos.correo" placeholder="Ingresa tu correo">
+				</div>
+				<div class="submit-label">
+					<button type="submit">Recuperar contraseña</button>
+				</div>
+				</form>
+			</div>
+		</div>
 	</div>
-</template>
+</template> 
 <script>
+	import "../assets/css/login.css";
 	import GlobalMixin from "../mixins/global-mixin.js";
 	export default{
 		name:   "RecuperarPass",
