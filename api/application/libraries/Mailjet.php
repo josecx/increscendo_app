@@ -7,10 +7,10 @@ class Mailjet
 	protected $ci;
 	protected $cli;
 
-	private $MJ_APIKEY_PUBLIC    = "7dd36ec5b228303c9d8ba969b2a56e1e";
-	private $MJ_APIKEY_PRIVATE   = "f945db07177cf901d143690765fef1fc";
-	private $MJ_CORREO_ORIGEN	 = "josechocojxinico@gmail.com";
-	private $MJ_NOMBRE_REMITENTE = "APIMAIL";
+	private $MJ_APIKEY_PUBLIC    = "8ac730561455e314c34616e920c23d8e";
+	private $MJ_APIKEY_PRIVATE   = "ec1a2eaf813e5c559abd4d2741a7c40b";
+	private $MJ_CORREO_ORIGEN	 = "no-reply@increscendo.com.gt";
+	private $MJ_NOMBRE_REMITENTE = "Increscendo";
 
 
 
