@@ -7,7 +7,6 @@
 #card-qs-two {
 	background: #ff931e;
 	position: relative;
-	top: -20px;
 }
 
 #card-qs-three {
@@ -47,19 +46,18 @@
 }
 
 .cnt-img-card {
-	height: auto;
-	max-height: 400px;
+	height: 450px;
 	width: 100%;
 	max-width: 300px;
 	overflow: hidden;
 	background: #1CB4ED;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	box-sizing: border-box;
 	margin: 1.5rem;
-	padding: 1rem;
+	padding: 2rem;
 	box-shadow: var(--shadow-normal)
 }
 
