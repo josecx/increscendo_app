@@ -17,7 +17,7 @@ const routes = [
 		]
 	},
 	{
-		path: '/app/',
+		path: '/',
 		name: 'Home',
 		component: () => import('../views/Home.vue'),
 		children: [
@@ -34,7 +34,7 @@ const routes = [
 			{
 				path: 'usuario',
 				name: 'Usuario',
-				component: () => import('../views/Usuario.vue')
+				component: () => import('../views/system/Usuario.vue')
 			},
 		]
 	},
