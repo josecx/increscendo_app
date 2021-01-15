@@ -12,18 +12,12 @@ class Usuario_model extends CI_Model {
 	{
 		return $this->db
 			->select(
-				"id,
-				 apellido,
-				 nombre,
-				 usuario,
-				 correo,
-				 rol_id,
-				 sexo_id,
-				 activo
+				"u.*,
+				 r.nombre as nrol
 				"
 			)
-			->from("usuario")
-			->where("activo", 1)
+			->from("usuario u")
+			->join("rol r", "u.rol_id = r.id", "LEFT")
 			->get()
 			->result();
 	}

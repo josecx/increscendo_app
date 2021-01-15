@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 
 const routes = [
 	{
-		path: "/",
+		path: "/landing",
 		component: () => import('../views/Landing.vue'),
 		children: [
 			{
