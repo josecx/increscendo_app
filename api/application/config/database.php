@@ -5,9 +5,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '138.197.99.155',
-	'username' => 'admin',
-	'password' => 'increscendo2021',
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
 	'database' => 'increscendo_dev',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

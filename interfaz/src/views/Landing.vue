@@ -103,6 +103,15 @@
 					<div class="contain-iframe-qs">
 						<iframe width="560" height="315" src="https://www.youtube.com/embed/K93ZoZov5Yk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					</div>
+					<div class="contain-iframe-qs">
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/StS-X7dDWws" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</div>
+					<div class="contain-iframe-qs">
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/uH41YU7SMfo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</div>
+					<div class="contain-iframe-qs">
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/ShXpIg7RyC0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</div>
 					<div class="content-text">
 						<h3>¿Quiénes somos?</h3>
 						<p>El programa de Estimulación Temprana por medio de la Música, pretende que los niños experimenten y desarrollen habilidades musicales en actividades específicas, que permitan un desarrollo integral al mismo tiempo que fortalecen el vínculo padre-hijo/a- madre-hijo/a mediante una interacción grupal en el aula.  Cada sesión tiene una duración de 45 minutos, espacio en el cual experimentan actividades de ejercicios motrices, rítmicos, melódicos, de relajación además de un   repertorio de canciones infantil adecuados a las edades de los niños.</p>
