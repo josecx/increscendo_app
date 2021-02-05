@@ -15,8 +15,8 @@
 					</b-button>
 
 					<b-dropdown right text="Menú" variant="outline-success">
-						<b-dropdown-item @click="form()"><font-awesome-icon :icon="['fas', 'check-square']" /> Nuevo</b-dropdown-item>
-						<b-dropdown-item href="#"><font-awesome-icon :icon="['fas', 'file-alt']" /> Generar reporte</b-dropdown-item>
+						<b-dropdown-item @click="_abrirFormulario()"><font-awesome-icon :icon="['fas', 'check-square']" /> Nuevo</b-dropdown-item>
+						<b-dropdown-item @click="_guardar()"><font-awesome-icon :icon="['fas', 'file-alt']" /> Generar reporte</b-dropdown-item>
 					</b-dropdown>
 				</div>
 			</b-form>
@@ -27,7 +27,7 @@
 				<span aria-hidden="true">&times;</span>
 			</button>
 			<div class="border border-ligth border-top-0 col-sm-12 mb-4 mt-4"></div>
-			<b-form>
+			<form :key="componentKey" @submit.prevent="_guardar()">
 				<div class="form-row">
 					<div class="form-group mb-1 col-sm-6">
 						<label 
@@ -37,7 +37,8 @@
 						<input 
 							type="text"
 							class="form-control form-control-sm" 
-							id="inputNombre" 
+							id="inputNombre"
+							v-model="form.nombre"
 							:required="true"
 						>
 					</div>
@@ -49,7 +50,8 @@
 						<input 
 							type="text" 
 							class="form-control form-control-sm" 
-							id="inputApellido" 
+							id="inputApellido"
+							v-model="form.apellido"
 							:required="true"
 						>
 					</div>
@@ -64,6 +66,7 @@
 							type="text" 
 							class="form-control form-control-sm" 
 							id="inputUsuario" 
+							v-model="form.usuario"
 							:required="true"
 						>
 					</div>
@@ -75,7 +78,8 @@
 						<input 
 							type="text" 
 							class="form-control form-control-sm" 
-							id="inputCorreo" 
+							id="inputCorreo"
+							v-model="form.correo"
 							:required="true"
 						>
 					</div>
@@ -88,9 +92,11 @@
 						</label>
 						<select 
 							class="form-control form-control-sm"
-							id="selectRol" 
+							id="selectRol"
+							v-model="form.rol_id"
 						>
-							<option value="">Selecciona un rol</option>
+							<option value=""></option>
+							<option v-for="i in select.rol" :key="i.id" :value="i.id">{{ i.nombre }}</option>
 						</select>
 					</div>
 					<div class="form-group mb-1 col-sm-3">
@@ -101,24 +107,26 @@
 						<select 
 							class="form-control form-control-sm"
 							id="selectSexo" 
+							v-model="form.sexo_id"
 						>
-							<option value="">Selecciona un sexo</option>
+							<option value=""></option>
+							<option v-for="i in select.sexo" :key="i.id" :value="i.id">{{ i.nombre }}</option>
 						</select>
 					</div>
 				</div>
-				<div class="col-sm-12 text-right p-0">
-					<b-button variant="outline-primary" class="mr-2">
+				<div class="col-sm-12 text-right p-0" v-if="btnGuardar">
+					<b-button type="submit" variant="outline-primary" class="mr-2" :disabled="btnGuardando">
 						<font-awesome-icon :icon="['fas', 'save']" />
-						Guardar
+						<span :key="componentKey"> {{ btnGuardando ? 'Guardando...' : 'Guardar'}}</span>
 					</b-button>
 				</div>
-			</b-form>
+			</form>
 		</div>
 
 		<div class="border border-ligth border-top-0 col-sm-12 mb-4 mt-4"></div>
 
 		<div class="table-responsive-xl">
-			<table class="table table-bordered table-striped rounded">
+			<table :key="componentKey" class="table table-bordered table-striped rounded">
 				<thead class="thead-light">
 					<tr>
 						<th>Nombre</th>
@@ -130,8 +138,8 @@
 						<th></th>
 					</tr>
 				</thead>
-					<tbody v-if="usuarios.length > 0">
-						<tr v-for="(i, idx) in usuarios" :key="i.id">
+					<tbody v-if="lista.length > 0">
+						<tr v-for="(i, idt) in lista" :key="i.id">
 							<td>{{ i.nombre }}</td>
 							<td>{{ i.apellido }}</td>
 							<td>{{ i.usuario }}</td>
@@ -143,7 +151,7 @@
 							</td>
 							<td class="text-center m-0 pt-2 p-0">
 								<b-dropdown right size="sm" variant="none">
-									<b-dropdown-item  @click="form(idx)">
+									<b-dropdown-item  @click="_editar(idt)">
 										<font-awesome-icon :icon="['fas', 'pen-square']" /> Editar
 									</b-dropdown-item>
 									<b-dropdown-item>
@@ -162,28 +170,14 @@
 </template>
 <script>
 	import GlobalMixin from "../../mixins/global-mixin.js";
+	import Formulario from "../../mixins/Formulario.js";
 	export default{
 		name: "Usuario",
-		mixins: [GlobalMixin],
-		data: () => {
-			return{
-				usuarios: [],
-				verForm: false
-			}
-		},
+		mixins: [GlobalMixin,Formulario],
 		created(){
-			this.getUsuario()
-		},
-		methods:{
-			getUsuario(){
-				this._getLista({url: "/usuario/getUsuario"}).then((response) => {
-					this.usuarios = response.lista
-					console.log(this.usuarios)
-				})
-			},
-			form(){
-				this.verForm = true
-			}
+			this.url = "/usuario"
+			this._getSelect(['rol','sexo'])
+			this._getDatos()
 		}
 	}
 </script>

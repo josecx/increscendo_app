@@ -24,7 +24,7 @@ class Usuario extends CI_Controller {
 		]));
 	}
 
-	public function getUsuario()
+	public function getLista()
 	{
 		$this->output->set_output(json_encode([
 			'lista' => $this->Usuario_model->getUsuario($_GET)
@@ -43,13 +43,15 @@ class Usuario extends CI_Controller {
 		$this->output->set_output(json_encode($response));
 	}
 
-	public function guardar()
+	public function guardar($id = "")
 	{
-		$response = ['exito' => 0];
+		$response = ['exito' => 0, 'nivel' => 1];
 		$datos    = json_decode(file_get_contents('php://input'));
-		if (isset($datos->correo)) {
-			if ($this->Usuario_model->validarCorreo($datos->correo)) {
-				$response['mensaje'] = "el correo que intentas introducir ya existe";
+		if (isset($datos->correo) && $id != "") {
+			$usuario = $this->Usuario_model->validarCorreo($datos->correo);
+			if ($usuario) {
+				$response['nivel']   = 2;
+				$response['mensaje'] = "Este correo ya está registrado. Usuario: ".$usuario->usuario;
 			} else {
 				$password = randomPassword(20);
 				$datos_guardar = [
@@ -57,6 +59,7 @@ class Usuario extends CI_Controller {
 					"nombre"    => (isset($datos->nombre))   	 ? $datos->nombre   	: '',
 					"usuario"   => (isset($datos->usuario))      ? $datos->usuario  	: '',
 					"sexo_id"	=> (isset($datos->sexo_id['0'])) ? $datos->sexo_id['0'] : '',
+					"rol_id"	=> (isset($datos->rol_id['0']))  ? $datos->rol_id['0']	: '',
 					"correo"    => $datos->correo,
 					"password"  => sha1($password),
 					"estado_id" => '1',
@@ -71,7 +74,7 @@ class Usuario extends CI_Controller {
 					]);
 
 					if ($mail) {
-						$response['mensaje'] = "Usuario creado correctamente. Hemos enviado un correo con tu contraseña";
+						$response['mensaje'] = "Usuario creado correctamente. Hemos enviado un correo con la contraseña";
 						$response['exito']	 = true;
 					} else {
 						$this->Usuario_model->eliminarUsuario($insert_id);
@@ -107,7 +110,7 @@ class Usuario extends CI_Controller {
 				]);
 
 				if ($mail) {
-					$response['mensaje'] = "Hemos enviado un correo con tu nueva contraseña.";
+					$response['mensaje'] = "Hemos enviado un correo con una nueva contraseña.";
 					$response['exito']	 = true;
 				} else {
 					$response['mensaje'] = "Ha ocurrido un error al completar el proceso. Intenta nuevamenta.";
