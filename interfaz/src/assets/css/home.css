@@ -4,10 +4,7 @@
 	height: auto;
 	width: 100%;
 	padding: 10px 10px 0px 10px;
-background: #000046;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to top, #1CB5E0, #163a6b);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to top, #1CB5E0, #163a6b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+	background: var(--color-primary);
 	z-index: 10;
 }
 
@@ -86,10 +83,25 @@ background: linear-gradient(to top, #1CB5E0, #163a6b); /* W3C, IE 10+/ Edge, Fir
 }
 
 .main-home {
-	position: relative;
-	height: auto;
-	width: 100%;
+	position: absolute;
+	width: 80%;
+	margin: 90px 10%;
 	background: #f2f2f2;
+}
+
+.component-change-home {
+	width: 100%;
+	background: #fff;
+	box-sizing: border-box;
+	padding: 1rem;
+	border-radius: 10px;
+}
+
+.aside-home {
+	display: none;
+	border-radius: 10px;
+	box-sizing: border-box;
+	padding: 1rem;
 }
 
 @media (min-width: 576px) {
@@ -144,12 +156,46 @@ background: linear-gradient(to top, #1CB5E0, #163a6b); /* W3C, IE 10+/ Edge, Fir
 		font-size: 1rem;
 	}
 
+	.main-home {
+		position: absolute;
+		box-sizing: border-box;
+		padding: 1rem;
+		width: calc(100% - 100px);
+		margin: 70px 0px 0px 100px;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+
+	.component-change-home {
+		width: calc(100% - 210px);
+		background: #fff;
+	}
+
+	.aside-home {
+		display: block;
+		background: #fff;
+		width: 200px;
+	}
+
 }
 
 @media (min-width: 992px) {
-	
+	.component-change-home {
+		width: calc(100% - 310px);
+	}
+
+	.aside-home {
+		width: 300px;
+	}
 }
 
 @media (min-width: 1200px) {
-	
+	.component-change-home {
+		width: calc(100% - 470px);
+	}
+
+	.aside-home {
+		width: 450px;
+	}
 }

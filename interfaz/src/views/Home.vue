@@ -48,14 +48,16 @@
 			</div>
 		</div>
 		<div class="main-home">
-			
+			<div class="component-change-home"></div>
+			<div class="aside-home">
+				<span v-if="isLoggedIn">
+					<button v-on:click="logout">Logout</button>
+					<router-link :to="{ name:'CambiarPassword' }">
+						Cambiar contraseña
+					</router-link>
+				</span>
+			</div>
 		</div>
-		<!-- <span v-if="isLoggedIn">
-			<button v-on:click="logout">Logout</button>
-			<router-link :to="{ name:'CambiarPassword' }">
-				Cambiar contraseña
-			</router-link>
-		</span> -->
 		<router-view/>
 	</div>
 </template>
