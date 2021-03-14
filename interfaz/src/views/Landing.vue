@@ -14,12 +14,12 @@
 			<div class="menu-head-contain">
 				<img src="../assets/img/logo_en_fondo_oscuro.svg" alt="logo-increscendo" id="logo-sidebar-menu">
 			</div>
-			<div class="menu-search-contain">
+			<!-- <div class="menu-search-contain">
 				<input type="text" placeholder="Buscar">
 				<button class="btn-icon-search">
 					<font-awesome-icon :icon="['fas', 'search-plus']" />
 				</button>
-			</div>
+			</div> -->
 			<div class="menu-links-contain">
 				<nav>
 					<ul>
@@ -35,7 +35,7 @@
 						<a v-scroll-to="'#programas'">
 							<li class="cl-blanco">Programas</li>
 						</a>
-						<a>
+						<!-- <a>
 							<li class="cl-blanco">Increscendo Store</li>
 						</a>
 						<a>
@@ -49,7 +49,7 @@
 						</a>
 						<a>
 							<li class="cl-blanco">Recursos para Padres</li>
-						</a>
+						</a> -->
 						<a>
 							<li class="cl-blanco">Contacto</li>
 						</a>

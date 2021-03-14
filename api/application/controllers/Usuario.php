@@ -47,7 +47,7 @@ class Usuario extends CI_Controller {
 	{
 		$response = ['exito' => 0, 'nivel' => 1];
 		$datos    = json_decode(file_get_contents('php://input'));
-		if (isset($datos->correo) && $id != "") {
+		if (isset($datos->correo)) {
 			$usuario = $this->Usuario_model->validarCorreo($datos->correo);
 			if ($usuario) {
 				$response['nivel']   = 2;
@@ -59,7 +59,7 @@ class Usuario extends CI_Controller {
 					"nombre"    => (isset($datos->nombre))   	 ? $datos->nombre   	: '',
 					"usuario"   => (isset($datos->usuario))      ? $datos->usuario  	: '',
 					"sexo_id"	=> (isset($datos->sexo_id['0'])) ? $datos->sexo_id['0'] : '',
-					"rol_id"	=> (isset($datos->rol_id['0']))  ? $datos->rol_id['0']	: '',
+					"rol_id"	=> (isset($datos->rol_id['0']))  ? $datos->rol_id['0']	: '2',
 					"correo"    => $datos->correo,
 					"password"  => sha1($password),
 					"estado_id" => '1',

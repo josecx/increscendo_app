@@ -166,11 +166,11 @@
 	/*IMG responsive logo Increscendo*/
 
 	.menu-head-contain {
-		height: 100px;
+		height: 160px;
 	}
 		.menu-head-contain img {
-		height: 100px;
-		width: 100px;
+		height: 150px;
+		width: 150px;
 	}
 }
 
