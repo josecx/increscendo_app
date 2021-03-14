@@ -1,7 +1,7 @@
 import Vue 	    	from 'vue';
 import VueToast 	from 'vue-toast-notification';
 import VueScrollTo  from 'vue-scrollto';
-import 'vue-toast-notification/dist/theme-default.css';
+import 'vue-toast-notification/dist/theme-sugar.css';
 
 Vue.use(VueToast);
 Vue.use(VueScrollTo, {
@@ -11,6 +11,11 @@ Vue.use(VueScrollTo, {
 
 export default {
 	name: "GlobalMixin",
+	data: () => {
+		return {
+			btnGuardar: false
+		}
+	},
 	methods: {
 		//ALERTAS
 		_showToast(type_toast, message) {
@@ -67,13 +72,21 @@ export default {
 			})
 		},
 		_enviarDatos(args){
+			this.btnGuardar = true
 			return new Promise((resolve, reject) => {
 				this.$http
 				.post(`${this.urlBase}`+args.url+args.arg, args.data)
 				.then(res => {
+					this.btnGuardar = false
+					resolve(res)
 					if (res.data.exito) {
-						resolve(res)
 						this._notificarSuccess(res.data.mensaje)
+					} else {
+						if (res.data.warning) {
+							this._notificarWarning(res.data.mensaje)
+						} else {
+							this._notificarError(res.data.mensaje)
+						}
 					}
 				}).catch(e => {
 					reject(e)

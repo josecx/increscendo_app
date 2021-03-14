@@ -1,4 +1,4 @@
-const version = '1.003'
+const version = '1.004'
 module.exports = {
 	filenameHashing: false,
 	publicPath: process.env.NODE_ENV === 'production' ? '/assets' : '/',

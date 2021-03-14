@@ -37,4 +37,15 @@ if (!function_exists('randomPassword')) {
 	    return implode($password); 
 	}
 }
+
+if (!function_exists('verPropiedad')) {
+	function verPropiedad($objeto, $propiedad, $return=false)
+	{
+		if (property_exists($objeto, $propiedad) &&!empty($objeto->$propiedad)) {
+			return $objeto->$propiedad;
+		}
+
+		return $return;
+	}
+}
 ?>

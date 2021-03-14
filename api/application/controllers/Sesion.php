@@ -12,36 +12,38 @@ class Sesion extends CI_Controller {
 
 	public function login()
 	{
-		$response = [
-			"exito"   => false, 
-			"mensaje" => "usuario y/o contraseña incorrectos"
-		];
+		$response = ["exito" => false, "warning" => false];
 
 		$datos = json_decode(file_get_contents('php://input'));
 		
-		if (isset($datos->usuario) && isset($datos->password)) {
-			$args = [
-				"usuario"  => $datos->usuario,
-				"password" => sha1($datos->password)
-			];
-			$logued = $this->Usuario_model->login($args);
-			if ($logued) {
-				$this->load->library('Token');
-				$token = new Token();
+		if (verPropiedad($datos, "usuario") && verPropiedad($datos, "password")) {
+			$usuario = $this->Usuario_model->getUsuario(['usuario' => $datos->usuario]);
+			if ($usuario) {
+				if (sha1($datos->password) == $usuario->password) {
+					$this->load->library('Token');
+					$token = new Token();
 
-				$t_vida  = time() + $this->t_sesion;
+					$t_vida  = time() + $this->t_sesion;
 
-				$s_token = $token->_setToken_([
-					"expira" => time()+7200,
-					"data"   => $logued
-				]);
+					$s_token = $token->_setToken_([
+						"expira" => time()+7200,
+						"data"   => $usuario
+					]);
 
-				$response["token"]    = $s_token;
-				$response["mensaje"]  = "logueado correctamente";
-				$response["exito"]    = true;
-				$response["expira"]   = $this->t_sesion;
-				$response["registro"] = $logued;
+					$response["token"]    = $s_token;
+					$response["mensaje"]  = "Bienvenido ".$usuario->nombre;
+					$response["exito"]    = true;
+					$response["expira"]   = $this->t_sesion;
+					$response["registro"] = $usuario;
+				} else {
+					$response["mensaje"] = "Contraseña incorrecta";
+				}
+			} else {
+				$response["mensaje"] = "El usuario '".$datos->usuario."' no existe";
 			}
+		}else{
+			$response["warning"] = true;
+			$response["mensaje"] = "Hacen falta datos para continuar";
 		}
 		$this->output->set_output(json_encode($response));
 	}

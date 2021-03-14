@@ -45,12 +45,12 @@ class Usuario extends CI_Controller {
 
 	public function guardar($id = "")
 	{
-		$response = ['exito' => 0, 'nivel' => 1];
+		$response = ['exito' => 0, 'warning' => 0];
 		$datos    = json_decode(file_get_contents('php://input'));
 		if (isset($datos->correo)) {
 			$usuario = $this->Usuario_model->validarCorreo($datos->correo);
 			if ($usuario) {
-				$response['nivel']   = 2;
+				$response['warning'] = true;
 				$response['mensaje'] = "Este correo ya está registrado. Usuario: ".$usuario->usuario;
 			} else {
 				$password = randomPassword(20);
@@ -70,7 +70,12 @@ class Usuario extends CI_Controller {
 						"to_email" 	 => $datos_guardar['correo'],
 						"to_name" 	 => $datos_guardar['nombre']." ".$datos_guardar['apellido'],
 						"subject"	 => "Bienvenido a Increscendo App",
-						"html" 		 => $password
+						"html" 		 => $this->load->view('mail/bienvenido_mail',
+										[
+											'password' => $password,
+											'usuario'  => $datos_guardar
+										],
+										true)
 					]);
 
 					if ($mail) {
@@ -92,32 +97,44 @@ class Usuario extends CI_Controller {
 	{
 		$response = [
 			'exito'   => 0, 
-			'mensaje' => 'Hacen falta datos para continuar.'
+			'warning' => false
 		];
 		$datos = json_decode(file_get_contents('php://input'));
-		if (isset($datos->correo)) {
-			$password = randomPassword(20);
-			$datos_update = [
-				"password" => sha1($password)
-			];
+		if (verPropiedad($datos, "usuario")) {
+			$usuario = $this->Usuario_model->getUsuario(['usuario' => $datos->usuario]);
+			if ($usuario) {
+				$password = randomPassword(20);
+				$datos_update = [
+					"password" => sha1($password)
+				];
 
-			if ($this->Usuario_model->guardar($datos_update, $datos->registro->id)) {
-				$mail = enviarEmail([
-					"to_email" 	 => $datos->correo,
-					"to_name" 	 => $datos->registro->nombre." ".$datos->registro->apellido,
-					"subject"	 => "Reenvio de contraseña",
-					"html" 		 => $password
-				]);
+				if ($this->Usuario_model->guardar($datos_update, $usuario->id)) {
+					$mail = enviarEmail([
+						"to_email" 	 => $usuario->correo,
+						"to_name" 	 => $usuario->nombre." ".$usuario->apellido,
+						"subject"	 => "Reenvio de contraseña",
+						"html" 		 => $this->load->view('mail/recuperarPass_mail',
+										[
+											'password' => $password,
+											'usuario'  => $usuario
+										],
+										true)
+					]);
 
-				if ($mail) {
-					$response['mensaje'] = "Hemos enviado un correo con una nueva contraseña.";
-					$response['exito']	 = true;
-				} else {
-					$response['mensaje'] = "Ha ocurrido un error al completar el proceso. Intenta nuevamenta.";
-					$response['exito']	 = false;
+					if ($mail) {
+						$response['mensaje'] = "Hemos enviado un correo con una nueva contraseña";
+						$response['exito']	 = true;
+					} else {
+						$response['mensaje'] = "Ha ocurrido un error al completar el proceso. Intenta nuevamenta";
+						$response['warning'] = true;
+					}
 				}
+			} else {
+				$response["mensaje"] = "El usuario '".$datos->usuario."' no existe";
 			}
-
+		} else {
+			$response["warning"] = true;
+			$response["mensaje"] = "Ingresa tu usuario para continunar";
 		}
 		$this->output->set_output(json_encode($response));	
 	}

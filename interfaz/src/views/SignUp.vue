@@ -37,7 +37,10 @@
 					</div>
 				</div>
 				<div class="submit-label">
-					<button type="submit">Registrarme</button>
+					<button type="submit" :disabled="btnGuardar">
+						<span v-if="btnGuardar" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+						<span> {{ btnGuardar ? 'Guardando...' : 'Registrarme'}}</span>
+					</button>
 				</div>
 				</form>
 			</div>
@@ -93,6 +96,8 @@
 							this.$router.push({name: "Login"})
 						}
 					})
+				} else {
+					this._notificarWarning("Debes utilizar un correo no registrado")
 				}
 			},
 			check_one(){

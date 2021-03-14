@@ -9,7 +9,14 @@ class Usuario_model extends CI_Model {
 	}
 
 	public function getUsuario($args=[])
-	{
+	{	
+		$method="result";
+
+		if (elemento($args, "usuario")) {
+			$this->db->where("u.usuario", $args["usuario"]);
+			$method="row";
+		}
+
 		return $this->db
 			->select(
 				"u.*,
@@ -19,7 +26,7 @@ class Usuario_model extends CI_Model {
 			->from("usuario u")
 			->join("rol r", "u.rol_id = r.id", "LEFT")
 			->get()
-			->result();
+			->$method();
 	}
 
 	public function validarCorreo($correo)
