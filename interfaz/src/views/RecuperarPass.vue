@@ -7,8 +7,8 @@
 					<img src="../assets/img/logo_secundario_en_fondo_oscuro.svg" alt="logo-increscendo" id="logo-sidebar-menu">
 				</div>
 				<div class="user-label">	
-					<label>Usuario</label>
-					<input type="text" v-model="form.usuario" placeholder="Ingresa tu usuario">
+					<label>Correo</label>
+					<input type="text" v-model="form.correo" placeholder="Ingresa tu correo">
 				</div>
 				<div class="submit-label">
 					<button type="submit" :disabled="btnGuardar">

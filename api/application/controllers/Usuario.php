@@ -100,8 +100,8 @@ class Usuario extends CI_Controller {
 			'warning' => false
 		];
 		$datos = json_decode(file_get_contents('php://input'));
-		if (verPropiedad($datos, "usuario")) {
-			$usuario = $this->Usuario_model->getUsuario(['usuario' => $datos->usuario]);
+		if (verPropiedad($datos, "correo")) {
+			$usuario = $this->Usuario_model->getUsuario(['correo' => $datos->correo]);
 			if ($usuario) {
 				$password = randomPassword(20);
 				$datos_update = [
@@ -130,11 +130,11 @@ class Usuario extends CI_Controller {
 					}
 				}
 			} else {
-				$response["mensaje"] = "El usuario '".$datos->usuario."' no existe";
+				$response["mensaje"] = "Ningún usuario está registrado con el correo: '".$datos->correo;
 			}
 		} else {
 			$response["warning"] = true;
-			$response["mensaje"] = "Ingresa tu usuario para continunar";
+			$response["mensaje"] = "Ingresa tu correo para continunar";
 		}
 		$this->output->set_output(json_encode($response));	
 	}

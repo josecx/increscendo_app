@@ -17,6 +17,11 @@ class Usuario_model extends CI_Model {
 			$method="row";
 		}
 
+		if (elemento($args, "correo")) {
+			$this->db->where("u.correo", $args["correo"]);
+			$method="row";
+		}
+
 		return $this->db
 			->select(
 				"u.*,
