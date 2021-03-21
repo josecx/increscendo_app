@@ -12,6 +12,7 @@
 			<a href="">
 				<img style="height: 50px; border-radius: 50%; overflow: hidden; width: 50px;" src="https://lh3.googleusercontent.com/ogw/ADGmqu-OhZUCi5QCe_spoPL-8B7VV9JQ3VUWZw4FtDiCcg=s83-c-mo" alt="">
 			</a>
+			
 		</div>
 		<div class="panel-lateral">
 			<div class="contain-panel-lateral">
@@ -61,6 +62,31 @@
 						Cambiar contraseña
 					</router-link>
 				</span>
+				<br>
+				<br>
+				<!--  -->
+				<div class="card" style="width: 18rem;">
+					<div class="card-body">
+						<h5 class="card-title">Card title</h5>
+						<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						<a href="#" class="card-link">Card link</a>
+						<a href="#" class="card-link">Another link</a>
+					</div>
+				</div>
+				<br>
+				<!--  -->
+				<div class="card">
+					<div class="card-header">
+						Quote
+					</div>
+					<div class="card-body">
+						<blockquote class="blockquote mb-0">
+							<p>A well-known quote, contained in a blockquote element.</p>
+							<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+						</blockquote>
+					</div>
+				</div>
 			</div>
 		</div>
 		<router-view/>
