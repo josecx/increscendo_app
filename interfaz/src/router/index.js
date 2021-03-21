@@ -27,7 +27,7 @@ const routes = [
 				component: () => import('../views/Principal.vue')
 			},
 			{
-				path: 'cambiarpassword',
+				path: 'cambiar-contrasenia',
 				name: 'CambiarPassword',
 				component: () => import('../views/CambiarPass.vue')
 			},

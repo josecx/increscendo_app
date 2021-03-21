@@ -9,9 +9,16 @@
 					</a>
 				</nav>
 			</div>
-			<a href="">
-				<img style="height: 50px; border-radius: 50%; overflow: hidden; width: 50px;" src="https://lh3.googleusercontent.com/ogw/ADGmqu-OhZUCi5QCe_spoPL-8B7VV9JQ3VUWZw4FtDiCcg=s83-c-mo" alt="">
-			</a>
+			<b-dropdown variant="link" toggle-class="text-decoration-none" no-caret>
+				<template #button-content>
+					<a href="javascript:;">
+						<img style="height: 50px; border-radius: 50%; overflow: hidden; width: 50px;" src="https://lh3.googleusercontent.com/ogw/ADGmqu-OhZUCi5QCe_spoPL-8B7VV9JQ3VUWZw4FtDiCcg=s83-c-mo" alt="">
+					</a>
+				</template>
+				<b-dropdown-item @click="cambiarPass()"><i class="fas fa-key text-muted"></i> Cambiar contraseña</b-dropdown-item>
+				<b-dropdown-divider></b-dropdown-divider>
+				<b-dropdown-item @click="logout()"><i class="fas fa-power-off text-danger"></i> Cerrar sesión</b-dropdown-item>
+			</b-dropdown>
 			
 		</div>
 		<div class="panel-lateral">
@@ -56,12 +63,7 @@
 				<C4 :key="key" v-if="componentes.c4"></C4>
 			</div>
 			<div class="aside-home">
-				<span v-if="isLoggedIn">
-					<button v-on:click="logout">Logout</button>
-					<router-link :to="{ name:'CambiarPassword' }">
-						Cambiar contraseña
-					</router-link>
-				</span>
+				<router-view/>
 				<br>
 				<br>
 				<!--  -->
@@ -89,7 +91,6 @@
 				</div>
 			</div>
 		</div>
-		<router-view/>
 	</div>
 </template>
 <script>
@@ -124,6 +125,9 @@
 				if (tipo == '2'){this.componentes.c2 = true} else this.componentes.c2 = false;
 				if (tipo == '3'){this.componentes.c3 = true} else this.componentes.c3 = false;
 				if (tipo == '4'){this.componentes.c4 = true} else this.componentes.c4 = false;
+			},
+			cambiarPass(){
+				this.$router.push({name: "CambiarPassword"})
 			}
 		},
 		components:{
