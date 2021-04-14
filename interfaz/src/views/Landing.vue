@@ -50,7 +50,7 @@
 						<a>
 							<li class="cl-blanco">Recursos para Padres</li>
 						</a> -->
-						<a>
+						<a v-scroll-to="'#contacto-landing'">
 							<li class="cl-blanco">Contacto</li>
 						</a>
 					</ul>
@@ -255,12 +255,66 @@
 				</div>
 			</section>
 			<!-- Fin Programas -->
+			<!-- Contacto -->
+			<section id="contacto-landing">
+				<div class="contain">
+					<h2>Contacto</h2>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<form method="post" action="enviarcorreo.php">
+								<ul class="contact-form">
+									<li>
+										<div class="col-md-6">
+											<input name="nombre" placeholder="Escribe tu nombre" required="required" size="8" type="text" />
+										</div>
+										<div class="col-md-6">
+											<input name="email" placeholder="Email" required="required" size="8" type="email" />
+										</div>
+									</li>
+									<li>
+										<div class="col-md-6">
+											<input name="telefono" placeholder="Escribe tu numero" required="required" size="8" type="text" />
+										</div>
+										<!-- <div class="col-md-6">
+											<input name="compañia" placeholder="Companía/Agencia" required="required" size="8" type="text" />
+										</div> -->
+									</li>
+									<li>
+										<!-- <div class="col-md-12">
+											<input name="asunto" placeholder="Asunto" required="required" size="8" type="text" />
+										</div> -->
+									</li>
+									<li>
+										<div class="col-md-12">
+											<textarea class="span12" name="mensaje" placeholder="Escribe tu proyecto o mensaje" required="required"></textarea>
+										</div>
+									</li>
+									<li>
+										<div class="col-md-12">
+											<button type="submit">
+												Enviar mensaje
+												<span
+												class="glyphicon glyphicon-arrow-right"
+												aria-hidden="true"
+												></span>
+											</button>
+										</div>
+									</li>
+								</ul>
+							</form>
+						</div>
+					</div>		
+				</div>
+			</section>
+			<!-- Fin Contacto -->
 			
 		</section>
 
 
 
 			<!-- <section>
+				ELEMENTS HTML
 				<div class="contain">
 					<h1>h1</h1>
 					<h2>h2</h2>
@@ -293,6 +347,7 @@
 	import "../assets/css/quienes-somos.css";
 	import "../assets/css/que-hacemos.css";
 	import "../assets/css/programas.css";
+	import "../assets/css/contacto.css";
 	import GlobalMixin from "../mixins/global-mixin.js";
 	export default {
 		name: "Landing",
