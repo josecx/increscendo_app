@@ -14,6 +14,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 library.add(fas, far, fab)
 // Bootstrap
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue,IconsPlugin)

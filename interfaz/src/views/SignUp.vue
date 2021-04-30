@@ -22,7 +22,7 @@
 					<label for="">Correo
 						<span style="color: red">*</span>
 					</label>
-					<input type="text" v-model="form.correo" @change="validarCorreo()">
+					<input type="text" v-model="form.correo">
 				</div>
 				<div class="password-label">
 					<label for="">Usuario
@@ -89,16 +89,12 @@
 					data: this.form,
 					arg:  ''
 				};
-				if (this.exito) {	
-					this._enviarDatos(this.args).then((response) => {
-						this.args = []
-						if (response.data.exito) {
-							this.$router.push({name: "Login"})
-						}
-					})
-				} else {
-					this._notificarWarning("Debes utilizar un correo no registrado")
-				}
+				this._enviarDatos(this.args).then((response) => {
+					this.args = []
+					if (response.data.exito) {
+						this.$router.push({name: "Login"})
+					}
+				})
 			},
 			check_one(){
 				this.form.sexo_id = []

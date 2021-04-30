@@ -17,6 +17,7 @@ export default{
 		componentKey: 0,
 		reg: 		  '',
 		form:   {},
+		bform:  {},
 		select: {},
 		lista:  {},
 	}),
@@ -76,8 +77,10 @@ export default{
 
 		// FORMULARIO SELECT, LISTA, VALIDACIONES
 		_getDatos(){
+			let datos = this.bform
 			this._enviarPeticionGet({
-				url: this.url+"/getLista"
+				url: this.url+"/getLista/",
+				data: {params:datos}
 			}).then((response) => {
 				this.lista = response.lista
 			})
@@ -119,6 +122,16 @@ export default{
 		},
 		_limpiarFormulario () {
 			this.form = {};
+			this.reg  = '';
 		},
+	},
+	filters: {
+        truncate: function (text, length, suffix) {
+            if (text.length > length) {
+                return text.substring(0, length) + suffix;
+            } else {
+                return text;
+            }
+        },
 	}
 }

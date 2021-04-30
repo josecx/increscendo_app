@@ -20,7 +20,7 @@ class Sesion extends CI_Controller {
 			$usuario = $this->Usuario_model->getUsuario(['usuario' => $datos->usuario]);
 			if ($usuario) {
 				if (sha1($datos->password) == $usuario->password) {
-					$this->load->library('Token');
+					$this->load->library(['Token','user_agent']);
 					$token = new Token();
 
 					$t_vida  = time() + $this->t_sesion;
@@ -29,7 +29,7 @@ class Sesion extends CI_Controller {
 						"expira" => time()+7200,
 						"data"   => $usuario
 					]);
-
+					$this->session->set_userdata(['usuario' => $usuario]);
 					$response["token"]    = $s_token;
 					$response["mensaje"]  = "Bienvenido ".$usuario->nombre;
 					$response["exito"]    = true;

@@ -48,4 +48,32 @@ if (!function_exists('verPropiedad')) {
 		return $return;
 	}
 }
+
+if (!function_exists('str_contains')) {
+    function str_contains(string $haystack, string $needle): bool
+    {
+        return '' === $needle || false !== strpos($haystack, $needle);
+    }
+}
+
+if (!function_exists('getUrlVideo')) {
+	function getUrlVideo($urlOriginal)
+	{
+		if (str_contains($urlOriginal, 'youtu')) {
+			$url = "https://www.youtube.com/embed/";
+			if (str_contains($urlOriginal, 'https://www.youtube.com/watch?v=')) { return str_replace("https://www.youtube.com/watch?v=", $url, $urlOriginal);}
+			if (str_contains($urlOriginal, 'www.youtube.com/watch?v=')) {return str_replace("www.youtube.com/watch?v=", $url, $urlOriginal);}
+			if (str_contains($urlOriginal, 'https://youtu.be/')) {return str_replace("https://youtu.be/", $url, $urlOriginal);}
+			if (str_contains($urlOriginal, 'youtu.be/')) {return str_replace("youtu.be/", $url, $urlOriginal);}
+		}
+
+		if (str_contains($urlOriginal, 'vimeo')) {
+			$url = "https://player.vimeo.com/video/";
+			if (str_contains($urlOriginal, 'https://vimeo.com/')) {return str_replace("https://vimeo.com/", $url, $urlOriginal);}
+			if (str_contains($urlOriginal, 'vimeo.com/')) {return str_replace("vimeo.com/", $url, $urlOriginal);}
+		}
+
+		return false;
+	}
+}
 ?>

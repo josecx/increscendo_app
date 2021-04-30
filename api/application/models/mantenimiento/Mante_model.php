@@ -17,6 +17,16 @@ class Mante_model extends CI_Model {
 	{
 		return $this->db->get("sexo")->result();
 	}
+
+	public function _gettipo_recurso()
+	{
+		return $this->db->get("tipo_recurso")->result();
+	}
+
+	public function _getusuario_root()
+	{
+		return $this->db->where("id <>",3)->get("usuario")->result();
+	}
 }
 
 /* End of file Mante_model.php */

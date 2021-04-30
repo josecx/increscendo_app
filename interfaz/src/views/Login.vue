@@ -56,7 +56,7 @@
 					this.args = []
 					if (response.data.exito) {
 						this.$store.dispatch('login', response.data).then(() => {
-							this.$router.push({name: "Home"})
+							this.$router.push({name: "Home_app"})
 						})
 					}
 				})

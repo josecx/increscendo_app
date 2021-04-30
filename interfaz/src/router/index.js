@@ -36,6 +36,21 @@ const routes = [
 				name: 'Usuario',
 				component: () => import('../views/system/Usuario.vue')
 			},
+			{
+				path: 'home',
+				name: 'Home_app',
+				component: () => import('../views/app/Home.vue')
+			},
+			{
+				path: 'contenido',
+				name: 'Home_app',
+				component: () => import('../views/app/Home.vue')
+			},
+			{
+				path: 'configuracion-contenido',
+				name: 'Config_contenido',
+				component: () => import('../views/app/ConfigContenido.vue')
+			},
 		]
 	},
 	{
