@@ -24,6 +24,10 @@ class Contenido_publicacion_model extends CI_Model {
 	{
 		$method = "result";
 
+		if (elemento($args, "contenido")) {
+			$this->db->where("a.contenido_id", $args["contenido"]);
+		}
+
 		if (elemento($args, "termino")) {
 			$termino = $args["termino"];
 			$this->db
@@ -35,7 +39,7 @@ class Contenido_publicacion_model extends CI_Model {
 		->select("
 			a.*,
 			DATE_FORMAT(a.fecha_sys, '%m-%d-%Y %H:%i') AS fecha_publicado,
-			b.nombre as recurso,
+			b.nombre as recurso_nombre,
 			b.icono
 		")
 		->join("tipo_recurso b", "b.id = a.tipo_recurso_id")
@@ -53,6 +57,19 @@ class Contenido_publicacion_model extends CI_Model {
 			return $this->db->insert_id();
 		} else {
 			return false;
+		}
+	}
+
+	public function activarPadres($args=[])
+	{
+		$row = $this->db
+					->where("contenido_id", $args["contenido_id"])
+					->where("usuario_id", $args["usuario_id"])
+					->get("contenido_padres")->row();
+		if (empty($row)) {
+			if ($this->db->insert("contenido_padres", $args)) {
+				return true;
+			}
 		}
 	}
 

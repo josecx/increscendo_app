@@ -8,7 +8,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<div class="collapse navbar-collapse " id="navbarSupportedContent">
-					<form class="d-flex navbar-nav ml-auto">
+					<form class="d-flex navbar-nav ml-auto" v-if="usuario.rol_id == 1">
 						<button title="Nuevo publicación" class="btn btn-outline-primary" type="button" @click="_abrirFormulario">
 							<i class="fas fa-plus"></i> Nueva publicación
 						</button>
@@ -57,7 +57,10 @@
 	<div class="mt-2">
 		<div v-for="(i, key) in lista" :key="key" class="card mt-4" style="width: 100%;">
 			<div class="contain-iframe-qs" v-if="i.tipo_recurso_id == 1">
-				<iframe width="560" height="315" :src="i.recurso" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<iframe width="560" height="315" :src="i.recurso" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
+			<div class="contain-iframe-qs text-center" v-if="i.tipo_recurso_id==2">
+				<img :src="i.recurso" style="height:70vh;">
 			</div>
 			<div class="card-body">
 				<h5 class="card-title">{{ i.nombre }}</h5>
@@ -76,23 +79,26 @@
 		name: "Home",
 		mixins: [GlobalMixin],
 		created(){
+			if (this.$store.getters.isLoggedIn) {
+				this.usuario = this.$store.state.usuario
+			}
 			this._getSelect(['tipo_recurso'])
 			this.url = "/mantenimiento/publicacion"
 			this._getDatos()
 		}
 	}
 </script>
-	<style>
-		.contain-iframe-qs {
-			width: 100%;
-			height: 0;
-			padding-bottom: 56.25%;
-			position: relative;
-		}
+<style>
+.contain-iframe-qs {
+	width: 100%;
+	height: 0;
+	padding-bottom: 56.25%;
+	position: relative;
+}
 
-		.contain-iframe-qs iframe {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-		}
-	</style>
+.contain-iframe-qs iframe {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+</style>

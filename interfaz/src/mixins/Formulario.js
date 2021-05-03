@@ -14,6 +14,7 @@ export default{
 		btnGuardar:   true,
 		btnGuardando: false,
 		verForm:      false,
+		buscando:     false,
 		componentKey: 0,
 		reg: 		  '',
 		form:   {},
@@ -77,11 +78,13 @@ export default{
 
 		// FORMULARIO SELECT, LISTA, VALIDACIONES
 		_getDatos(){
+			this.buscando = true
 			let datos = this.bform
 			this._enviarPeticionGet({
 				url: this.url+"/getLista/",
 				data: {params:datos}
 			}).then((response) => {
+				this.buscando = false
 				this.lista = response.lista
 			})
 		},

@@ -14,20 +14,25 @@ class Publicacion extends CI_Controller {
 	{
 		$response = ['exito' => 0, 'warning' => 0];
 		$datos    = json_decode(file_get_contents('php://input'));
-		$datos->usuario_id = $this->usuario->id;
+		if (isset($this->usuario->id)) {
+			$datos->usuario_id = $this->usuario->id;
 
-		if ($datos->tipo_recurso_id == 1) {
-			$datos->recurso = getUrlVideo($datos->recurso);
-		}
+			if ($datos->tipo_recurso_id == 1 || $datos->tipo_recurso_id == 2) {
+				$datos->recurso = getUrlRecurso($datos->recurso);
+			}
 
-		$result = $this->Publicacion_model->guardar($datos, $id);
-		if ($result) {
-			$accion = (!empty($id)) ? "actualizado" : "publicado";
-			$response['exito']   = true;
-			$response['mensaje'] = "Se ha {$accion} correctamente: {$datos->nombre}";
+			$result = $this->Publicacion_model->guardar($datos, $id);
+			if ($result) {
+				$accion = (!empty($id)) ? "actualizado" : "publicado";
+				$response['exito']   = true;
+				$response['mensaje'] = "Se ha {$accion} correctamente: {$datos->nombre}";
+			} else {
+				$response['exito']   = 2;
+				$response["mensaje"] = "Ha ocurrido un error, intenta nuevamente";
+			}
 		} else {
-			$response['exito']   = 2;
-			$response["Ha ocurrido un error, intenta nuevamente"];
+			$response["exito"] = 3;
+			$response["mensaje"] = "Ha ocurrido un error con la información de su usuario, intente iniciar sesión nuevamente";
 		}
 
 		$this->output->set_output(json_encode($response));

@@ -25,7 +25,12 @@ class Mante_model extends CI_Model {
 
 	public function _getusuario_root()
 	{
-		return $this->db->where("id <>",3)->get("usuario")->result();
+		return $this->db->where("rol_id <>",3)->get("usuario")->result();
+	}
+
+	public function _getpadres()
+	{
+		return $this->db->select("nombre, id, concat(apellido, ' ', nombre) as nombre_completo")->where("rol_id", 3)->get("usuario")->result();
 	}
 }
 

@@ -51,6 +51,11 @@ const routes = [
 				name: 'Config_contenido',
 				component: () => import('../views/app/ConfigContenido.vue')
 			},
+			{
+				path: 'contenido',
+				name: 'Contenido',
+				component: () => import('../views/app/Contenido.vue')
+			},
 		]
 	},
 	{

@@ -30,16 +30,24 @@
 							<span class="text-bx-menu">Home</span>
 						</div>
 					</router-link>
-					<router-link :to="{ name:'Config_contenido' }">
+					<router-link :to="{ name:'Config_contenido' }" v-if="usuario.rol_id == 2 || usuario.rol_id == 1">
 						<div class="box-menu-icons">
 							<span class="icon-bx-menu"><i class="fas fa-cogs"></i></span>
 							<span class="text-bx-menu">Configurar Contenido</span>
 						</div>
 					</router-link>
-					<div class="box-menu-icons">
-						<span class="icon-bx-menu"><i class="fas fa-play"></i></span>
-						<span class="text-bx-menu">Contenido</span>
-					</div>
+					<router-link :to="{ name:'Contenido' }">
+						<div class="box-menu-icons">
+							<span class="icon-bx-menu"><i class="fas fa-play"></i></span>
+							<span class="text-bx-menu">Contenido</span>
+						</div>
+					</router-link>
+					<router-link :to="{ name:'Usuario' }" v-if="usuario.rol_id == 1">
+						<div class="box-menu-icons">
+							<span class="icon-bx-menu"><i class="fas fa-user"></i></span>
+							<span class="text-bx-menu">Usuarios</span>
+						</div>
+					</router-link>
 				</div>
 			</div>
 		</div>
@@ -83,9 +91,15 @@
 		name: 'Home',
 		data: () => {
 			return {
-				componentes: {
-				},
+				usuario: null,
 				key: 0
+			}
+		},
+		created(){
+			if (this.$store.getters.isLoggedIn) {
+				this.usuario = this.$store.state.usuario
+			} else {
+				this.logout();
 			}
 		},
 		computed : {

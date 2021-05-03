@@ -12,7 +12,7 @@
 							<form @submit.prevent="_getDatos()" class="d-flex navbar-nav ml-auto">
 								<input class="form-control me-2" type="search" placeholder="Término" v-model="bform.termino">
 								<button class="btn btn-outline-success ml-2 mr-2" type="submit"><i class="fas fa-search"></i></button>
-								<button title="Nuevo contenido" class="btn btn-outline-primary" type="button" @click="_abrirFormulario"><i class="fas fa-plus"></i></button>
+								<button v-if="usuario.rol_id == 1" title="Nuevo contenido" class="btn btn-outline-primary" type="button" @click="_abrirFormulario"><i class="fas fa-plus"></i></button>
 							</form>
 						</div>
 					</div>
@@ -47,7 +47,7 @@
 
 			<div class="card mt-2">
 				<div class="card-body">
-					<div class="col-sm-12 form-row">
+					<div class="col-sm-12 form-row" v-if="lista.length > 0 && !buscando">
 						<div v-for="(i, key) in lista" :key="key" class="col-sm-4 mt-2">
 							<div class="card" style="max-height: 100%; height: 100%">
 								<div class="card-body">
@@ -60,14 +60,27 @@
 									<p><small>{{ i.descripcion | truncate(120, '...')}}</small></p>
 								</div>
 								<div class="card-footer text-right">
-									<button title="Editar" class="btn btn-outline-info mr-2" @click="_editar(key)">
+									<button v-if="usuario.rol_id == 1" title="Editar" class="btn btn-outline-info mr-2" @click="_editar(key)">
 										<i class="fas fa-edit"></i>
 									</button>
-									<button title="Configurar Publicaciones" class="btn btn-outline-primary" @click="configContenido(key)">
+									<button type="button" class="btn btn-primary m-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<i class="fas fa-cog"></i>
 									</button>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="javascript:;" @click="configContenido(key)">
+											<i class="fas fa-wrench"></i> Configurar Contenido
+										</a>
+										<a v-if="usuario.rol_id == 1" class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#modalPadres" @click="setContenido(key)">
+											<i class="fas fa-user-cog"></i> Activar contenido a padres
+										</a>
+									</div>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 text-center p-5" v-if="buscando">
+						<div class="spinner-grow" role="status">
+							<span class="sr-only"></span>
 						</div>
 					</div>
 				</div>
@@ -113,6 +126,7 @@
 								<input class="form-control me-2" type="search" placeholder="Término" v-model="bform.termino">
 								<button class="btn btn-outline-success ml-2 mr-2" type="submit"><i class="fas fa-search"></i></button>
 								<button
+									v-if="usuario.rol_id == 1"
 									title="Configurar docente" 
 									data-toggle="modal" 
 									data-target="#modalDocente" 
@@ -167,7 +181,7 @@
 
 			<div class="card mt-2">
 				<div class="card-body">
-					<table class="table table-hover">
+					<table class="table table-hover" v-if="lista.length > 0 && !buscando">
 						<thead>
 							<tr>
 								<th scope="col"></th>
@@ -177,7 +191,7 @@
 								<th scope="col">Recurso</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody>	
 							<tr v-for="(i, key) in lista" :key="key">
 								<th><i :class="i.icono"></i></th>
 								<td>
@@ -193,29 +207,84 @@
 							</tr>
 						</tbody>
 					</table>
+					<div v-if="buscando" class="text-center col-sm-12 p-5">
+						<div class="spinner-grow" role="status">
+							<span class="sr-only">Cargando...</span>
+						</div>
+					</div>
+					<div class="text-center col-sm-12 p-5" v-if="lista.length == 0">
+						<h1 class="text-muted">
+							<i class="fas fa-frown-open"></i>
+							Aún no hay publicaciones.
+						</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div v-if="modal" class="modal fade" id="modalPadres" ref="modalPadres" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Activar contenido</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form @submit.prevent="activarPadres()">
+						<div class="modal-body">
+							<Multiselect
+								track-by="nombre_completo"
+								label="nombre_completo"
+								:multiple="true"
+								placeholder="Selecciona usuarios para activar" 
+								:searchable="true" 
+								:allow-empty="false"
+								v-model="selected"
+								deselect-label="Click para remover"
+								select-label="Click para agregar"
+								:options="select.padres">
+							</Multiselect>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" :disabled="btnGuardando" class="btn btn-primary">
+								<span v-if="btnGuardando" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+								<i class="fas fa-save" v-else></i>
+								<span> {{ btnGuardando ? 'Activando...' : 'Activar'}}</span>
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <script>
 	import GlobalMixin from "../../mixins/Formulario.js";
+	import Multiselect from 'vue-multiselect';
 	import Vue from 'vue'
 	export default {
 		name: "ConfigContenido",
 		mixins: [GlobalMixin],
+		components: { Multiselect },
 		data: () => {
 			return {
 				actual : 1,
 				contenido : {},
-				docente: {}
+				docente: {},
+				padres_act: {},
+				selected: null,
+				modal: false
 			}
 		},
 		created(){
+			if (this.$store.getters.isLoggedIn) {
+				this.usuario = this.$store.state.usuario
+			}
+			this._getSelect(['tipo_recurso','usuario_root','padres'])
 			this.url = "/mantenimiento/contenido"
 			this.form.activo = 1;
 			this.docente.usuario_id = ""
-			this._getSelect(['tipo_recurso','usuario_root'])
 			this._getDatos()
 		},
 		methods: {
@@ -224,6 +293,7 @@
 				this.contenido = dato
 				this.actual = 2
 				this.url    = "/mantenimiento/contenido_publicacion"
+				this.bform.contenido = this.contenido.id
 				this._getDatos()
 			},
 			guardarPublicacion(){
@@ -252,8 +322,37 @@
 							this._notificarError(response.mensaje)
 						}
 					}
-					this.$bvModal.hide('modalDocente')
 				})
+			},
+			setContenido(idt){
+				let dato = this.lista[idt]
+				this.contenido = dato
+				this.modal = true
+			},
+			activarPadres(){
+				this.url    = "/mantenimiento/contenido_publicacion"
+				this.padres_act.contenido_id = this.contenido.id
+				this.padres_act.usuarios 	 = this.selected
+				this.btnGuardando = true
+				let datos = this.padres_act
+				this._enviarPeticionPost({
+					url: this.url+"/activarPadres",
+					arg: '',
+					data: datos
+				}).then((response) => {
+					this.url = "/mantenimiento/contenido"
+					this.btnGuardando = false
+					if (response.exito) {
+						this._notificarSuccess(response.mensaje)
+					}else{
+						if (response.nivel == 2) {
+							this._notificarWarning(response.mensaje)
+						} else {
+							this._notificarError(response.mensaje)
+						}
+					}
+				})
+
 			},
 			regresarContenido(){
 				this.actual 	= 1;

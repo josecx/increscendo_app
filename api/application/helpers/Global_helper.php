@@ -56,8 +56,8 @@ if (!function_exists('str_contains')) {
     }
 }
 
-if (!function_exists('getUrlVideo')) {
-	function getUrlVideo($urlOriginal)
+if (!function_exists('getUrlRecurso')) {
+	function getUrlRecurso($urlOriginal)
 	{
 		if (str_contains($urlOriginal, 'youtu')) {
 			$url = "https://www.youtube.com/embed/";
@@ -71,6 +71,17 @@ if (!function_exists('getUrlVideo')) {
 			$url = "https://player.vimeo.com/video/";
 			if (str_contains($urlOriginal, 'https://vimeo.com/')) {return str_replace("https://vimeo.com/", $url, $urlOriginal);}
 			if (str_contains($urlOriginal, 'vimeo.com/')) {return str_replace("vimeo.com/", $url, $urlOriginal);}
+		}
+
+		if (str_contains($urlOriginal, 'drive')) {
+			$url = "https://drive.google.com/uc?id=";
+			if (str_contains($urlOriginal, 'https://drive.google.com/file/d/')) {
+				$tmp = str_replace("https://drive.google.com/file/d/", $url , $urlOriginal);
+				if (str_contains($tmp, "/view?usp=sharing")) {
+					$tmp = str_replace("/view?usp=sharing", "", $tmp);
+				}
+				return $tmp;
+			}
 		}
 
 		return false;

@@ -22,6 +22,12 @@ class Usuario_model extends CI_Model {
 			$method="row";
 		}
 
+		if (elemento($args, "termino")) {
+			$termino = $args["termino"];
+			$this->db
+			->where("(u.correo like '%$termino%' or u.nombre like '%$termino%' or u.apellido like '%$termino%' or u.usuario like '%$termino%')");
+		}
+
 		return $this->db
 			->select(
 				"u.*,

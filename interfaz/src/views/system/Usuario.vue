@@ -1,23 +1,24 @@
 <template>
 	<div class="col-sm-12 mt-2">
 		<div class="p-0">
-			<b-form inline>
+			<b-form @submit.prevent="_getDatos" inline>
 				<div class="col-sm-6 p-0">
-					<h2><b-badge variant="info">Usuarios <font-awesome-icon :icon="['fas', 'users']" /></b-badge></h2>
+					<h2>Usuarios</h2>
 				</div>
 				<div class="col-sm-6 text-right p-0">
 					<b-form-input
+						v-model     ="bform.termino"
 						class 		="col-sm-9 mr-2"
 						placeholder	="Término a buscar"
 					></b-form-input>
-					<b-button variant="outline-secondary" class="mr-2">
+					<b-button  variant="outline-success" class="mr-2" type="submit">
 						<font-awesome-icon :icon="['fas', 'search']" />
 					</b-button>
 
-					<b-dropdown right text="Menú" variant="outline-success">
+<!-- 					<b-dropdown right text="Menú" variant="outline-success">
 						<b-dropdown-item @click="_abrirFormulario()"><font-awesome-icon :icon="['fas', 'check-square']" /> Nuevo</b-dropdown-item>
 						<b-dropdown-item @click="_guardar()"><font-awesome-icon :icon="['fas', 'file-alt']" /> Generar reporte</b-dropdown-item>
-					</b-dropdown>
+					</b-dropdown> -->
 				</div>
 			</b-form>
 		</div>
@@ -126,8 +127,8 @@
 		<div class="border border-ligth border-top-0 col-sm-12 mb-4 mt-4"></div>
 
 		<div class="table-responsive-xl">
-			<table :key="componentKey" class="table table-bordered table-striped rounded">
-				<thead class="thead-light">
+			<table :key="componentKey" class="table table-hover">
+				<thead >
 					<tr>
 						<th>Nombre</th>
 						<th>Apellido</th>
@@ -151,13 +152,13 @@
 							</td>
 							<td class="text-center m-0 pt-2 p-0">
 								<b-dropdown right size="sm" variant="none">
-									<b-dropdown-item  @click="_editar(idt)">
+<!-- 									<b-dropdown-item  @click="_editar(idt)">
 										<font-awesome-icon :icon="['fas', 'pen-square']" /> Editar
-									</b-dropdown-item>
-									<b-dropdown-item>
+									</b-dropdown-item> -->
+<!-- 									<b-dropdown-item @click="deshabilitar(idt)">
 										<font-awesome-icon :icon="['fas', 'user-slash']" /> Deshabilitar
-									</b-dropdown-item>
-									<b-dropdown-item>
+									</b-dropdown-item> -->
+									<b-dropdown-item @click="reenviar(idt)">
 										<font-awesome-icon :icon="['fas', 'key']" /> Reenviar Contraseña
 									</b-dropdown-item>
 								</b-dropdown>
@@ -178,6 +179,27 @@
 			this.url = "/usuario"
 			this._getSelect(['rol','sexo'])
 			this._getDatos()
+		},
+		methods: {
+			reenviar(idt){
+				let datos = this.lista[idt]
+				this._enviarPeticionPost({
+					url: this.url+"/recuperarPassword",
+					arg: '',
+					data: datos
+				}).then((response) => {
+					this.btnGuardando = false
+					if (response.exito) {
+						this._notificarSuccess(response.mensaje)
+					}else{
+						if (response.nivel == 2) {
+							this._notificarWarning(response.mensaje)
+						} else {
+							this._notificarError(response.mensaje)
+						}
+					}
+				})
+			}
 		}
 	}
 </script>

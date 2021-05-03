@@ -59,7 +59,7 @@ class Usuario extends CI_Controller {
 					"nombre"    => (isset($datos->nombre))   	 ? $datos->nombre   	: '',
 					"usuario"   => (isset($datos->usuario))      ? $datos->usuario  	: '',
 					"sexo_id"	=> (isset($datos->sexo_id['0'])) ? $datos->sexo_id['0'] : '',
-					"rol_id"	=> (isset($datos->rol_id['0']))  ? $datos->rol_id['0']	: '2',
+					"rol_id"	=> (isset($datos->rol_id['0']))  ? $datos->rol_id['0']	: '3',
 					"correo"    => $datos->correo,
 					"password"  => sha1($password),
 					"estado_id" => '1',

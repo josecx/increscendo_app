@@ -30,6 +30,10 @@ class Contenido extends CI_Controller {
 
 	public function getLista()
 	{
+		if (!empty($this->usuario)) {
+			$_GET["rol"] 	 = $this->usuario->rol_id;
+			$_GET["usuario"] = $this->usuario->id;
+		}
 		$this->output->set_output(json_encode([
 			'lista' => $this->Contenido_model->getContenidos($_GET)
 		]));
