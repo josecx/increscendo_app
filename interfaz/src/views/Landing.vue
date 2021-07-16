@@ -77,7 +77,7 @@
 									<button class="btn-primary">Iniciar Sesión</button>
 								</router-link>
 								<router-link :to="{ name:'SignUp' }">
-									<button class="btn-secondary">Registrarse</button>
+									<button class="btn-secondary">Demo</button>
 								</router-link>
 							</div>
 						</div>

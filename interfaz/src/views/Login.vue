@@ -14,9 +14,6 @@
 					<input type="password" v-model="form.password" placeholder="Ingrese su contraseña">
 				</div>
 				<div class="submit-label">
-					<router-link :to="{name: 'Landing'}">
-						<button>Inicio</button>
-					</router-link>
 					<button v-on:click="login()" :disabled="btnGuardar">
 						<span v-if="btnGuardar" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 						<span> {{ btnGuardar ? 'Entrando...' : 'Entrar'}}</span>
@@ -29,6 +26,9 @@
 				</div>
 			</div>
 		</div>
+					<router-link :to="{name: 'Landing'}" class="btn-back-login">
+						<button><i class="fas - fa-arrow-left"></i></button>
+					</router-link>
 	</div>
 </template>
 <script>

@@ -6,36 +6,36 @@
 				<div class="logo-label">	
 					<img src="../assets/img/logo_secundario_en_fondo_oscuro.svg" alt="logo-increscendo" id="logo-sidebar-menu">
 				</div>
-				<div class="user-label">	
+				<!-- <div class="user-label">	
 					<label for="">Nombre
 						<span style="color: red">*</span>
 					</label>
 					<input type="text" v-model="form.nombre">
-				</div>
-				<div class="password-label">
+				</div> -->
+				<!-- <div class="password-label">
 					<label for="">Apellido
 						<span style="color: red">*</span>
 					</label>
 					<input type="text" v-model="form.apellido">
-				</div>
+				</div> -->
 				<div class="password-label">
 					<label for="">Correo
 						<span style="color: red">*</span>
 					</label>
-					<input type="text" v-model="form.correo">
+					<input type="text" v-model="form.correo" placeholder="Ingrese su e-mail.">
 				</div>
-				<div class="password-label">
+				<!-- <div class="password-label">
 					<label for="">Usuario
 						<span style="color: red">*</span>
 					</label>
 					<input type="text" v-model="form.usuario">
-				</div>
-				<div class="password-label">
+				</div> -->
+				<!-- <div class="password-label">
 					<div v-for="(sexo, index) in sexos" :key="index">			
 						<input type="checkbox" :value="sexo.id" v-model="form.sexo_id" v-on:click= "check_one()">
 						<label>{{sexo.nombre}}</label><br>
 					</div>
-				</div>
+				</div> -->
 				<div class="submit-label">
 					<button type="submit" :disabled="btnGuardar">
 						<span v-if="btnGuardar" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

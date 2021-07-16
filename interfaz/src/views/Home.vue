@@ -55,10 +55,10 @@
 			<div class="component-change-home">
 				<router-view/>
 			</div>
-			<div class="aside-home">
+			<!-- <div class="aside-home">
 				<br>
 				<br>
-				<!--  -->
+				
 				<div class="card" style="width: 18rem;">
 					<div class="card-body">
 						<h5 class="card-title">Card title</h5>
@@ -69,7 +69,7 @@
 					</div>
 				</div>
 				<br>
-				<!--  -->
+	
 				<div class="card">
 					<div class="card-header">
 						Quote
@@ -81,7 +81,7 @@
 						</blockquote>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </template>

@@ -168,7 +168,7 @@
 	}
 
 	.component-change-home {
-		width: calc(100% - 210px);
+		/*width: calc(100% - 210px);*/
 		background: #fff;
 	}
 
@@ -182,7 +182,7 @@
 
 @media (min-width: 992px) {
 	.component-change-home {
-		width: calc(100% - 310px);
+		/*width: calc(100% - 310px);*/
 	}
 
 	.aside-home {
@@ -192,7 +192,7 @@
 
 @media (min-width: 1200px) {
 	.component-change-home {
-		width: calc(100% - 470px);
+		/*width: calc(100% - 470px);*/
 	}
 
 	.aside-home {

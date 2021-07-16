@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: http://localhost:8080    Database: dev_
+-- Host: 127.0.0.1    Database: dev_
 -- ------------------------------------------------------
 -- Server version	8.0.21
 --
