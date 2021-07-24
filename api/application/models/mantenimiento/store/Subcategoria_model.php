@@ -7,11 +7,14 @@ class Subcategoria_model extends CI_Model {
 	{
 		return $this->db
 		->select("
-            *,
-			DATE_FORMAT(fecha_sys, '%m-%d-%Y %H:%i') AS fecha_sys")
-		->order_by("categoria_id", "DESC")
-        ->where("activo", 1)
-		->get("subcategoria")->result();
+            a.*,
+			DATE_FORMAT(a.fecha_sys, '%m-%d-%Y %H:%i') AS fecha_sys,
+			b.nombre as ncategoria")
+		->join("categoria b", "a.categoria_id = b.id", "LEFT")
+		->order_by("a.categoria_id", "DESC")
+        ->where("a.activo", 1)
+		->where("b.activo", 1)
+		->get("subcategoria a")->result();
 	}
 
 	public function guardar($args = [], $id ="")

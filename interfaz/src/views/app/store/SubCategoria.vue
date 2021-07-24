@@ -64,6 +64,7 @@
 					<thead>
 						<tr>
 							<th scope="col">Nombre</th>
+                            <th scope="col">Categoría</th>
 							<th scope="col">Descripción</th>
 							<th scope="col">Fecha</th>
 						</tr>
@@ -73,6 +74,7 @@
 							<td>
 								<a href="javascript:;" @click="_editar(key)">{{ i.nombre }}</a>
 							</td>
+                            <td>{{ i.ncategoria }}</td>
 							<td>{{ (i.descripcion) ? i.descripcion : '---' | truncate(100, '...') }}</td>
                             <td>{{ i.fecha_sys }}</td>
 						</tr>
@@ -96,6 +98,7 @@
 </template>
 <script>
 import Formulario from "@/mixins/Formulario.js";
+import Vue from 'vue';
 export default {
     name: "SubCategoria",
     mixins: [Formulario],
@@ -109,6 +112,10 @@ export default {
     },
     methods:{
         guardar(){
+            if(this.reg){
+                Vue.delete(this.form, "ncategoria")
+                Vue.delete(this.form, "fecha_sys")
+            }
             if(this.form.activo == false){
                 if(confirm("Al desactivar esta subcategoría se inabilitarán los productos relacionados ¿Desea continuar?")){
                     this._guardar()
