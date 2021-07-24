@@ -77,7 +77,7 @@
 									<button class="btn-primary">Iniciar Sesión</button>
 								</router-link>
 								<router-link :to="{ name:'SignUp' }">
-									<button class="btn-secondary">Demo</button>
+									<button class="btn-secondary">Clase Gratis</button>
 								</router-link>
 							</div>
 						</div>
@@ -349,6 +349,11 @@
 					<input type="text">
 				</div>
 			</section> -->
+		<b-modal ref="modalContenido" centered hide-footer title="Contenido Semanal">
+			<div class="d-block text-center">
+				<h3>Algún contenido</h3>
+			</div>
+		</b-modal>
 	</div>
 </template>
 <script>
@@ -372,6 +377,12 @@
 			if (this.windowWidth <= 992) {
 				this.toggled = false
 			}
+		},
+		mounted(){
+			setTimeout(() => {
+				let $ref = this.$refs["modalContenido"]
+				$ref.show()
+			}, 500);
 		},
 		methods: {
 			togleSlider(){
