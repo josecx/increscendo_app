@@ -33,7 +33,7 @@
 						<label class="control-label">Descripción</label>
 						<wysiwyg id="descripcion" v-model="form.descripcion" class="border bg-white"/>
 					</div>
-                    <div class="form-row col-sm-12">
+                    <div class="form-row col-sm-12" v-if="reg">
                         <div class="custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="switchActivo" :true-value="1" :false-value="0" v-model="form.activo">
                             <label class="custom-control-label" for="switchActivo">Activo</label>
