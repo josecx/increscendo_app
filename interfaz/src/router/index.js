@@ -61,6 +61,11 @@ const routes = [
 				name: 'Categoria',
 				component: () => import('../views/app/store/Categoria.vue')
 			},
+			{
+				path: 'sub-categoria',
+				name: 'SubCategoria',
+				component: () => import('../views/app/store/SubCategoria.vue')
+			},
 		]
 	},
 	{
