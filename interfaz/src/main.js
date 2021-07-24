@@ -18,6 +18,10 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue,IconsPlugin)
+// WYSIWYG
+import 'vue-wysiwyg/dist/vueWysiwyg.css'
+import wysiwyg from "vue-wysiwyg"
+Vue.use(wysiwyg, { maxHeight: '300px'})
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 // Fin Font Awesome
