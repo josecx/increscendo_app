@@ -308,7 +308,17 @@
 				</div>
 			</section>
 			<!-- Fin Contacto -->
-			
+			<!-- Social Links -->
+
+<!-- The social media icon bar -->
+<div class="icon-bar">
+  <a href="https://www.facebook.com/search/top?q=increscendo" target="_blank" class="facebook"><i class="fab fa-facebook"></i></a>
+  <a href="https://www.tiktok.com/@increscendogt?lang=es" target="_blank" class="tiktok"><i class="fab fa-tiktok"></i></a>
+  <a href="#" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+  <a href="https://www.instagram.com/increscendogt/?hl=es" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+  <a href="https://www.youtube.com/channel/UCXvwHvMZCuEt2n0E1mVp9pQ" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+</div>
+			<!-- Fin Social Link -->
 		</section>
 
 

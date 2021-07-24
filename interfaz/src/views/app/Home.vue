@@ -101,4 +101,13 @@
 	width: 100%;
 	height: 100%;
 }
+
+@media (min-width: 1200px) {
+	.contain-iframe-qs {
+		width: 100%;
+		height: 0;
+		padding-bottom: 56.25%;
+		position: relative;
+	}
+}
 </style>

@@ -92,6 +92,97 @@
 	left: 0;
 }
 
+/*Social Links*/
+
+ /* Fixed/sticky icon bar (vertically aligned 50% from the top of the screen) */
+.icon-bar {
+  position: fixed;
+  z-index: 99;
+  right: 0;
+  bottom: -20%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+/* Style the icon bar links */
+.icon-bar a {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+  height: 40px;
+  width: 40px;
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+/* Style the social media icons with color, if you want */
+.icon-bar a:hover {
+  background-color: #000;
+}
+
+.facebook {
+  background: #34518c;
+  color: white;
+}
+
+.facebook:hover {
+  background: #037db8 !important;
+  color: white;
+}
+
+.tiktok {
+  background: #000000;
+  color: #02f7f7 !important;
+}
+
+.tiktok:hover {
+  background: #000000;
+  color: #f70072 !important;
+}
+
+.whatsapp {
+  background: #25d366;
+  color: white;
+}
+
+.whatsapp:hover {
+  background: #128c7e !important;
+  color: white;
+}
+
+.instagram {
+  background: #d6249f;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+  box-shadow: 0px 3px 10px rgba(0,0,0,.25);
+  color: white;
+}
+
+.instagram:hover {
+  background: #d6249f;
+  background: radial-gradient(circle at 40% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+  box-shadow: 0px 3px 10px rgba(0,0,0,.25);
+  color: white;
+}
+
+.youtube {
+  background: #bb0000 !important;
+  color: white;
+}
+
+.youtube:hover {
+  background: #db2533 !important;
+  color: white;
+} 
+
+
 /*RESPONSIVE DESIGN*/
 
 @media (min-width: 576px) {
