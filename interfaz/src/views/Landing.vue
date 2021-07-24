@@ -35,6 +35,16 @@
 						<a v-scroll-to="'#programas'">
 							<li class="cl-blanco">Programas</li>
 						</a>
+						<router-link :to="{ name:'Login' }">
+							<a>
+								<li class="cl-blanco">Iniciar Sesón</li>
+							</a>
+						</router-link>
+						<!-- <router-link :to="{ name:'SignUp' }">
+							<a>
+								<li class="cl-blanco">Clase Gratis</li>
+							</a>
+						</router-link> -->
 						<!-- <a>
 							<li class="cl-blanco">Increscendo Store</li>
 						</a>
@@ -50,9 +60,9 @@
 						<a>
 							<li class="cl-blanco">Recursos para Padres</li>
 						</a> -->
-						<a v-scroll-to="'#contacto-landing'">
+						<!-- <a v-scroll-to="'#contacto-landing'">
 							<li class="cl-blanco">Contacto</li>
-						</a>
+						</a> -->
 					</ul>
 				</nav>
 			</div>
@@ -72,14 +82,14 @@
 						<div class="card-actions-slider">
 							<h4 id="bien-title">Bienvenidos a</h4>
 							<h1 id="in-title">Increscendo</h1>
-							<div class="content-btn-slider">
+							<!-- <div class="content-btn-slider">
 								<router-link :to="{ name:'Login' }">
 									<button class="btn-primary">Iniciar Sesión</button>
 								</router-link>
 								<router-link :to="{ name:'SignUp' }">
 									<button class="btn-secondary">Clase Gratis</button>
 								</router-link>
-							</div>
+							</div> -->
 						</div>
 						<img src="../assets/img/logo-principal.svg" alt="logo-increscendo" id="in-slider-logo">
 					</div>
@@ -256,7 +266,7 @@
 			</section>
 			<!-- Fin Programas -->
 			<!-- Contacto -->
-			<section id="contacto-landing">
+			<!-- <section id="contacto-landing">
 				<div class="contain">
 					<h2>Contacto</h2>
 					<br>
@@ -276,14 +286,8 @@
 										<div class="col-md-6">
 											<input name="telefono" placeholder="Escribe tu numero" required="required" size="8" type="text" />
 										</div>
-										<!-- <div class="col-md-6">
-											<input name="compañia" placeholder="Companía/Agencia" required="required" size="8" type="text" />
-										</div> -->
 									</li>
 									<li>
-										<!-- <div class="col-md-12">
-											<input name="asunto" placeholder="Asunto" required="required" size="8" type="text" />
-										</div> -->
 									</li>
 									<li>
 										<div class="col-md-12">
@@ -306,7 +310,7 @@
 						</div>
 					</div>		
 				</div>
-			</section>
+			</section> -->
 			<!-- Fin Contacto -->
 			<!-- Social Links -->
 
@@ -349,11 +353,11 @@
 					<input type="text">
 				</div>
 			</section> -->
-		<b-modal ref="modalContenido" centered hide-footer title="Contenido Semanal">
-			<div class="d-block text-center">
-				<h3>Algún contenido</h3>
-			</div>
-		</b-modal>
+        <b-modal ref="modalContenido" centered hide-footer title="Contenido Semanal" size="lg">
+            <div class="text-center" style="margin: 0; padding-top: 56.25%">
+                <iframe class="responsive-iframe p-2" height="90%" src="https://www.youtube.com/embed/K93ZoZov5Yk?autoplay=1" frameborder="0" allowfullscreen ></iframe>
+            </div>
+        </b-modal>
 	</div>
 </template>
 <script>

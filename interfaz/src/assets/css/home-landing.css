@@ -99,7 +99,7 @@
   position: fixed;
   z-index: 99;
   right: 0;
-  bottom: -20%;
+  bottom: -10%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
@@ -121,6 +121,17 @@
   align-items: center;
   border-radius: 50%;
   text-decoration: none;
+}
+
+/* RESPONSIVE IFRAME MODAL */
+.responsive-iframe{
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
 }
 
 /* Style the social media icons with color, if you want */
