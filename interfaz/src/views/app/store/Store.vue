@@ -2,7 +2,7 @@
     <div>
 
 <div class="wrapper">
-    <nav id="sidebar">
+    <nav id="sidebar" v-bind:class="{active : navActivo}">
         <div class="menu-head-contain">
 				<img src="../../../assets/img/logo_en_fondo_oscuro.svg" alt="logo-increscendo" id="logo-sidebar-menu">
 			</div>
@@ -30,7 +30,7 @@
     </nav>
     <div class="content w-100">
         <nav class="navbar navbar-expand-lg navbar-light bg-light"> 
-            <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <button type="button" id="sidebarCollapse" class="btn btn-info" @click="navActivo = !navActivo">
                 <i class="fa fa-align-justify"></i>
             </button> 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,13 +57,9 @@ import "../../../assets/css/store.css";
 import "../../../assets/css/menu-landing.css";
 
 export default {
-    name: "Store"
+    name: "Store",
+    data:() => ({
+        navActivo: false
+    })
 };
-
-// $(document).ready(function(){
-// $("#sidebarCollapse").on('click', function(){
-// $("#sidebar").toggleClass('active');
-// });
-// });
-
 </script>
