@@ -38,11 +38,11 @@
 
 .card-programas {
 	height: 380px;
-	width: 80%;
+	width: 300px;
 }
 
 .card-program-level-part {
-	height: 250px;
+	height: 230px;
 	width: 80%;
 	max-width: 300px;
 	box-sizing: border-box;
@@ -54,9 +54,9 @@
 }
 
 .card-program-level-part h3 {
-	margin-top: 3rem;
+	margin-top: 2.5rem;
 	color: #fff;
-	font-size: 3rem;
+	font-size: 2rem;
 }
 
 .card-program-old-part {
@@ -93,17 +93,17 @@
 
 @media (min-width: 576px) {
 	.card-programas {
-		width: 300px;
+		
 	}
 
 	.card-program-level-part {
-		width: 380px;
+		
 	}
 }
 
 @media (min-width: 748px) {
 	.card-programas {
-		width: 450px;
+		
 	}
 
 	.card-program-level-part {

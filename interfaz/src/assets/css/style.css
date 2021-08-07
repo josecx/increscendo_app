@@ -69,6 +69,7 @@ p {
 	font-family: 'Roboto', sans-serif;
 	line-height: 1.3rem;
 	font-weight: thin;
+	text-align: justify !important;
 }
 
 button {

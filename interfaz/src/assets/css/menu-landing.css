@@ -16,6 +16,12 @@
 .btn-sandwich {
 	background: transparent;
 	color: #fff;
+	height: 40px;
+    width: 40px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% !important;
 }
 
 /*Sidebar Menú*/

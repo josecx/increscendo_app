@@ -99,10 +99,7 @@
   position: fixed;
   z-index: 99;
   right: 0;
-  bottom: -10%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+  bottom: 0%;
 }
 
 /* Style the icon bar links */

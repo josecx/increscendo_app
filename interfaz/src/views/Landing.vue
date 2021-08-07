@@ -42,7 +42,7 @@
 						</router-link>
 						<router-link :to="{ name:'Store' }">
 							<a>
-								<li class="cl-blanco">Store</li>
+								<li class="cl-blanco">Increscendo Store</li>
 							</a>
 						</router-link>
 						<!-- <router-link :to="{ name:'SignUp' }">
