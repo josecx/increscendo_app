@@ -91,7 +91,14 @@ const routes = [
 	{
 		path: '/store',
 		name: 'Store',
-		component: () => import('../views/app/store/Store.vue')
+		component: () => import('../views/app/store/Store.vue'),
+		children: [
+			{
+				path: "/",
+				name: "Productos",
+				component: () => import("../views/app/store/ProductoDetalle.vue")
+			}
+		]
 	}
 
 ]
@@ -108,7 +115,8 @@ router.beforeEach((to, from, next) => {
 		"SignUp",
 		"RecuperarPassword",
 		"Login",
-		"Store"
+		"Store",
+		"Productos"
 		].includes(to.name)) next()
   else if (to.name !== 'Login' && !store.getters.isLoggedIn) next({name:'Landing'})
   else if (to.name == 'Login' && store.getters.isLoggedIn) next({name:'Principal'})
