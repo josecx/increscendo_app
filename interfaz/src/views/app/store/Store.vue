@@ -45,6 +45,7 @@
             </div>
         </nav>
         <div class="content-wrapper">
+            <router-view></router-view>
             <!-- aquí contenido -->
         </div>
     </div>
