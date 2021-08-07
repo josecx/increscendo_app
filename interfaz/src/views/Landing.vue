@@ -40,6 +40,11 @@
 								<li class="cl-blanco">Iniciar Sesón</li>
 							</a>
 						</router-link>
+						<router-link :to="{ name:'Store' }">
+							<a>
+								<li class="cl-blanco">Store</li>
+							</a>
+						</router-link>
 						<!-- <router-link :to="{ name:'SignUp' }">
 							<a>
 								<li class="cl-blanco">Clase Gratis</li>
@@ -75,8 +80,23 @@
 			<!-- Slider -->
 			<section id="slider">
 				<div class="contenedor-slider">
-					<div class="content-img-slider">
-						<img id="bg-home" src="../assets/img/bgslide.jpg" height="100vh" alt="slider-img">
+					<div class="content-img-slider">	
+						<img id="bg-home" class="d-block w-100" src="../assets/img/bgslide.jpg" alt="First slide">
+						<!--Slide-->
+						<!-- <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+								<img class="d-block w-100" src="../assets/img/bgslide.jpg" alt="First slide">
+								</div>
+								<div class="carousel-item">
+								<img class="d-block w-100" src="https://wallpaperaccess.com/full/893423.jpg" alt="Second slide">
+								</div>
+								<div class="carousel-item">
+								<img class="d-block w-100" src="https://www.mindicsalud.com/sites/default/files/nino-agua.jpg" alt="Third slide">
+								</div>
+							</div>
+						</div> -->
+						<!--fin slide landing-->
 					</div>
 					<div class="contenedor-sec-slider">
 						<div class="card-actions-slider">
@@ -316,9 +336,9 @@
 
 <!-- The social media icon bar -->
 <div class="icon-bar">
-  <a href="https://www.facebook.com/search/top?q=increscendo" target="_blank" class="facebook"><i class="fab fa-facebook"></i></a>
+  <a href="https://www.facebook.com/increscendogt/" target="_blank" class="facebook"><i class="fab fa-facebook"></i></a>
   <a href="https://www.tiktok.com/@increscendogt?lang=es" target="_blank" class="tiktok"><i class="fab fa-tiktok"></i></a>
-  <a href="#" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+  <a href="https://wa.me/+50246336348?text=Hola%20solicito%20información%20de%20Increscendo." target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
   <a href="https://www.instagram.com/increscendogt/?hl=es" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
   <a href="https://www.youtube.com/channel/UCXvwHvMZCuEt2n0E1mVp9pQ" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
 </div>

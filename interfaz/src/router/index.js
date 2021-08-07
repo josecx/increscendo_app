@@ -15,9 +15,6 @@ const routes = [
 				component: () => import ('../views/Landing.vue')
 			},
 		],
-			path: 'store',
-			name: 'Store',
-			component: () => import('../views/app/store/Store.vue')
 	},
 	{
 		path: '/',
@@ -90,6 +87,11 @@ const routes = [
 		path: '/login',
 		name: 'Login',
 		component: () => import('../views/Login.vue')
+	},
+	{
+		path: '/store',
+		name: 'Store',
+		component: () => import('../views/app/store/Store.vue')
 	}
 
 ]
