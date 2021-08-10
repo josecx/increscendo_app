@@ -5,6 +5,10 @@ class Producto_model extends CI_Model {
 
 	public function buscar($args=[])
 	{
+		if(elemento($args, "subcategoria")){
+			$this->db->where("c.id", $args["subcategoria"]);
+		}
+
 		return $this->db
 		->select("
             a.*,

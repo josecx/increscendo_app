@@ -91,14 +91,7 @@ const routes = [
 	{
 		path: '/store',
 		name: 'Store',
-		component: () => import('../views/app/store/Store.vue'),
-		children: [
-			{
-				path: "/",
-				name: "Productos",
-				component: () => import("../views/app/store/ProductoDetalle.vue")
-			}
-		]
+		component: () => import('../views/app/store/Store.vue')
 	}
 
 ]

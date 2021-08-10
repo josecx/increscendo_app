@@ -32,6 +32,15 @@ class Mante_model extends CI_Model {
 	{
 		return $this->db->select("nombre, id, concat(apellido, ' ', nombre) as nombre_completo")->where("rol_id", 3)->get("usuario")->result();
 	}
+
+	public function _getcategoria()
+	{
+		return $this->db->where("activo",1)->get("categoria")->result();
+	}
+	public function _getsubcategoria()
+	{
+		return $this->db->where("activo",1)->get("subcategoria")->result();
+	}
 }
 
 /* End of file Mante_model.php */
