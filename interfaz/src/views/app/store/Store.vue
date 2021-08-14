@@ -21,14 +21,14 @@
                     <li> <a href="#" class="download">Subscribe</a> </li>
                 </ul> -->
             </nav>
-            <div class="content w-100">
+            <div id="topbar">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light"> 
                     <button type="button" id="sidebarCollapse" class="btn btn-info" @click="navActivo = !navActivo">
                         <i class="fa fa-align-justify"></i>
                     </button> 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon">ssssss</span>
+                    </button> -->
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active"> <a class="nav-link" href="#">Iniciar Sesión <span class="sr-only">(current)</span></a> </li>
@@ -47,6 +47,7 @@
 <script>
 import "../../../assets/css/store.css";
 import "../../../assets/css/menu-landing.css";
+import "../../../assets/css/categoria_store.css";
 import Formulario from "@/mixins/Formulario.js";
 import Productos from "@/components/store/Productos.vue"
 
