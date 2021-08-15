@@ -126,10 +126,12 @@ a.download:hover {
     position: fixed;
     width: calc(100vw - 250px);
     margin-left: 250px;
+    transition: all 0.3s;
 }
 
 .topbar-active {
     width: 100%;
+    transition: all 0.3s;
 }
 
 .content-wrapper {
