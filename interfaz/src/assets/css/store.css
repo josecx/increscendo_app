@@ -9,7 +9,7 @@ a:focus {
 }
 
 .navbar {
-    position: fixed;
+    position: relative;
     width: 100%;
     padding: 15px 10px;
     background: #fff;
@@ -122,7 +122,13 @@ a.download:hover {
     color: #fff
 }
 
-#topbar {
+.topbar {
+    position: fixed;
+    width: calc(100vw - 250px);
+    margin-left: 250px;
+}
+
+.topbar-active {
     width: 100%;
 }
 
