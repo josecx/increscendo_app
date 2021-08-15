@@ -21,7 +21,7 @@
                     <li> <a href="#" class="download">Subscribe</a> </li>
                 </ul> -->
             </nav>
-            <div id="topbar">
+            <div class="topbar">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light"> 
                     <button type="button" id="sidebarCollapse" class="btn btn-info" @click="navActivo = !navActivo">
                         <i class="fa fa-align-justify"></i>
