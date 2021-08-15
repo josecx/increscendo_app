@@ -9,7 +9,7 @@
                     <h3>Increscendo Store</h3>
                 </div>
                 <ul class="list-unstyled components">
-                    <p>Productos</p>
+                    <!-- <p>Productos</p> -->
                     <li v-for="(i, key) in this.select.categoria" :key="key">
                         <a :href="'#submenu'+i.nombre" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">{{i.nombre}}</a>
                         <ul v-for="(j, jkey) in filtrarSubCategoria(i.id)" :key="jkey" class="collapse list-unstyled" :id="'submenu'+i.nombre">
@@ -21,13 +21,13 @@
                     <li> <a href="#" class="download">Subscribe</a> </li>
                 </ul> -->
             </nav>
-            <div v-bind:class="{'topbar-active': navActivo, 'topbar': !navActivo}">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light"> 
+            <div class="content-navbar-store" v-bind:class="{'topbar-active': navActivo, 'topbar': !navActivo}">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light sticky fixed-top"> 
                     <button type="button" id="sidebarCollapse" class="btn btn-info" @click="navActivo = !navActivo">
                         <i class="fa fa-align-justify"></i>
                     </button> 
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ml-auto">
+                        <ul class="navbar-nav ml-auto nav-menu-store-sesion">
                             <li class="nav-item active">
                                 <span class="nav-link" v-if="usuario">Hola {{usuario.nombre}}!</span>
                                 <a class="nav-link" href="javascript:;" v-b-modal.modal-login v-else @click="caso=1">
