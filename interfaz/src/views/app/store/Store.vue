@@ -21,18 +21,25 @@
                     <li> <a href="#" class="download">Subscribe</a> </li>
                 </ul> -->
             </nav>
-            <div class="topbar">
+            <div v-bind:class="{'topbar-active': navActivo, 'topbar': !navActivo}">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light"> 
                     <button type="button" id="sidebarCollapse" class="btn btn-info" @click="navActivo = !navActivo">
                         <i class="fa fa-align-justify"></i>
                     </button> 
-                    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon">ssssss</span>
-                    </button> -->
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active"> <a class="nav-link" href="#">Iniciar Sesión <span class="sr-only">(current)</span></a> </li>
-                            <li class="nav-item"> <a class="nav-link" href="#">Registrarse</a> </li>
+                            <li class="nav-item active">
+                                <span class="nav-link" v-if="usuario">Hola {{usuario.nombre}}!</span>
+                                <a class="nav-link" href="javascript:;" v-b-modal.modal-login v-else @click="caso=1">
+                                    Iniciar Sesión <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" v-if="!usuario">
+                                <a class="nav-link" href="javascript:;" v-b-modal.modal-login @click="caso=2">Registrarse</a>
+                            </li>
+                            <li class="nav-item" v-if="usuario">
+                                <a class="nav-link" href="javascript:;" @click="logout">Cerrar sesión</a>
+                            </li>
                             <li class="nav-item"> <a class="nav-link" href="../">Home</a> </li>
                         </ul>
                     </div>
@@ -42,6 +49,60 @@
                 </div>
             </div>
         </div>
+        <b-modal id="modal-login" ref="modal-login" hide-footer>
+            <template #modal-title>
+                <span v-if="caso==1">Iniciar Sesión</span>
+                <span v-else>Registrarse</span>
+            </template>
+            <div class="d-block">
+                <div v-if="caso==1">
+                    <form @submit.prevent="login">
+                        <div class="form-row col-sm-12 mt-2">
+                            <div class="col-sm-12">
+                                <label class="control-label">Usuario</label>
+                                <input type="text" class="form-control" v-model="form.usuario" required>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="control-label">Contraseña</label>
+                                <input type="text" class="form-control" v-model="form.password" required>
+                            </div>
+                        </div>
+                        <b-button class="mt-3" type="submit" block :disabled="btnGuardar">
+                            <span v-if="btnGuardar" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span> {{ btnGuardar ? 'Entrando...' : 'Entrar'}}</span>
+                        </b-button>
+                    </form>
+                </div>
+                <div v-else>
+                    <form @submit.prevent="registrarse">
+                        <div class="form-row col-sm-12 mt-2">
+                            <div class="col-sm-12">
+                                <label class="control-label">Nombre</label>
+                                <input type="text" class="form-control" v-model="form.nombre" required>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="control-label">Apellido</label>
+                                <input type="text" class="form-control" v-model="form.apellido" required>
+                            </div>
+                        </div>
+                        <div class="form-row col-sm-12 mt-2">
+                            <div class="col-sm-12">
+                                <label class="control-label">Correo</label>
+                                <input type="text" class="form-control" v-model="form.correo" required>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="control-label">Usuario</label>
+                                <input type="text" class="form-control" v-model="form.usuario" required>
+                            </div>
+                        </div>
+                        <b-button class="mt-3" type="submit" block :disabled="btnGuardar">
+                            <span v-if="btnGuardar" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span> {{ btnGuardar ? 'Enviando...' : 'Registrarse'}}</span>
+                        </b-button>
+                    </form>
+                </div>
+            </div>
+        </b-modal>
     </div>
 </template>
 <script>
@@ -55,12 +116,22 @@ export default {
     name: "Store",
     mixins: [Formulario],
     data:() => ({
-        navActivo: false,
+        navActivo: true,
         itemKey: 0,
-        subCat: null
+        subCat: null,
+        btnGuardar: false,
+        caso: 1,
+        usuario: null
     }),
+    created(){
+		if (this.$store.getters.isLoggedIn) {
+			this.usuario = this.$store.state.usuario
+            console.log(this.usuario)
+		} else {
+			this.logout();
+		}
+    },
     mounted(){
-        this.itemKey++
         this._getSelect(['categoria','subcategoria'])
     },
     methods: {
@@ -71,8 +142,50 @@ export default {
         },
         setSubCategoria(subId){
             this.subCat = subId
-            this.itemKey++
-        }
+        },
+        // FUNCIONES DE SESION
+        login(){
+            this.btnGuardar = true
+            this.args = {
+                url:  '/sesion/login/',
+                data: this.form,
+                arg:  ''
+            };
+            this._enviarDatos(this.args).then((response) => {
+                this.btnGuardar = false
+                this.args = []
+                if (response.data.exito) {
+                    this.$store.dispatch('login', response.data).then(res => {
+                        this.usuario = res.registro
+                        let $ref = this.$refs["modal-login"]
+                        $ref.hide()
+                    })
+                }
+            })
+        },
+        logout(){
+            if(confirm("¿Deseas cerrar sesión?")){
+                this.$store.dispatch('logout')
+                .then(() => {
+                    this.usuario = null
+                })
+            }
+        },
+        registrarse(){
+            this.form.rol_id = 5
+            this.args = {
+                url:  '/usuario/guardar/',
+                data: this.form,
+                arg:  ''
+            };
+            this._enviarDatos(this.args).then((response) => {
+                this.args = []
+                if (response.data.exito) {
+                    this.caso = 1
+                    this.form = {}
+                }
+            })
+        },
     },
     components: {Productos}
 };

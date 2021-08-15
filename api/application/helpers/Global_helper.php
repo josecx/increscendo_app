@@ -87,4 +87,20 @@ if (!function_exists('getUrlRecurso')) {
 		return false;
 	}
 }
+
+if (!function_exists('verConsulta'))
+{
+	function verConsulta($datos, $args)
+	{
+		if ($datos->num_rows() > 0) {
+			if (isset($args['uno'])) {
+				return $datos->row();
+			} else {
+				return $datos->result();
+			}
+		}
+
+		return [];
+	}
+}
 ?>

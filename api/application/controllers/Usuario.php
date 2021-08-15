@@ -7,6 +7,8 @@ class Usuario extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Usuario_model');
+		$this->load->model('Usuario_demo_model');
+		
 		$this->t_sesion = 14400;
 	}
 
@@ -55,11 +57,10 @@ class Usuario extends CI_Controller {
 			} else {
 				$password = randomPassword(20);
 				$datos_guardar = [
-					"apellido"  => (isset($datos->apellido)) 	 ? $datos->apellido 	: '',
-					"nombre"    => (isset($datos->nombre))   	 ? $datos->nombre   	: '',
-					"usuario"   => (isset($datos->usuario))      ? $datos->usuario  	: '',
-					"sexo_id"	=> (isset($datos->sexo_id['0'])) ? $datos->sexo_id['0'] : '',
-					"rol_id"	=> (isset($datos->rol_id['0']))  ? $datos->rol_id['0']	: '3',
+					"apellido"  => (isset($datos->apellido)) ? $datos->apellido : '',
+					"nombre"    => (isset($datos->nombre))   ? $datos->nombre   : '',
+					"usuario"   => (isset($datos->usuario))  ? $datos->usuario  : '',
+					"rol_id"	=> (isset($datos->rol_id))   ? $datos->rol_id   : '3',
 					"correo"    => $datos->correo,
 					"password"  => sha1($password),
 					"estado_id" => '1',
@@ -164,6 +165,25 @@ class Usuario extends CI_Controller {
 				$response["mensaje"]  = "Asegurate de ingresar tu contraseña actual para poder continuar";
 				$response["exito"]    = false;
 			}
+		}
+		$this->output->set_output(json_encode($response));
+	}
+
+	public function usuario_demo()
+	{
+		$response = [
+			'exito'   => 0, 
+			'warning' => false
+		];
+		$datos = json_decode(file_get_contents('php://input'));
+		
+		if(isset($datos->correo)){			
+			if($this->Usuario_demo_model->guardar($datos)){
+				$response['exito']   = 1;
+			}
+		}else {
+			$response['warning'] = true;
+			$response['mensaje'] = 'Es necesario ingresar el correo para poder continuar';
 		}
 		$this->output->set_output(json_encode($response));
 	}
