@@ -127,8 +127,6 @@ export default {
 		if (this.$store.getters.isLoggedIn) {
 			this.usuario = this.$store.state.usuario
             console.log(this.usuario)
-		} else {
-			this.logout();
 		}
     },
     mounted(){
