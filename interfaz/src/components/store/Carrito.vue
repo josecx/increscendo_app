@@ -1,5 +1,6 @@
 <template>
         <div>
+            <p>Carrito</p>
         </div>
 </template>
 <script>

@@ -28,9 +28,7 @@
                     </button> 
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ml-auto nav-menu-store-sesion">
-						    <router-link :to="{ name:'Carrito' }">
-                                <li class="nav-item"> <a class="nav-link" href="javascript:;"><i class="fas fa-shopping-cart"></i></a></li>
-                            </router-link>
+                            <li class="nav-item"> <a @click="vercarrito = true" class="nav-link" href="javascript:;"><i class="fas fa-shopping-cart"></i></a></li>
                             <li class="nav-item active">
                                 <span class="nav-link" v-if="usuario">Hola {{usuario.nombre}}!</span>
                                 <a class="nav-link" href="javascript:;" v-b-modal.modal-login v-else @click="caso=1">
@@ -47,8 +45,11 @@
                         </ul>
                     </div>
                 </nav>
-                <div class="content-wrapper" :key="itemKey">
-                    <Productos v-if="subCat" :subCat="subCat"/>
+                <div class="content-wrapper" :key="itemKey" v-if="subCat">
+                    <Productos :subCat="subCat"/>
+                </div>
+                <div class="content-wrapper" :key="itemKey" v-if="vercarrito">
+                    <Carrito />
                 </div>
             </div>
         </div>
@@ -114,6 +115,7 @@ import "../../../assets/css/menu-landing.css";
 import "../../../assets/css/categoria_store.css";
 import Formulario from "@/mixins/Formulario.js";
 import Productos from "@/components/store/Productos.vue"
+import Carrito from "@/components/store/Carrito.vue"
 
 export default {
     name: "Store",
@@ -124,7 +126,8 @@ export default {
         subCat: null,
         btnGuardar: false,
         caso: 1,
-        usuario: null
+        usuario: null,
+        vercarrito: false
     }),
     created(){
 		if (this.$store.getters.isLoggedIn) {
@@ -188,6 +191,6 @@ export default {
             })
         },
     },
-    components: {Productos}
+    components: {Productos, Carrito}
 };
 </script>

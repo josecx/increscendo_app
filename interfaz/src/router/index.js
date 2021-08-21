@@ -92,13 +92,7 @@ const routes = [
 		path: '/store',
 		name: 'Store',
 		component: () => import('../views/app/store/Store.vue')
-	},
-	{
-		path: '/carrito',
-		name: 'Carrito',
-		component: () => import('../views/app/store/Carrito.vue')
 	}
-
 ]
 
 const router = new VueRouter({
