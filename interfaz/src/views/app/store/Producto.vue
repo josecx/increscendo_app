@@ -68,10 +68,15 @@
                             <label class="control-label">Link a imagen</label>
                             <input type="text" class="form-control" v-model="form.imagen" required>
                         </div>
-                    <div class="form-row col-sm-12 mt-2" v-if="reg" >
+                        
+                    <div class="form-row col-sm-2 mt-2" v-if="reg" >
                         <div class="custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="switchActivo" :true-value="1" :false-value="0" v-model="form.activo">
                             <label class="custom-control-label" for="switchActivo">Activo</label>
+                        </div>
+                        <div class="custom-control ml-4 custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="switchFavorito" :true-value="1" :false-value="0" v-model="form.favorito">
+                            <label class="custom-control-label" for="switchFavorito">Favorito</label>
                         </div>
                     </div>
 					<div class="col-sm-12 mt-2 text-right">
@@ -99,6 +104,7 @@
                             <th>Precio de compra</th>
                             <th>Precio de venta</th>
                             <th>Fecha</th>
+                            <th>Favorito</th>
                         </tr>
                     </thead>
                     <tbody v-if="!buscando && lista.length > 0">
@@ -117,6 +123,7 @@
                             <td class="align-middle">{{i.precio_compra}}</td>
                             <td class="align-middle">{{i.precio_venta}}</td>
                             <td class="align-middle">{{i.fecha_sys}}</td>
+                            <td class="align-middle"><i v-if="i.favorito == 1" class="fas fa-star"></i></td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -125,7 +132,6 @@
                                 <div class="text-center">
                                     <div class="spinner-border" role="status">
                                     </div>
-                                    <p>Buscando...</p>
                                 </div>
                             </td>
                         </tr>

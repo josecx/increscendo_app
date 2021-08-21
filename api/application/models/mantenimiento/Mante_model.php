@@ -41,6 +41,10 @@ class Mante_model extends CI_Model {
 	{
 		return $this->db->where("activo",1)->get("subcategoria")->result();
 	}
+	public function _getproductos_favoritos()
+	{
+		return $this->db->where("activo",1)->where("favorito", 1)->get("producto")->result();
+	}
 }
 
 /* End of file Mante_model.php */

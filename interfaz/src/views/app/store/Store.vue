@@ -8,6 +8,10 @@
                 <div class="sidebar-header">
                     <h3>Increscendo Store</h3>
                 </div>
+                <div class="text-center" v-if="!select.categoria">
+                    <div class="spinner-border" role="status">
+                    </div>
+                </div>
                 <ul class="list-unstyled components" :key="componentKey">
                     <!-- <p>Productos</p> -->
                     <li v-for="(i, key) in select.categoria" :key="key">
@@ -28,7 +32,7 @@
                     </button> 
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ml-auto nav-menu-store-sesion">
-                            <li class="nav-item"> <a @click="vercarrito = true" class="nav-link" href="javascript:;"><i class="fas fa-shopping-cart"></i></a></li>
+                            <li class="nav-item"> <a @click="verCarrito()" class="nav-link" href="javascript:;"><i class="fas fa-shopping-cart"></i></a></li>
                             <li class="nav-item active">
                                 <span class="nav-link" v-if="usuario">Hola {{usuario.nombre}}!</span>
                                 <a class="nav-link" href="javascript:;" v-b-modal.modal-login v-else @click="caso=1">
@@ -50,6 +54,30 @@
                 </div>
                 <div class="content-wrapper" :key="componentKey" v-if="vercarrito">
                     <Carrito />
+                </div>
+                <div class="content-wrapper" v-if="!subCat && !vercarrito">
+                    <div class="text-center" v-if="!select.productos_favoritos">
+                        <div class="spinner-border" role="status">
+                        </div>
+                    </div>
+                    <div class="gallery_store" v-else>
+                        <div class="content_categoria" v-for="(i, key) in select.productos_favoritos" :key="key">
+                            <img class="product_img_categoria" :src="i.imagen_link">
+                            <h3 class="categoria_h3">{{i.nombre}}</h3>
+                            <p class="p_store_categoria">Descripción del producto</p>
+                            <h6 class="price_categoria">Q {{i.precio_venta}}</h6>
+                            <ul class="stars_categoria">
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            </ul>
+                            <a href="javascript:;" @click="detalleProducto(i)">
+                                <button class="buy-1 btn_cards_categoria">Comprar</button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -132,7 +160,7 @@ export default {
 		if (this.$store.getters.isLoggedIn) {
 			this.usuario = this.$store.state.usuario
 		}
-        this._getSelect(['categoria','subcategoria'])
+        this._getSelect(['categoria','subcategoria', 'productos_favoritos'])
     },
     methods: {
         filtrarSubCategoria(cat_id){
@@ -142,6 +170,11 @@ export default {
         },
         setSubCategoria(subId){
             this.subCat = subId
+            this.vercarrito = false
+        },
+        verCarrito(){
+            this.vercarrito = true
+            this.subCat = false
         },
         // FUNCIONES DE SESION
         login(){

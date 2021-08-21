@@ -96,6 +96,7 @@ export default{
 				for (let i in response.lista) {
 					this.select[i] = response.lista[i]
 				}
+				this.componentKey ++
 			}).catch(e=>{
 				console.log(e)
 			})

@@ -15,13 +15,15 @@ class Producto_model extends CI_Model {
 			DATE_FORMAT(a.fecha_sys, '%m-%d-%Y %H:%i') AS fecha_sys,
 			b.nombre as ncategoria,
             c.nombre as nsubcategoria")
+		->from("producto a")
 		->join("categoria b", "a.categoria_id = b.id", "LEFT")
         ->join("subcategoria c", "a.subcategoria_id = c.id", "LEFT")
 		->order_by("a.categoria_id", "DESC")
+		->group_by("a.id")
         ->where("a.activo", 1)
 		->where("b.activo", 1)
         ->where("c.activo", 1)
-		->get("producto a")->result();
+		->get()->result();
 	}
 
 	public function guardar($args = [], $id ="")
