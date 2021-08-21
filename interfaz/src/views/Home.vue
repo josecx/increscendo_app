@@ -12,7 +12,7 @@
 			<b-dropdown variant="link" toggle-class="text-decoration-none" no-caret>
 				<template #button-content>
 					<a href="javascript:;">
-						<img style="height: 50px; border-radius: 50%; overflow: hidden; width: 50px;" src="https://lh3.googleusercontent.com/ogw/ADGmqu-OhZUCi5QCe_spoPL-8B7VV9JQ3VUWZw4FtDiCcg=s83-c-mo" alt="">
+						<img style="height: 50px; border-radius: 50%; overflow: hidden; width: 50px;" src="https://simg.nicepng.com/png/small/128-1280406_view-user-icon-png-user-circle-icon-png.png" alt="">
 					</a>
 				</template>
 				<b-dropdown-item @click="cambiarPass()"><i class="fas fa-key text-muted"></i> Cambiar contraseña</b-dropdown-item>
@@ -40,6 +40,24 @@
 						<div class="box-menu-icons">
 							<span class="icon-bx-menu"><i class="fas fa-play"></i></span>
 							<span class="text-bx-menu">Contenido</span>
+						</div>
+					</router-link>
+					<router-link :to="{ name:'Categoria' }" v-if="usuario.rol_id == 1">
+						<div class="box-menu-icons">
+							<span class="icon-bx-menu"><i class="fas fa-box"></i></span>
+							<span class="text-bx-menu">Categoría</span>
+						</div>
+					</router-link>
+					<router-link :to="{ name:'SubCategoria' }" v-if="usuario.rol_id == 1">
+						<div class="box-menu-icons">
+							<span class="icon-bx-menu"><i class="fas fa-boxes"></i></span>
+							<span class="text-bx-menu">Sub-categoría</span>
+						</div>
+					</router-link>
+					<router-link :to="{ name:'Producto' }" v-if="usuario.rol_id == 1">
+						<div class="box-menu-icons">
+							<span class="icon-bx-menu"><i class="fas fa-box-open"></i></span>
+							<span class="text-bx-menu">Productos</span>
 						</div>
 					</router-link>
 					<router-link :to="{ name:'Usuario' }" v-if="usuario.rol_id == 1">
