@@ -63,6 +63,10 @@
     width: calc(100% - 20px);
 }
 
+.chec-cant-cart {
+    width: 80px;
+}
+
 .resume-cart h2 {
     padding-bottom: 15px;
     margin: 10px;

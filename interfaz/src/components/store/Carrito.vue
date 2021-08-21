@@ -11,7 +11,6 @@
                                 <th>Precio</th>
                                 <th>Cantidad</th>
                                 <th>Subtotal</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody v-if="!buscando">
@@ -19,9 +18,9 @@
                                 <td><img :src="i.imagen_link" height="100px" alt="logo-increscendo" id="logo-sidebar-menu"></td>
                                 <td>{{i.nproducto}}</td>
                                 <td>{{i.precio_venta}}</td>
-                                <td><input @change="actualizar(i)" limit="0" type="number" id="points" name="points" v-model="i.cantidad" step="1"></td>
-                                <td>{{i.total}}</td>
-                                <td style="cursor:pointer" @click="eliminar(i)"><i class="fas fa-trash text-danger"></i></td>
+                                <td><input class="chec-cant-cart" @change="actualizar(i)" limit="0" type="number" id="points" name="points" v-model="i.cantidad" step="1"></td>
+                                <td>{{i.total}}<span class="delete-from-list-cart" @click="eliminar(i)"><i class="far fa-trash-alt"></i></span></td>
+                            
                             </tr>
                         </tbody>
                         <tr v-if="buscando">
