@@ -49,9 +49,10 @@ class Usuario extends CI_Controller {
 	{
 		$response = ['exito' => 0, 'warning' => 0];
 		$datos    = json_decode(file_get_contents('php://input'));
+		$mail = false;
 		if (isset($datos->correo)) {
 			$usuario = $this->Usuario_model->validarCorreo($datos->correo);
-			if ($usuario) {
+			if ($usuario && !$id) {
 				$response['warning'] = true;
 				$response['mensaje'] = "Este correo ya está registrado. Usuario: ".$usuario->usuario;
 			} else {
@@ -62,25 +63,33 @@ class Usuario extends CI_Controller {
 					"usuario"   => (isset($datos->usuario))  ? $datos->usuario  : '',
 					"rol_id"	=> (isset($datos->rol_id))   ? $datos->rol_id   : '3',
 					"correo"    => $datos->correo,
-					"password"  => sha1($password),
 					"estado_id" => '1',
  				];
- 				$insert_id = $this->Usuario_model->guardar($datos_guardar);
+				if ($id)
+					$datos_guardar["password"] = sha1($password);
+
+ 				$insert_id = $this->Usuario_model->guardar($datos_guardar, $id);
  				if ($insert_id) {
-					$mail = enviarEmail([
-						"to_email" 	 => $datos_guardar['correo'],
-						"to_name" 	 => $datos_guardar['nombre']." ".$datos_guardar['apellido'],
-						"subject"	 => "Bienvenido a Increscendo App",
-						"html" 		 => $this->load->view('mail/bienvenido_mail',
-										[
-											'password' => $password,
-											'usuario'  => $datos_guardar
-										],
-										true)
-					]);
+
+					if (!$id) {
+						$mail = enviarEmail([
+							"to_email" 	 => $datos_guardar['correo'],
+							"to_name" 	 => $datos_guardar['nombre']." ".$datos_guardar['apellido'],
+							"subject"	 => "Bienvenido a Increscendo App",
+							"html" 		 => $this->load->view('mail/bienvenido_mail',
+											[
+												'password' => $password,
+												'usuario'  => $datos_guardar
+											],
+											true)
+						]);
+					}
 
 					if ($mail) {
 						$response['mensaje'] = "Usuario creado correctamente. Hemos enviado un correo con la contraseña";
+						$response['exito']	 = true;
+					} elseif ($id) {
+						$response['mensaje'] = "Usuario actualizado exitosamente";
 						$response['exito']	 = true;
 					} else {
 						$this->Usuario_model->eliminarUsuario($insert_id);

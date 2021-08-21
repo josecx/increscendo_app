@@ -28,6 +28,11 @@ class Usuario_model extends CI_Model {
 			->where("(u.correo like '%$termino%' or u.nombre like '%$termino%' or u.apellido like '%$termino%' or u.usuario like '%$termino%')");
 		}
 
+		if (elemento($args, "demo")){
+			$this->db->where("r.demo", 1);
+			$method="row";
+		}
+
 		return $this->db
 			->select(
 				"u.*,

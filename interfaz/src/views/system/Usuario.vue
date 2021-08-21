@@ -14,8 +14,11 @@
 					<b-button  variant="outline-success" class="mr-2" type="submit">
 						<font-awesome-icon :icon="['fas', 'search']" />
 					</b-button>
+					<b-button @click="_abrirFormulario()" variant="outline-primary" class="mr-2">
+						<i class="fas fa-plus"></i>
+					</b-button>
 
-<!-- 					<b-dropdown right text="Menú" variant="outline-success">
+					<!-- <b-dropdown right text="Menú" variant="outline-success">
 						<b-dropdown-item @click="_abrirFormulario()"><font-awesome-icon :icon="['fas', 'check-square']" /> Nuevo</b-dropdown-item>
 						<b-dropdown-item @click="_guardar()"><font-awesome-icon :icon="['fas', 'file-alt']" /> Generar reporte</b-dropdown-item>
 					</b-dropdown> -->
@@ -100,20 +103,6 @@
 							<option v-for="i in select.rol" :key="i.id" :value="i.id">{{ i.nombre }}</option>
 						</select>
 					</div>
-					<div class="form-group mb-1 col-sm-3">
-						<label 
-							for="selectSexo" 
-							class="mb-0 text-muted">Sexo:
-						</label>
-						<select 
-							class="form-control form-control-sm"
-							id="selectSexo" 
-							v-model="form.sexo_id"
-						>
-							<option value=""></option>
-							<option v-for="i in select.sexo" :key="i.id" :value="i.id">{{ i.nombre }}</option>
-						</select>
-					</div>
 				</div>
 				<div class="col-sm-12 text-right p-0" v-if="btnGuardar">
 					<b-button type="submit" variant="outline-primary" class="mr-2" :disabled="btnGuardando">
@@ -141,7 +130,7 @@
 				</thead>
 					<tbody v-if="lista.length > 0">
 						<tr v-for="(i, idt) in lista" :key="i.id">
-							<td>{{ i.nombre }}</td>
+							<td><a href="javascript:;" @click="_editar(idt)">{{ i.nombre }}</a></td>
 							<td>{{ i.apellido }}</td>
 							<td>{{ i.usuario }}</td>
 							<td>{{ i.correo }}</td>
