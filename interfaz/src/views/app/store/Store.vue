@@ -8,9 +8,9 @@
                 <div class="sidebar-header">
                     <h3>Increscendo Store</h3>
                 </div>
-                <ul class="list-unstyled components">
+                <ul class="list-unstyled components" :key="componentKey">
                     <!-- <p>Productos</p> -->
-                    <li v-for="(i, key) in this.select.categoria" :key="key">
+                    <li v-for="(i, key) in select.categoria" :key="key">
                         <a :href="'#submenu'+i.nombre" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">{{i.nombre}}</a>
                         <ul v-for="(j, jkey) in filtrarSubCategoria(i.id)" :key="jkey" class="collapse list-unstyled" :id="'submenu'+i.nombre">
                             <li> <a href="javascript:;" @click="setSubCategoria(j.id)">{{j.nombre}}</a> </li>
@@ -45,10 +45,10 @@
                         </ul>
                     </div>
                 </nav>
-                <div class="content-wrapper" :key="itemKey" v-if="subCat">
+                <div class="content-wrapper" :key="componentKey" v-if="subCat">
                     <Productos :subCat="subCat"/>
                 </div>
-                <div class="content-wrapper" :key="itemKey" v-if="vercarrito">
+                <div class="content-wrapper" :key="componentKey" v-if="vercarrito">
                     <Carrito />
                 </div>
             </div>
@@ -121,8 +121,7 @@ export default {
     name: "Store",
     mixins: [Formulario],
     data:() => ({
-        navActivo: true,
-        itemKey: 0,
+        navActivo: false,
         subCat: null,
         btnGuardar: false,
         caso: 1,
@@ -132,10 +131,7 @@ export default {
     created(){
 		if (this.$store.getters.isLoggedIn) {
 			this.usuario = this.$store.state.usuario
-            console.log(this.usuario)
 		}
-    },
-    mounted(){
         this._getSelect(['categoria','subcategoria'])
     },
     methods: {
