@@ -27,7 +27,7 @@
         <div class="content_categoria" v-for="(i, key) in lista" :key="key">
             <img class="product_img_categoria" :src="i.imagen_link">
             <h3 class="categoria_h3">{{i.nombre}}</h3>
-            <p class="p_store_categoria">Descripción del producto</p>
+            <p class="p_store_categoria">{{i.descripcion}}</p>
             <h6 class="price_categoria">Q {{i.precio_venta}}</h6>
             <ul class="stars_categoria">
             <li><i class="fa fa-star" aria-hidden="true"></i></li>

@@ -65,7 +65,7 @@
                         <div class="content_categoria" v-for="(i, key) in select.productos_favoritos" :key="key">
                             <img class="product_img_categoria" :src="i.imagen_link">
                             <h3 class="categoria_h3">{{i.nombre}}</h3>
-                            <p class="p_store_categoria">Descripción del producto</p>
+                            <p class="p_store_categoria">{{i.descripcion}}</p>
                             <h6 class="price_categoria">Q {{i.precio_venta}}</h6>
                             <ul class="stars_categoria">
                             <li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -97,7 +97,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <label class="control-label">Contraseña</label>
-                                <input type="text" class="form-control" v-model="form.password" required>
+                                <input type="password" class="form-control" v-model="form.password" required>
                             </div>
                         </div>
                         <b-button class="mt-3" type="submit" block :disabled="btnGuardar">
@@ -181,8 +181,12 @@ export default {
             this.vercarrito = false
         },
         verCarrito(){
-            this.vercarrito = true
-            this.subCat = false
+            if(this.usuario){
+                this.vercarrito = true
+                this.subCat = false
+            } else {
+                this._notificarWarning("Debes iniciar sesión para poder comprar")
+            }
         },
         verInicio(){
             this.vercarrito = false
@@ -208,6 +212,7 @@ export default {
                 if (response.data.exito) {
                     this.$store.dispatch('login', response.data).then(res => {
                         this.usuario = res.registro
+                        this.itemkey ++
                         let $ref = this.$refs["modal-login"]
                         $ref.hide()
                     })
