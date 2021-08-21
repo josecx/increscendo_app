@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Load -->
-        <div class="col-12 text-center" v-if="buscando">
+        <div class="col-12 text-center" v-if="buscando && actual == 1">
             <div class="spinner-border" role="status"></div>
         </div>
         <!-- Mensaje "sin existencias" -->
@@ -56,6 +56,7 @@
                         <p>SKU: 132154U</p>
                     </div>
                     <button v-if="!setActual" class="btn" @click="actual = 1"><i class="fas fa-arrow-left"></i></button>
+                    <button v-else class="btn" @click="regresarFavoritos"><i class="fas fa-arrow-left"></i></button>
                 </div>
                 <div class="row-midlecart">
                     <div class="cart-img-content">
@@ -85,18 +86,25 @@
                     </div>
                     <div class="cart-detail">
                         <div class="cart-price">
-                            <h3>Q150,000.00</h3>
+                            <h3>Q{{producto.precio_venta}}</h3>
                             <p class="disponible-text"><i class="fas fa-check-circle"></i> Disponible</p>
                             <p class="existencias-text"><i class="fas fa-boxes"></i> Solo quedan 4</p>
                         </div>
                         <div class="cart-count-detail">
                             <p class="title-count-cart">Cantidad:</p>
                             <div class="count-inpt">
-                                <button id='disminuir'>-</button>
-                                <input class="m-d-ipt" type='text' value='1'>
-                                <button id='aumentar'>+</button>
+                                <button @click="setCantidad(2)" id='disminuir'>-</button>
+                                <input class="m-d-ipt" type='number' v-model="form.cantidad" @keyup="calcular_total">
+                                <button @click="setCantidad(1)" id='aumentar'>+</button>
                             </div>
-                            <button class="add-cart-btn"><i class="fas fa-shopping-cart"></i> Agregar al carrito</button>   
+                            <div class="count-inpt">
+                                <input :key="itemKey" type="text" readonly v-model="form.total">
+                            </div>
+                            <button @click="agregar_carrito" class="add-cart-btn">
+                                <span v-if="btnGuardando" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <i v-else class="fas fa-shopping-cart"></i>
+                                <span> {{ btnGuardando ? 'Agregando...' : 'Agregar al carrito'}}</span>
+                            </button>   
                         </div>
                         <div class="cart-other-detail">
                             <button><i class="fas fa-heart"></i></button>
@@ -145,7 +153,8 @@ export default {
     mixins: [Formulario],
     data:() => ({
         actual: 1,
-        producto: null
+        producto: null,
+        itemKey:0
     }),
     props: {
         subCat: {
@@ -165,16 +174,53 @@ export default {
         detalleProducto(item){
             this.actual = 2
             this.producto = item
+            this.form.cantidad = 1;
+            this.form.total = this.producto.precio_venta
+        },
+        agregar_carrito(){
+            this.url = "/mantenimiento/store/carrito"
+            this.form.producto_id = this.producto.id
+            this._guardar()
+            this.url = "/mantenimiento/store/producto"
+        },
+        setCantidad(caso){
+            switch (caso) {
+                case 1:
+                    this.form.cantidad = this.form.cantidad + 1
+                    break;
+                case 2:
+                    if(this.form.cantidad > 1)
+                        this.form.cantidad = this.form.cantidad -1
+                    break;
+            }
+            this.calcular_total()
+        },
+        calcular_total(){
+            this.form.total = this.form.cantidad * this.producto.precio_venta
+            this.itemKey++
+        },
+        regresarFavoritos(){
+            this.actual = 3
         }
     },
     created(){
+        this.form.cantidad = 1
         this.bform.subcategoria = this.subCat
         this.url = "/mantenimiento/store/producto"
         if(this.setActual){
             this.actual = this.setActual
             this.producto = this.setProducto
+            this.calcular_total()
         } else {
             this._getDatos()
+        }
+    },
+    watch:{
+        btnGuardando(){
+            if(this.btnGuardando == false){
+                this.form.cantidad = 1
+                this.calcular_total()
+            }
         }
     }
 }
