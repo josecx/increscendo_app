@@ -1,0 +1,103 @@
+.title-carrito {
+    margin: 20px 0px 40px;
+    text-align: center;
+}
+
+.content-cart {
+    position: relative;
+    width: 80%;
+    margin: auto;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.list-product-cart {
+    width: 70%;
+    padding: 0px 10px;
+}
+
+.resume-cart {
+    width: 30%;
+    padding: 10px 10px;
+    background-color: #163A6B !important;
+    color: white;
+}
+
+    .table-product-cart {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    .table-product-cart th, .table-product-cart td {
+        text-align: left;
+        padding: 16px;
+        text-align: center;
+    }
+
+    .encabezado-list-cart {
+        border-bottom: solid 1px #bdbdbd;
+    }
+
+    .line-list-product {
+        border-top: solid 1px #bdbdbd;
+    }
+
+    .delete-from-list-cart {
+        margin-left: 15px;
+        font-size: 20px;
+        color: #bdbdbd;
+        transition: all 0.5s ease;
+        cursor:pointer;
+    }
+        .delete-from-list-cart:hover {
+            color: #b70d11 !important;
+        }
+
+.table-resume-cart {
+    box-sizing: border-box;
+    margin: 10px;
+    width: calc(100% - 20px);
+}
+
+.resume-cart h2 {
+    padding-bottom: 15px;
+    margin: 10px;
+    text-align: center;
+    border-bottom: solid 1px #fff;
+}
+
+.table-resume-cart td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+    border-bottom: solid 1px #fff;
+}
+
+.table-resume-cart span {
+    font-weight: bolder;
+}
+
+    #btn-submit-cart-pay {
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    #btn-submit-cart-pay button {
+        background-color: goldenrod;
+        padding: 10px 20px;
+        color: white;
+        font-weight: bolder;
+    }
+    #btn-submit-cart-pay button:hover {
+        background-color: rgb(255, 208, 0) !important;
+        padding: 10px 20px;
+        color: black;
+        font-weight: bolder;
+    }
