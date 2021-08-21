@@ -154,7 +154,8 @@ export default {
     data:() => ({
         actual: 1,
         producto: null,
-        itemKey:0
+        itemKey:0,
+        usuario: null
     }),
     props: {
         subCat: {
@@ -178,10 +179,14 @@ export default {
             this.form.total = this.producto.precio_venta
         },
         agregar_carrito(){
-            this.url = "/mantenimiento/store/carrito"
-            this.form.producto_id = this.producto.id
-            this._guardar()
-            this.url = "/mantenimiento/store/producto"
+            if(this.usuario){
+                this.url = "/mantenimiento/store/carrito"
+                this.form.producto_id = this.producto.id
+                this._guardar()
+                this.url = "/mantenimiento/store/producto"
+            } else {
+                this._notificarWarning("Debes iniciar sesión para poder comprar")
+            }
         },
         setCantidad(caso){
             switch (caso) {
@@ -204,6 +209,9 @@ export default {
         }
     },
     created(){
+        if (this.$store.getters.isLoggedIn) {
+			this.usuario = this.$store.state.usuario
+		}
         this.form.cantidad = 1
         this.bform.subcategoria = this.subCat
         this.url = "/mantenimiento/store/producto"

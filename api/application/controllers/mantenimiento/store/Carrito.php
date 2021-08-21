@@ -7,6 +7,7 @@ class Carrito extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('mantenimiento/store/Carrito_model');
+        $this->load->model('mantenimiento/store/Producto_model');
 		$this->output->set_content_type('application/json');
 	}
 
@@ -27,23 +28,34 @@ class Carrito extends CI_Controller {
 		$datos = json_decode(file_get_contents('php://input'));
 		$data  = ['exito' => 0];
 
-        $producto = $this->Carrito_model->buscar([
-            "producto_id" => $datos->producto_id,
-            "uno" => true
-        ]);
-
-        if($producto){
-            $datos->cantidad += $producto->cantidad;
-            $datos->total += $producto->total;
-            $id = $producto->id;
+        if ($id) {
+            if($datos->cantidad == 0){
+                $datos->activo = 0;
+            } else {
+                $datos->total = $datos->cantidad * $datos->precio_venta;
+            }
+        } else{
+            $producto = $this->Carrito_model->buscar([
+                "producto_id" => $datos->producto_id,
+                "uno" => true
+            ]);
+            if($producto){
+                $datos->cantidad += $producto->cantidad;
+                $datos->total += $producto->total;
+                $id = $producto->id;
+            }
         }
         
         $carrito = new Carrito_model($id);
 
         if ($carrito->guardar($datos)) {
             $data['exito'] = 1;
-            $texto = empty($id) ? 'añadido':'actualizado';
-            $data['mensaje'] = "Se ha {$texto} el producto:";
+            if(isset($datos->activo) && $datos->activo == 0){
+                $data["mensaje"] = "Se ha eliminado el producto del carrito";
+            } else {
+                $texto = empty($id) ? 'añadido':'actualizado';
+                $data['mensaje'] = "Se ha {$texto} el producto:";
+            }
             $data['linea'] = $carrito->buscar([
                 'id' => $carrito->getPK(),
                 '_uno' => true

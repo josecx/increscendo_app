@@ -30,7 +30,8 @@ class Carrito_model extends General_model {
 		->select("a.*, 
 			b.nombre as nproducto,
 			b.codigo,
-			b.imagen_link")
+			b.imagen_link,
+			b.precio_venta")
 		->join("producto b", "b.id = a.producto_id", "left")
 		->where("a.activo", 1)
 		->where("a.usuario_id", $this->usuario->id)

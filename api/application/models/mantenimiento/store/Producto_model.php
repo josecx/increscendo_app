@@ -9,7 +9,11 @@ class Producto_model extends CI_Model {
 			$this->db->where("c.id", $args["subcategoria"]);
 		}
 
-		return $this->db
+		if(elemento($args, "producto_id")){
+			$this->db->where("a.id", $args["producto_id"]);
+		}
+
+		$tmp =  $this->db
 		->select("
             a.*,
 			DATE_FORMAT(a.fecha_sys, '%m-%d-%Y %H:%i') AS fecha_sys,
@@ -23,7 +27,9 @@ class Producto_model extends CI_Model {
         ->where("a.activo", 1)
 		->where("b.activo", 1)
         ->where("c.activo", 1)
-		->get()->result();
+		->get();
+
+		return verConsulta($tmp, $args);
 	}
 
 	public function guardar($args = [], $id ="")
