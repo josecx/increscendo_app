@@ -50,10 +50,10 @@
                         </ul>
                     </div>
                 </nav>
-                <div class="content-wrapper" :key="componentKey" v-if="subCat || setproducto">
+                <div class="content-wrapper" :key="itemkey" v-if="subCat || setproducto && !vercarrito">
                     <Productos :subCat="subCat" :setActual="setactual" :setProducto="setproducto"/>
                 </div>
-                <div class="content-wrapper" :key="componentKey" v-if="vercarrito">
+                <div class="content-wrapper" :key="itemkey" v-if="vercarrito">
                     <Carrito />
                 </div>
                 <div class="content-wrapper" v-if="!subCat && !vercarrito && verfavorito">
@@ -158,7 +158,8 @@ export default {
         vercarrito: false,
         setactual: null,
         setproducto: null,
-        verfavorito: true
+        verfavorito: true,
+        itemkey: 100
     }),
     created(){
 		if (this.$store.getters.isLoggedIn) {
@@ -175,7 +176,7 @@ export default {
         setSubCategoria(subId){
             this.setactual = null
             this.setproducto = null
-            this.componentKey++
+            this.itemkey++
             this.subCat = subId
             this.vercarrito = false
         },
@@ -189,7 +190,7 @@ export default {
             this.verfavorito = true
         },
         detalleProducto(item){
-            this.componentKey++
+            this.itemkey++
             this.setactual = "2"
             this.setproducto = item
         },
