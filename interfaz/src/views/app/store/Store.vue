@@ -28,6 +28,7 @@
                     </button> 
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ml-auto nav-menu-store-sesion">
+                            <li class="nav-item"> <a class="nav-link" href="../"><i class="fas fa-shopping-cart"></i></a></li>
                             <li class="nav-item active">
                                 <span class="nav-link" v-if="usuario">Hola {{usuario.nombre}}!</span>
                                 <a class="nav-link" href="javascript:;" v-b-modal.modal-login v-else @click="caso=1">

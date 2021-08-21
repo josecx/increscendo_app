@@ -39,7 +39,7 @@
             <a href="javascript:;" @click="detalleProducto(i)">
                 <button class="buy-1 btn_cards_categoria">Comprar</button>
             </a>
-        </div>        
+        </div>
     </div>
 
 
