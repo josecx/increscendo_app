@@ -13,6 +13,7 @@
                     </div>
                 </div>
                 <ul class="list-unstyled components" :key="componentKey">
+                    <li v-if="select.categoria"><a @click="verInicio" data-toggle="collapse" aria-expanded="false">Inicio</a></li>
                     <!-- <p>Productos</p> -->
                     <li v-for="(i, key) in select.categoria" :key="key">
                         <a :href="'#submenu'+i.nombre" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">{{i.nombre}}</a>
@@ -49,13 +50,13 @@
                         </ul>
                     </div>
                 </nav>
-                <div class="content-wrapper" :key="componentKey" v-if="subCat">
-                    <Productos :subCat="subCat"/>
+                <div class="content-wrapper" :key="componentKey" v-if="subCat || setproducto">
+                    <Productos :subCat="subCat" :setActual="setactual" :setProducto="setproducto"/>
                 </div>
                 <div class="content-wrapper" :key="componentKey" v-if="vercarrito">
                     <Carrito />
                 </div>
-                <div class="content-wrapper" v-if="!subCat && !vercarrito">
+                <div class="content-wrapper" v-if="!subCat && !vercarrito && verfavorito">
                     <div class="text-center" v-if="!select.productos_favoritos">
                         <div class="spinner-border" role="status">
                         </div>
@@ -154,7 +155,10 @@ export default {
         btnGuardar: false,
         caso: 1,
         usuario: null,
-        vercarrito: false
+        vercarrito: false,
+        setactual: null,
+        setproducto: null,
+        verfavorito: true
     }),
     created(){
 		if (this.$store.getters.isLoggedIn) {
@@ -169,12 +173,25 @@ export default {
 			})
         },
         setSubCategoria(subId){
+            this.setactual = null
+            this.setproducto = null
+            this.componentKey++
             this.subCat = subId
             this.vercarrito = false
         },
         verCarrito(){
             this.vercarrito = true
             this.subCat = false
+        },
+        verInicio(){
+            this.vercarrito = false
+            this.subCat = null
+            this.verfavorito = true
+        },
+        detalleProducto(item){
+            this.componentKey++
+            this.setactual = "2"
+            this.setproducto = item
         },
         // FUNCIONES DE SESION
         login(){

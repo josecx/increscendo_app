@@ -55,7 +55,7 @@
                         <h2>{{producto.nombre}}</h2>
                         <p>SKU: 132154U</p>
                     </div>
-                    <button class="btn" @click="actual = 1"><i class="fas fa-arrow-left"></i></button>
+                    <button v-if="!setActual" class="btn" @click="actual = 1"><i class="fas fa-arrow-left"></i></button>
                 </div>
                 <div class="row-midlecart">
                     <div class="cart-img-content">
@@ -150,7 +150,15 @@ export default {
     props: {
         subCat: {
             type: String,
-            required: true
+            required: false
+        },
+        setActual:{
+            type: String,
+            required: false
+        },
+        setProducto:{
+            type: Object,
+            required: false
         }
     },
     methods:{
@@ -162,7 +170,12 @@ export default {
     created(){
         this.bform.subcategoria = this.subCat
         this.url = "/mantenimiento/store/producto"
-        this._getDatos()
+        if(this.setActual){
+            this.actual = this.setActual
+            this.producto = this.setProducto
+        } else {
+            this._getDatos()
+        }
     }
 }
 </script>
