@@ -24,7 +24,7 @@
 					<button type="button" class="close pr-2" aria-label="Close" @click="_cerrarFormulario">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<form @submit.prevent="_guardar()">
+					<form @submit.prevent="guardar()">
 						<small class="text-primary ml-2"><i class="fas fa-exclamation-circle"></i> Información general</small>
 						<div class="form-row col-sm-12">
 							<label class="control-label">Nombre</label>
@@ -288,6 +288,11 @@
 			this._getDatos()
 		},
 		methods: {
+			guardar(){
+				Vue.delete(this.form, 'adocente')
+				Vue.delete(this.form, 'ndocente')
+				this._guardar()
+			},
 			configContenido(idt){
 				let dato = this.lista[idt]
 				this.contenido = dato
@@ -301,6 +306,7 @@
 				this.form.recurso      = this.form.recurso_link
 				Vue.delete(this.form, 'fecha_publicado')
 				Vue.delete(this.form, 'icono')
+				Vue.delete(this.form, "recurso_nombre")
 				this._guardar()
 			},
 			guardarDocente(){
