@@ -1,7 +1,28 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Producto_model extends CI_Model {
+class Producto_model extends General_model {
+	public $nombre;
+	public $codigo;
+	public $subcategoria_id;
+	public $categoria_id;
+	public $descripcion;
+	public $imagen;
+	public $imagen_link;
+	public $usuario_id;
+	public $activo = 1;
+	public $precio_compra;
+	public $precio_venta;
+	public $favorito;
+
+	public function __construct($id="")
+	{
+		parent::__construct();
+		
+		if (!empty($id)) {
+			$this->cargar($id);
+		}
+	}
 
 	public function buscar($args=[])
 	{
@@ -30,23 +51,6 @@ class Producto_model extends CI_Model {
 		->get();
 
 		return verConsulta($tmp, $args);
-	}
-
-	public function guardar($args = [], $id ="")
-	{	
-		if (!empty($id)) {
-			if ($this->db->where("id", $id)->update("producto", $args)) {
-				return true;
-			} else {
-				return false;
-			}
-		} else{
-			if ($this->db->insert("producto", $args)) {
-				return $this->db->insert_id();
-			} else {
-				return false;
-			}
-		}
 	}
 
 }

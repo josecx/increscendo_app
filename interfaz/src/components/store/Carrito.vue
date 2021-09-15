@@ -15,7 +15,7 @@
                         </thead>
                         <tbody v-if="!buscando">
                             <tr class="line-list-product" v-for="(i, key) in lista" :key="key">
-                                <td><img :src="i.imagen_link" height="100px" alt="logo-increscendo" id="logo-sidebar-menu"></td>
+                                <td><img :src="'https://drive.google.com/uc?id='+i.imagen" height="100px" alt="logo-increscendo" id="logo-sidebar-menu"></td>
                                 <td>{{i.nproducto}}</td>
                                 <td>{{i.precio_venta}}</td>
                                 <td><input class="chec-cant-cart" @change="actualizar(i)" limit="0" type="number" id="points" name="points" v-model="i.cantidad" step="1"></td>

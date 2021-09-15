@@ -15,7 +15,7 @@ class Sesion extends CI_Controller {
 		$response = ["exito" => false, "warning" => false];
 
 		$datos = json_decode(file_get_contents('php://input'));
-		
+	
 		if (verPropiedad($datos, "usuario") && verPropiedad($datos, "password")) {
 			$usuario = $this->Usuario_model->getUsuario(['usuario' => $datos->usuario]);
 			if ($usuario) {

@@ -2,7 +2,7 @@
 	<div>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<button v-if="actual == 2" class="btn btn-outline-dark" @click="regresarContenido()"><i class="fas fa-arrow-left"></i></button>
-			<a v-else class="navbar-brand" href="javascript:;">CONTENIDOS</a>
+			<a v-else class="navbar-brand" href="javascript:;"><i class="fas fa-play"></i> CONTENIDOS</a>
 			<div class="container-fluid">
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -29,7 +29,7 @@
 										Docente: {{ (i.ndocente) ? i.adocente+' '+i.ndocente: 'Sin asignar' }} 
 									</small>
 								</p>
-								<p><small>{{ i.descripcion | truncate(120, '...')}}</small></p>
+								<p><small v-html="i.descripcion"></small></p>
 							</div>
 						</div>
 					</div>
@@ -48,19 +48,21 @@
 			</div>
 		</div>
 		<div class="card mt-4" v-if="actual == 2">
-			<div class="mt-2" v-if="lista.length > 0">
-				<div v-for="(i, key) in lista" :key="key" class="card mt-4" style="width: 100%;">
-					<div class="contain-iframe-qs" v-if="i.tipo_recurso_id == 1">
-						<iframe width="560" height="315" :src="i.recurso" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-					</div>
-					<div class="contain-iframe-qs text-center" v-if="i.tipo_recurso_id==2">
-						<img :src="i.recurso" style="height:70vh;">
-					</div>
-					<div class="card-body">
-						<h5 class="card-title">{{ i.nombre }}</h5>
-						<p class="card-text">{{ i.descripcion }}</p>
-						<div class="text-right">
-							<small class="text-muted">{{ i.fecha_publicado}}</small>
+			<div class="mt-2 mb-4" v-if="lista.length > 0">
+				<div v-for="(i, key) in lista" :key="key" class="col-sm-6 mt-2" v-bind:class="{ 'col-sm-12' : i.tipo_recurso_id == 3 }" >
+					<div class="card" style="max-height: 100%; height: 100%">
+						<div class="card-body">
+							<h5 class="card-title">{{ i.nombre }}</h5>
+							<div class="contain-iframe-qs" v-if="i.tipo_recurso_id == 1">
+								<iframe width="560" height="315" :src="'https://drive.google.com/uc?id='+i.recurso" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+							</div>
+							<div class="text-center" v-if="i.tipo_recurso_id==2">
+								<img :src="'https://drive.google.com/uc?id='+i.recurso" class="img-fluid" alt="Responsive image">
+							</div>
+							<p class="card-text mt-2" v-html="i.descripcion" ></p>
+							<div class="text-right">
+								<small class="text-muted">{{ i.fecha_publicado}}</small>
+							</div>
 						</div>
 					</div>
 				</div>

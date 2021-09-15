@@ -3,11 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Producto extends CI_Controller {
 
-    
     public function __construct()
     {
         parent::__construct();
         $this->load->model('/mantenimiento/store/Producto_model');
+		$this->output->set_content_type('application/json');
         $this->usuario = $this->session->userdata('usuario');
         
     }
@@ -18,29 +18,36 @@ class Producto extends CI_Controller {
 			'lista' => $this->Producto_model->buscar($_GET)
 		]));
 	}
-
+	
     public function guardar($id = "")
 	{
-		$response = ['exito' => 0, 'warning' => 0];
-		$datos    = json_decode(file_get_contents('php://input'));
+		$response  = ['exito' => 0, 'warning' => 0];
+		$datos 	   = (object)$_POST;
+		$continuar = true;
+		$producto  = new Producto_model($id);
 
-        $datos->imagen_link = getUrlRecurso($datos->imagen);
-        
-		if (isset($this->usuario->id)) {
-			$datos->usuario_id = $this->usuario->id;
+		if (isset($_FILES["archivo"]) && !empty($_FILES["archivo"]["tmp_name"])) {
+			$_FILES["archivo"]["carpeta"] = "Store";
+			$imagen = subirArchivo($_FILES["archivo"]);
 
-			$result = $this->Producto_model->guardar($datos, $id);
-			if ($result) {
+			if ($imagen) {
+				$datos->imagen_link = $imagen->link;
+				$datos->imagen = $imagen->key;	
+			} else {
+				$continuar = false;
+				$response["mensaje"] = "No fue posible guardar la imagen, por favor intenta de nuevo";
+			}
+		}
+
+		if ($continuar) {
+			if ($producto->guardar($datos)) {
 				$accion = (!empty($id)) ? "actualizado" : "guardando";
 				$response['exito']   = true;
 				$response['mensaje'] = "Se ha {$accion} correctamente: {$datos->nombre}";
 			} else {
 				$response['exito']   = 2;
-				$response["mensaje"] = "Ha ocurrido un error, intenta nuevamente";
+				$response["mensaje"] = $producto->getMensaje();
 			}
-		} else {
-			$response["exito"] = 3;
-			$response["mensaje"] = "Ha ocurrido un error con la información de su usuario, intente iniciar sesión nuevamente";
 		}
 		$this->output->set_output(json_encode($response));
 	}

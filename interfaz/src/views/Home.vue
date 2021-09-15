@@ -25,52 +25,46 @@
 			<div class="contain-panel-lateral">
 				<div class="contain-items-home">
 					<router-link :to="{ name:'Home_app' }">
-						<div class="box-menu-icons">
+						<div class="box-menu-icons" title="Home">
 							<span class="icon-bx-menu"><i class="fas fa-home"></i></span>
-							<span class="text-bx-menu">Home</span>
+							<!-- <span class="text-bx-menu"></span> -->
 						</div>
 					</router-link>
 					<router-link :to="{ name:'Config_contenido' }" v-if="usuario.rol_id == 2 || usuario.rol_id == 1">
-						<div class="box-menu-icons">
+						<div class="box-menu-icons" title="Configurar Contenido">
 							<span class="icon-bx-menu"><i class="fas fa-cogs"></i></span>
-							<span class="text-bx-menu">Configurar Contenido</span>
 						</div>
 					</router-link>
 					<router-link :to="{ name:'Contenido' }">
-						<div class="box-menu-icons">
+						<div class="box-menu-icons" title="Contenido">
 							<span class="icon-bx-menu"><i class="fas fa-play"></i></span>
-							<span class="text-bx-menu">Contenido</span>
 						</div>
 					</router-link>
 					<router-link :to="{ name:'Categoria' }" v-if="usuario.rol_id == 1">
-						<div class="box-menu-icons">
+						<div class="box-menu-icons" title="Categoría">
 							<span class="icon-bx-menu"><i class="fas fa-box"></i></span>
-							<span class="text-bx-menu">Categoría</span>
 						</div>
 					</router-link>
 					<router-link :to="{ name:'SubCategoria' }" v-if="usuario.rol_id == 1">
-						<div class="box-menu-icons">
+						<div class="box-menu-icons" title="Sub-categoría">
 							<span class="icon-bx-menu"><i class="fas fa-boxes"></i></span>
-							<span class="text-bx-menu">Sub-categoría</span>
 						</div>
 					</router-link>
 					<router-link :to="{ name:'Producto' }" v-if="usuario.rol_id == 1">
-						<div class="box-menu-icons">
+						<div class="box-menu-icons" title="Productos">
 							<span class="icon-bx-menu"><i class="fas fa-box-open"></i></span>
-							<span class="text-bx-menu">Productos</span>
 						</div>
 					</router-link>
 					<router-link :to="{ name:'Usuario' }" v-if="usuario.rol_id == 1">
-						<div class="box-menu-icons">
+						<div class="box-menu-icons" title="Usuarios">
 							<span class="icon-bx-menu"><i class="fas fa-user"></i></span>
-							<span class="text-bx-menu">Usuarios</span>
 						</div>
 					</router-link>
 				</div>
 			</div>
 		</div>
 		<div class="main-home">
-			<div class="component-change-home">
+			<div class="component-change-home bg-light">
 				<router-view/>
 			</div>
 			<!-- <div class="aside-home">

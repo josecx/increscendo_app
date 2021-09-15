@@ -88,6 +88,19 @@ if (!function_exists('getUrlRecurso')) {
 	}
 }
 
+if (!function_exists('getTipoRecurso')) {
+	function getTipoRecurso($tipo)
+	{
+		if (str_contains($tipo, 'video')) {
+			return 1;
+		} else if(str_contains($tipo, "image")){
+			return 2;
+		}
+
+		return 3;
+	}
+}
+
 if (!function_exists('verConsulta'))
 {
 	function verConsulta($datos, $args)

@@ -1,7 +1,7 @@
 <template>
     <div>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="javascript:;"><i class="fas fa-th"></i> SUBCATEGORÍAS</a>
+			<a class="navbar-brand" href="javascript:;"><i class="fas fa-boxes"></i> SUBCATEGORÍAS</a>
 			<div class="container-fluid">
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -75,7 +75,7 @@
 								<a href="javascript:;" @click="_editar(key)">{{ i.nombre }}</a>
 							</td>
                             <td>{{ i.ncategoria }}</td>
-							<td>{{ (i.descripcion) ? i.descripcion : '---' | truncate(100, '...') }}</td>
+							<td><small v-html="i.descripcion"></small></td>
                             <td>{{ i.fecha_sys }}</td>
 						</tr>
 					</tbody>
@@ -85,7 +85,6 @@
                                 <div class="text-center">
                                     <div class="spinner-border" role="status">
                                     </div>
-                                    <p>Buscando...</p>
                                 </div>
                             </td>
                         </tr>
@@ -98,7 +97,6 @@
 </template>
 <script>
 import Formulario from "@/mixins/Formulario.js";
-import Vue from 'vue';
 export default {
     name: "SubCategoria",
     mixins: [Formulario],
@@ -112,10 +110,6 @@ export default {
     },
     methods:{
         guardar(){
-            if(this.reg){
-                Vue.delete(this.form, "ncategoria")
-                Vue.delete(this.form, "fecha_sys")
-            }
             if(this.form.activo == false){
                 if(confirm("Al desactivar esta subcategoría se inabilitarán los productos relacionados ¿Desea continuar?")){
                     this._guardar()

@@ -15,15 +15,14 @@ class Subcategoria extends CI_Controller {
 		$datos    = json_decode(file_get_contents('php://input'));
 		if (isset($this->usuario->id)) {
 			$datos->usuario_id = $this->usuario->id;
-
-			$result = $this->Subcategoria_model->guardar($datos, $id);
-			if ($result) {
+			$sub = new Subcategoria_model($id);
+			if ($sub->guardar($datos)) {
 				$accion = (!empty($id)) ? "actualizado" : "guardando";
 				$response['exito']   = true;
 				$response['mensaje'] = "Se ha {$accion} correctamente: {$datos->nombre}";
 			} else {
 				$response['exito']   = 2;
-				$response["mensaje"] = "Ha ocurrido un error, intenta nuevamente";
+				$response["mensaje"] = $sub->getMensaje();
 			}
 		} else {
 			$response["exito"] = 3;

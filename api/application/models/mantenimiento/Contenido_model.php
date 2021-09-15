@@ -1,24 +1,22 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Contenido_model extends CI_Model {
+class Contenido_model extends General_model {
 
-	public function guardar($args = [], $id ="")
-	{	
+	public $nombre;
+	public $descripcion;
+	public $activo=1;
+	public $usuario_id;
+
+	public function __construct($id="")
+	{
+		parent::__construct();
+		
 		if (!empty($id)) {
-			if ($this->db->where("id", $id)->update("contenido", $args)) {
-				return true;
-			} else {
-				return false;
-			}
-		} else{
-			if ($this->db->insert("contenido", $args)) {
-				return $this->db->insert_id();
-			} else {
-				return false;
-			}
+			$this->cargar($id);
 		}
 	}
+
 
 	public function getContenidos($args=[])
 	{
@@ -50,7 +48,6 @@ class Contenido_model extends CI_Model {
 		->join("contenido_docente b", "b.contenido_id = a.id", "left")
 		->join("usuario c", "b.usuario_id = c.id", "left")
 		->join("contenido_padres d", "d.contenido_id = a.id", "left")
-		->group_by("a.id")
 		->get("contenido a")->$method();
 	}
 

@@ -1,6 +1,6 @@
 <template>
 <div>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg rounded border">
 		<a class="navbar-brand" href="javascript:;">PUBLICACIONES</a>
 		<div class="container-fluid">
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,24 +25,21 @@
 			</button>
 			<form @submit.prevent="_guardar()">
 				<small class="text-primary ml-2"><i class="fas fa-exclamation-circle"></i> Información general</small>
-				<div class="form-row col-sm-12">
-					<label class="control-label">Título</label>
-					<input type="text" class="form-control" v-model="form.nombre" required>
+				<div class="form-row col-sm-12 mt-2">
+					<div class="col-sm-6">
+						<label class="control-label">Título</label>
+						<input type="text" class="form-control" v-model="form.nombre" required>
+					</div>
+					<div class="col-sm-6 mt-2">
+						<div class="custom-file mt-4">
+							<input type="file" class="custom-file-input" id="archivo" name="archivo" @change="_cargarImagen">
+							<label class="custom-file-label" for="archivo">{{txt_imagen}}</label>
+						</div>
+					</div>
 				</div>
 				<div class="form-row col-sm-12 mt-2">
 					<label class="control-label">Descripción</label>
-					<input type="text" class="form-control" v-model="form.descripcion">
-				</div>
-				<div class="form-row col-sm-12 mt-2">
-					<label class="control-label">Tipo de recurso</label>
-					<select class="form-control" v-model="form.tipo_recurso_id">
-						<option value=""></option>
-						<option v-for="i in select.tipo_recurso" :key="i.id" :value="i.id">{{ i.nombre }}</option>
-					</select>
-				</div>
-				<div class="form-row col-sm-12 mt-2">
-					<label class="control-label">Link a recurso</label>
-					<input type="text" class="form-control" v-model="form.recurso">
+					<wysiwyg id="descripcion" v-model="form.descripcion" class="border bg-white"/>
 				</div>
 				<div class="col-sm-12 mt-2 text-right">
 					<button type="submit" :disabled="btnGuardando" class="btn btn-primary">
@@ -55,18 +52,22 @@
 		</div>
 	</div>
 	<div class="mt-2">
-		<div v-for="(i, key) in lista" :key="key" class="card mt-4" style="width: 100%;">
-			<div class="contain-iframe-qs" v-if="i.tipo_recurso_id == 1">
-				<iframe width="560" height="315" :src="i.recurso" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>
-			<div class="contain-iframe-qs text-center" v-if="i.tipo_recurso_id==2">
-				<img :src="i.recurso" style="height:70vh;">
-			</div>
-			<div class="card-body">
-				<h5 class="card-title">{{ i.nombre }}</h5>
-				<p class="card-text">{{ i.descripcion }}</p>
-				<div class="text-right">
-					<small class="text-muted">{{ i.fecha_publicado}}</small>
+		<div class="col-sm-12 form-row" v-if="lista.length > 0 && !buscando">
+			<div v-for="(i, key) in lista" :key="key" class="col-sm-6 mt-2" v-bind:class="{ 'col-sm-12' : i.tipo_recurso_id == 3 }" >
+				<div class="card" style="max-height: 100%; height: 100%">
+					<div class="card-body">
+						<h5 class="card-title">{{ i.nombre }}</h5>
+						<div class="contain-iframe-qs" v-if="i.tipo_recurso_id == 1">
+							<iframe width="560" height="315" :src="'https://drive.google.com/uc?id='+i.recurso" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						</div>
+						<div class="text-center" v-if="i.tipo_recurso_id==2">
+							<img :src="'https://drive.google.com/uc?id='+i.recurso" class="img-fluid" alt="Responsive image">
+						</div>
+						<p class="card-text mt-2" v-html="i.descripcion" ></p>
+						<div class="text-right">
+							<small class="text-muted">{{ i.fecha_publicado}}</small>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -85,6 +86,7 @@
 			this._getSelect(['tipo_recurso'])
 			this.url = "/mantenimiento/publicacion"
 			this._getDatos()
+			this.fEspecial = true
 		}
 	}
 </script>

@@ -63,9 +63,9 @@
                     </div>
                     <div class="gallery_store" v-else>
                         <div class="content_categoria" v-for="(i, key) in select.productos_favoritos" :key="key">
-                            <img class="product_img_categoria" :src="i.imagen_link">
+                            <img class="product_img_categoria" :src="'https://drive.google.com/uc?id='+i.imagen">
                             <h3 class="categoria_h3">{{i.nombre}}</h3>
-                            <p class="p_store_categoria">{{i.descripcion}}</p>
+                            <p class="p_store_categoria p-2"><small v-html="i.descripcion"></small></p>
                             <h6 class="price_categoria">Q {{i.precio_venta}}</h6>
                             <ul class="stars_categoria">
                             <li><i class="fa fa-star" aria-hidden="true"></i></li>

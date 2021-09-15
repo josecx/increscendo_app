@@ -25,9 +25,9 @@
     <div class="gallery_store" v-if="actual == 1 && !buscando">
         <!--  -->
         <div class="content_categoria" v-for="(i, key) in lista" :key="key">
-            <img class="product_img_categoria" :src="i.imagen_link">
+            <img class="product_img_categoria" :src="'https://drive.google.com/uc?id='+i.imagen">
             <h3 class="categoria_h3">{{i.nombre}}</h3>
-            <p class="p_store_categoria">{{i.descripcion}}</p>
+            <p class="p_store_categoria p-2"><small v-html="i.descripcion"></small></p>
             <h6 class="price_categoria">Q {{i.precio_venta}}</h6>
             <ul class="stars_categoria">
             <li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -53,7 +53,7 @@
                 <div class="header-cart-detail">
                     <div>
                         <h2>{{producto.nombre}}</h2>
-                        <p>SKU: 132154U</p>
+                        <p>{{producto.codigo}}</p>
                     </div>
                     <button v-if="!setActual" class="btn" @click="actual = 1"><i class="fas fa-arrow-left"></i></button>
                     <button v-else class="btn" @click="regresarFavoritos"><i class="fas fa-arrow-left"></i></button>
@@ -62,33 +62,33 @@
                     <div class="cart-img-content">
                         <div class="cart-img-box">
                             <div class="imag-product-box imag-product-box-active">
-                                <img :src="producto.imagen_link">
+                                <img  :src="'https://drive.google.com/uc?id='+producto.imagen">
                             </div>
                             <div class="imag-product-box">
-                                <img :src="producto.imagen_link">
+                                <img  :src="'https://drive.google.com/uc?id='+producto.imagen">
                             </div>
                             <div class="imag-product-box">
-                                <img :src="producto.imagen_link">
+                                <img  :src="'https://drive.google.com/uc?id='+producto.imagen">
                             </div>
                             <div class="imag-product-box">
-                                <img :src="producto.imagen_link">
+                                <img  :src="'https://drive.google.com/uc?id='+producto.imagen">
                             </div>
                             <div class="imag-product-box">
-                                <img :src="producto.imagen_link">
+                                <img  :src="'https://drive.google.com/uc?id='+producto.imagen">
                             </div>
                             <div class="imag-product-box">
-                                <img :src="producto.imagen_link">
+                                <img :src="'https://drive.google.com/uc?id='+producto.imagen">
                             </div>
                         </div>
                         <div class="cart-img-box-principal">
-                            <img :src="producto.imagen_link">
+                            <img :src="'https://drive.google.com/uc?id='+producto.imagen">
                         </div>
                     </div>
                     <div class="cart-detail">
                         <div class="cart-price">
                             <h3>Q{{producto.precio_venta}}</h3>
                             <p class="disponible-text"><i class="fas fa-check-circle"></i> Disponible</p>
-                            <p class="existencias-text"><i class="fas fa-boxes"></i> Solo quedan 4</p>
+                            <!-- <p class="existencias-text"><i class="fas fa-boxes"></i> Solo quedan 4</p> -->
                         </div>
                         <div class="cart-count-detail">
                             <p class="title-count-cart">Cantidad:</p>
@@ -108,6 +108,9 @@
                         </div>
                         <div class="cart-other-detail">
                             <button><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="cart-other-detail">
+                            <small v-html="producto.descripcion"></small>
                         </div>
                     </div>
                 </div>

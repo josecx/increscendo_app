@@ -14,16 +14,15 @@ class Categoria extends CI_Controller {
 		$response = ['exito' => 0, 'warning' => 0];
 		$datos    = json_decode(file_get_contents('php://input'));
 		if (isset($this->usuario->id)) {
+			$cat = new Categoria_model($id);
 			$datos->usuario_id = $this->usuario->id;
-
-			$result = $this->Categoria_model->guardar($datos, $id);
-			if ($result) {
+			if ($cat->guardar($datos)) {
 				$accion = (!empty($id)) ? "actualizado" : "guardando";
 				$response['exito']   = true;
 				$response['mensaje'] = "Se ha {$accion} correctamente: {$datos->nombre}";
 			} else {
 				$response['exito']   = 2;
-				$response["mensaje"] = "Ha ocurrido un error, intenta nuevamente";
+				$response["mensaje"] = $cat->getMensaje();
 			}
 		} else {
 			$response["exito"] = 3;

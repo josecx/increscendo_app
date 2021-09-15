@@ -1,22 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Publicacion_model extends CI_Model {
+class Publicacion_model extends General_model {
+	public $nombre;
+	public $descripcion;
+	public $recurso;
+	public $activo=1;
+	public $usuario_id;
+	public $tipo_recurso_id;
 
-	public function guardar($args = [], $id ="")
-	{	
+	public function __construct($id="")
+	{
+		parent::__construct();
+		
 		if (!empty($id)) {
-			if ($this->db->where("id", $id)->update("publicacion", $args)) {
-				return true;
-			} else {
-				return false;
-			}
-		} else{
-			if ($this->db->insert("publicacion", $args)) {
-				return $this->db->insert_id();
-			} else {
-				return false;
-			}
+			$this->cargar($id);
 		}
 	}
 
@@ -30,6 +28,7 @@ class Publicacion_model extends CI_Model {
 			b.icono")
 		->join("tipo_recurso b", "a.tipo_recurso_id = b.id")
 		->order_by("a.fecha_sys", "DESC")
+		->where("a.activo", 1)
 		->get("publicacion a")->result();
 	}
 }

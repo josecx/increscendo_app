@@ -65,7 +65,7 @@ class Usuario extends CI_Controller {
 					"correo"    => $datos->correo,
 					"estado_id" => '1',
  				];
-				if ($id)
+				if (!$id)
 					$datos_guardar["password"] = sha1($password);
 
  				$insert_id = $this->Usuario_model->guardar($datos_guardar, $id);

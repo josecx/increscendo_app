@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "increscenoapp",
+  "private_key_id": "28971caeaa71432931b062bb4cea1293ae23ac72",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCRavMyWGKrXpa6\nACGg2J3FHAw7kY5IWB/t8pQQ7OFnYgJu85ZeoxD9YfTTbxyxuYxHTTJ7XfmAcd0l\nn5Zvs31ngmfhC+C2VJemzOXSCkYX10cgmI3FUrWQLFxbXTiXjK0CKCGefGLC0cCW\nEaSvvN+1yhb9Kz/J4y0x6AyTrWx3Mf0St6QqOgpmxGFqMaWaDUs4KXmLFSKIliFl\ni74ZHd68rYMleo451zVqkKa5RiZbYxrIPOkgzTm+LDjac70xD4DeA6R6V03ejqMV\ndump4VB1mlsKG7WUCO2MprWU60Ble3Pdd9cQOKnxpdlMcDUKzVHON7jR/Dw2bbX2\nQbIVxG6ZAgMBAAECggEACiLCQMgYWImHR/+qWGPA23RRBfXnTPOXhiZaW7OnImWa\nddFUsdP74y1ouzQLc/fS50ViN2cddO5605yEB9Ui8IwOYYlKaGsNBvtRKYq9x/uh\nYYxAlXhmX144McYVo7qSdIwHi9xvpdSo78zbBcTMcwdbAtp438GN7OSXu9NitAwV\nBEptB+Nny+hx8pAlc7HSTbBw+o7mOVUs/g7QlUrdJy9Fbjt6RV5VHQqI1SVNOq+M\nxnsM0WK5ySTr69CXpxzbwGUAPNMvBoMwIUYVLy4687K4yFRxsaAotAKI8Rv1daUy\n/IOQqYQ5O0xjPwR+rkxjuOoiVEIdqu6gxJHkO96PgQKBgQDI/fu7FLA6CnxB2+is\nYB0s+EnctYKUgrKdTCNeC0MH5FdB7vYrp2xE/BGncSQ3Zdyle0WEXViTwqp4SWrL\nEpQ2mlkN7zwnuQvgduMzA5oRppB3QnWV8j5ppEVCpD6sG1pnX8/qWdGcra2XZAtc\nK9a1aywLpbGdtS+j9RPKvy2nHQKBgQC5N0mCu9i9Htibk4w5H4bfD79oNfi7Sr3z\nGvzZxXrCG1bkjBk0WIxs4Uo2ce6wpBvIzTNJKpk79U12GfkPRwcCrzmSZ/GvsNG+\nVZkuD3Iqhonc4kGVNEsOqIkSyr0/dtBQF/b9dunP3sd4afpFqP2ryAqZFoWxDVS6\nZlqxNwyArQKBgE88MTzzTvXSpGGiO/uYeGf+CcBEnhHF5Hw2Q8sTTX2S+wM3HTzg\nZ8JaTOthoxFjyrRCAInJ8t1tZJ6+8qbT0DImbu0bXu+Z96Cpva+iv94td85MGObf\n9NLYu6Ul8r8OmXkfQGv2tLe7kC+adRAFCEPE2DxPOdIeV4WfXAoVi/3RAoGABbS5\nVAi7daAUpj5WbJAXFJokmG5JOmPkFDA5p+/Yh1BWTfYu9JjhwpzyL1k1NEXqATap\nJNDmJZ26BDBqptjWU3PYfzUqkfINlCKI9I1PRBYe+yoRQSp6QXpZtrV+PQ1I/56t\nYkOekmPXm1MQfcLmBbvE79Bsz/aMLK3oj1sVzIUCgYA3E53ScQyAzUoWLYf4rhhV\nJw6xyJKD1yQVqaIZmNNY1/tVvwe2+FFpDeOLVhlIB+FzN64SA0dcJUeRz5WAVDvr\n04RjgBYr4etf3gBaMqB0c78RNXfNaDtUjz2q7h2k0hj0sZccVPVGMlMZzdg3333U\n5DWVKVe2nT3iZ6ZHATzRaQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "backupincrescendo-480@increscenoapp.iam.gserviceaccount.com",
+  "client_id": "104349798388857680339",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/backupincrescendo-480%40increscenoapp.iam.gserviceaccount.com"
+}

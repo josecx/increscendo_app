@@ -1,7 +1,20 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Categoria_model extends CI_Model {
+class Categoria_model extends General_model {
+	public $nombre;
+	public $descripcion;
+	public $activo=1;
+	public $usuario_id;
+
+	public function __construct($id="")
+	{
+		parent::__construct();
+		
+		if (!empty($id)) {
+			$this->cargar($id);
+		}
+	}
 
 	public function buscar($args=[])
 	{
@@ -12,23 +25,6 @@ class Categoria_model extends CI_Model {
 		->order_by("fecha_sys", "DESC")
         ->where("activo", 1)
 		->get("categoria")->result();
-	}
-
-	public function guardar($args = [], $id ="")
-	{	
-		if (!empty($id)) {
-			if ($this->db->where("id", $id)->update("categoria", $args)) {
-				return true;
-			} else {
-				return false;
-			}
-		} else{
-			if ($this->db->insert("categoria", $args)) {
-				return $this->db->insert_id();
-			} else {
-				return false;
-			}
-		}
 	}
 
 }

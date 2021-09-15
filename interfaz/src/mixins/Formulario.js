@@ -16,7 +16,9 @@ export default{
 		verForm:      false,
 		buscando:     false,
 		componentKey: 0,
+		fEspecial: false,
 		reg: 		  '',
+		txt_imagen: "Elegir Recurso",
 		form:   {},
 		bform:  {},
 		select: {},
@@ -49,6 +51,16 @@ export default{
 			this.componentKey += 1;
 			let datos = this.form
 
+			if (this.fEspecial) {
+				datos = new FormData()
+				for (let i in this.form) {
+					datos.append(i, this.form[i]);
+				}
+			}
+			if(this.fEspecial && !this.reg){
+				this._notificarWarning("Esto podría tardar unos minutos...")
+			}
+
 			this._enviarPeticionPost({
 				url: this.url+"/guardar/",
 				arg: this.reg,
@@ -68,6 +80,11 @@ export default{
 				}				
 			})
 		},
+		_cargarImagen(e){
+            let archivo = e.target.files || e.dataTransfer.files
+            this.form.archivo = archivo[0]
+            this.txt_imagen = archivo[0]["name"]
+        },
 		_editar(idt){
 			let dato = this.lista[idt]
 
@@ -119,10 +136,14 @@ export default{
 		// FORMULARIO FRONTEND
 		_abrirFormulario(){
 			this.verForm = true
+			if(!this.reg){
+				this._limpiarFormulario()
+			}
 		},
 		_cerrarFormulario(){
 			this._limpiarFormulario()
 			this.verForm = false
+			this.txt_imagen = "Elegir Recurso"
 		},
 		_limpiarFormulario () {
 			this.form = {};

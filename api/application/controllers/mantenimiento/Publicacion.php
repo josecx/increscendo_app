@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+ini_set('max_execution_time', '0');
 class Publicacion extends CI_Controller {
 
 	public function __construct()
@@ -13,22 +13,35 @@ class Publicacion extends CI_Controller {
 	public function guardar($id = "")
 	{
 		$response = ['exito' => 0, 'warning' => 0];
-		$datos    = json_decode(file_get_contents('php://input'));
+		$datos    = (object)$_POST;
 		if (isset($this->usuario->id)) {
 			$datos->usuario_id = $this->usuario->id;
-
-			if ($datos->tipo_recurso_id == 1 || $datos->tipo_recurso_id == 2) {
-				$datos->recurso = getUrlRecurso($datos->recurso);
+			$continuar = true;
+			$publicacion = new Publicacion_model($id);
+			$datos->tipo_recurso_id = 3;
+			if (isset($_FILES["archivo"]) && !empty($_FILES["archivo"]["tmp_name"])) {
+				$_FILES["archivo"]["carpeta"] = "Contenido";
+				$archivo = subirArchivo($_FILES["archivo"]);
+	
+				if ($archivo) {
+					$datos->recurso_link = $archivo->link;
+					$datos->recurso = $archivo->key;
+					$datos->tipo_recurso_id = getTipoRecurso($archivo->tipo);
+				} else {
+					$continuar = false;
+					$response["mensaje"] = "No fue posible guardar el archivo, por favor intenta de nuevo";
+				}
 			}
 
-			$result = $this->Publicacion_model->guardar($datos, $id);
-			if ($result) {
-				$accion = (!empty($id)) ? "actualizado" : "publicado";
-				$response['exito']   = true;
-				$response['mensaje'] = "Se ha {$accion} correctamente: {$datos->nombre}";
-			} else {
-				$response['exito']   = 2;
-				$response["mensaje"] = "Ha ocurrido un error, intenta nuevamente";
+			if ($continuar) {
+				if ($publicacion->guardar($datos)) {
+					$accion = (!empty($id)) ? "actualizado" : "guardando";
+					$response['exito']   = true;
+					$response['mensaje'] = "Se ha {$accion} correctamente la publicación: {$datos->nombre}";
+				} else {
+					$response['exito']   = 2;
+					$response["mensaje"] = $publicacion->getMensaje();
+				}
 			}
 		} else {
 			$response["exito"] = 3;

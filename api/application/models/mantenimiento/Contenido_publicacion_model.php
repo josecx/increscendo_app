@@ -1,22 +1,22 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Contenido_publicacion_model extends CI_Model {
+class Contenido_publicacion_model extends General_model {
+	public $contenido_id;
+	public $nombre;
+	public $descripcion;
+	public $recurso;
+	public $tipo_recurso_id;
+	public $activo;
+	public $usuario_id;
+	public $recurso_link;
 
-	public function guardar($args = [], $id ="")
-	{	
+	public function __construct($id="")
+	{
+		parent::__construct();
+		
 		if (!empty($id)) {
-			if ($this->db->where("id", $id)->update("contenido_publicacion", $args)) {
-				return true;
-			} else {
-				return false;
-			}
-		} else{
-			if ($this->db->insert("contenido_publicacion", $args)) {
-				return $this->db->insert_id();
-			} else {
-				return false;
-			}
+			$this->cargar($id);
 		}
 	}
 

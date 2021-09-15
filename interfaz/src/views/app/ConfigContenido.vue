@@ -2,7 +2,7 @@
 	<div>
 		<div id="contenedorContenidos" v-if="actual == 1">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<a class="navbar-brand" href="javascript:;">CONTENIDOS</a>
+				<a class="navbar-brand" href="javascript:;"><i class="fas fa-cogs"></i> CONFIGURACIÓN DE CONTENIDO</a>
 				<div class="container-fluid">
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
@@ -24,7 +24,7 @@
 					<button type="button" class="close pr-2" aria-label="Close" @click="_cerrarFormulario">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<form @submit.prevent="guardar()">
+					<form @submit.prevent="_guardar()">
 						<small class="text-primary ml-2"><i class="fas fa-exclamation-circle"></i> Información general</small>
 						<div class="form-row col-sm-12">
 							<label class="control-label">Nombre</label>
@@ -32,7 +32,7 @@
 						</div>
 						<div class="form-row col-sm-12 mt-2">
 							<label class="control-label">Descripción</label>
-							<input type="text" class="form-control" v-model="form.descripcion">
+							<wysiwyg id="descripcion" v-model="form.descripcion" class="border bg-white"/>
 						</div>
 						<div class="col-sm-12 mt-2 text-right">
 							<button type="submit" :disabled="btnGuardando" class="btn btn-primary">
@@ -48,17 +48,18 @@
 			<div class="card mt-2">
 				<div class="card-body">
 					<div class="col-sm-12 form-row" v-if="lista.length > 0 && !buscando">
-						<div v-for="(i, key) in lista" :key="key" class="col-sm-4 mt-2">
-							<div class="card" style="max-height: 100%; height: 100%">
+						<div v-for="(i, key) in lista" :key="key" class="col-sm-3 mt-2">
+							<div class="card mb-3">
+								<div class="card-header">{{i.nombre}}</div>
 								<div class="card-body">
-									<p>{{ i.nombre }}</p>
 									<p class="text-muted">
 										<small>
 											Docente: {{ (i.ndocente) ? i.adocente+' '+i.ndocente: 'Sin asignar' }} 
 										</small>
 									</p>
-									<p><small>{{ i.descripcion | truncate(120, '...')}}</small></p>
+									<p class="card-text" v-html="i.descripcion"></p>
 								</div>
+								
 								<div class="card-footer text-right">
 									<button v-if="usuario.rol_id == 1" title="Editar" class="btn btn-outline-info mr-2" @click="_editar(key)">
 										<i class="fas fa-edit"></i>
@@ -144,29 +145,26 @@
 
 			<div v-if="verForm && actual == 2" class="card mt-2">
 				<div class="card-body">
-					<button type="button" class="close pr-2" aria-label="Close" @click="_cerrarFormulario">
+					<button type="button" class="close pr-2" aria-label="Close" @click="cerrarFormulario">
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<form @submit.prevent="guardarPublicacion()">
 						<small class="text-primary ml-2"><i class="fas fa-exclamation-circle"></i> Información general</small>
-						<div class="form-row col-sm-12">
-							<label class="control-label">Título</label>
-							<input type="text" class="form-control" v-model="form.nombre" required>
+						<div class="form-row col-sm-12 mt-2">
+							<div class="col-sm-6">
+								<label class="control-label">Título</label>
+								<input type="text" class="form-control" v-model="form.nombre" required>
+							</div>
+							<div class="col-sm-6 mt-2">
+								<div class="custom-file mt-4">
+									<input type="file" class="custom-file-input" id="archivo" name="archivo" @change="_cargarImagen">
+									<label class="custom-file-label" for="archivo">{{txt_imagen}}</label>
+								</div>
+							</div>
 						</div>
 						<div class="form-row col-sm-12 mt-2">
 							<label class="control-label">Descripción</label>
-							<input type="text" class="form-control" v-model="form.descripcion">
-						</div>
-						<div class="form-row col-sm-12 mt-2">
-							<label class="control-label">Tipo de recurso</label>
-							<select class="form-control" v-model="form.tipo_recurso_id">
-								<option value=""></option>
-								<option v-for="i in select.tipo_recurso" :key="i.id" :value="i.id">{{ i.nombre }}</option>
-							</select>
-						</div>
-						<div class="form-row col-sm-12 mt-2">
-							<label class="control-label">Link a recurso</label>
-							<input type="text" class="form-control" v-model="form.recurso_link">
+							<wysiwyg id="descripcion" v-model="form.descripcion" class="border bg-white"/>
 						</div>
 						<div class="col-sm-12 mt-2 text-right">
 							<button type="submit" :disabled="btnGuardando" class="btn btn-primary">
@@ -197,7 +195,7 @@
 								<td>
 									<a href="javascript:;" @click="_editar(key)">{{ i.nombre }}</a>
 								</td>
-								<td>{{ i.descripcion | truncate(80, '...') }}</td>
+								<td><small v-html="i.descripcion"></small></td>
 								<td>{{ i.fecha_publicado }}</td>
 								<td>
 									<a :href="i.recurso_link" target="_blank" title="Abrir recurso">
@@ -262,7 +260,6 @@
 <script>
 	import GlobalMixin from "../../mixins/Formulario.js";
 	import Multiselect from 'vue-multiselect';
-	import Vue from 'vue'
 	export default {
 		name: "ConfigContenido",
 		mixins: [GlobalMixin],
@@ -274,7 +271,8 @@
 				docente: {},
 				padres_act: {},
 				selected: null,
-				modal: false
+				modal: false,
+				txt_imagen: "Elegir recurso"
 			}
 		},
 		created(){
@@ -288,11 +286,6 @@
 			this._getDatos()
 		},
 		methods: {
-			guardar(){
-				Vue.delete(this.form, 'adocente')
-				Vue.delete(this.form, 'ndocente')
-				this._guardar()
-			},
 			configContenido(idt){
 				let dato = this.lista[idt]
 				this.contenido = dato
@@ -304,10 +297,13 @@
 			guardarPublicacion(){
 				this.form.contenido_id = this.contenido.id
 				this.form.recurso      = this.form.recurso_link
-				Vue.delete(this.form, 'fecha_publicado')
-				Vue.delete(this.form, 'icono')
-				Vue.delete(this.form, "recurso_nombre")
+				this.fEspecial = true
 				this._guardar()
+				this.fEspecial = false
+			},
+			cerrarFormulario(){
+				this.txt_imagen = "Elegir imagen"
+				this._cerrarFormulario();
 			},
 			guardarDocente(){
 				this.btnGuardando = true

@@ -15,14 +15,14 @@ class Contenido extends CI_Controller {
 		$response = ['exito' => 0, 'warning' => 0];
 		$datos    = json_decode(file_get_contents('php://input'));
 		$datos->usuario_id = $this->usuario->id;
-		$result = $this->Contenido_model->guardar($datos, $id);
-		if ($result) {
+		$cont = new Contenido_model($id);
+		if ($cont->guardar($datos)) {
 			$accion = (!empty($id)) ? "actualizado" : "creado";
 			$response['exito']   = true;
 			$response['mensaje'] = "Se ha {$accion} correctamente el contenido: {$datos->nombre}";
 		} else {
 			$response['exito']   = 2;
-			$response["Ha ocurrido un error, intenta nuevamente"];
+			$response["mensaje"] = $cont->getMensaje();
 		}
 
 		$this->output->set_output(json_encode($response));
