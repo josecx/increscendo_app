@@ -45,6 +45,21 @@ class Mante_model extends CI_Model {
 	{
 		return $this->db->where("activo",1)->where("favorito", 1)->get("producto")->result();
 	}
+
+	public function _getcontenido_padres($args=[])
+	{
+		return $this->db
+		->select("
+			a.*,
+			concat(b.apellido, ' ', b.nombre) as nombre_completo
+		")
+		->from("contenido_padres a")
+		->join("usuario b", "b.id = a.usuario_id")
+		->where("a.activo",1)
+		->get()
+		->result();
+		
+	}
 }
 
 /* End of file Mante_model.php */

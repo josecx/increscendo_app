@@ -48,6 +48,8 @@ class Contenido_model extends General_model {
 		->join("contenido_docente b", "b.contenido_id = a.id", "left")
 		->join("usuario c", "b.usuario_id = c.id", "left")
 		->join("contenido_padres d", "d.contenido_id = a.id", "left")
+		->where("a.activo", 1)
+		->group_by("a.id")
 		->get("contenido a")->$method();
 	}
 

@@ -24,7 +24,7 @@
 					<button type="button" class="close pr-2" aria-label="Close" @click="_cerrarFormulario">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<form @submit.prevent="_guardar()">
+					<form @click="fEspecial = false" @submit.prevent="_guardar()">
 						<small class="text-primary ml-2"><i class="fas fa-exclamation-circle"></i> Información general</small>
 						<div class="form-row col-sm-12">
 							<label class="control-label">Nombre</label>
@@ -33,6 +33,12 @@
 						<div class="form-row col-sm-12 mt-2">
 							<label class="control-label">Descripción</label>
 							<wysiwyg id="descripcion" v-model="form.descripcion" class="border bg-white"/>
+						</div>
+						<div class="form-row col-sm-4" v-if="reg">
+							<div class="custom-control custom-switch">
+								<input type="checkbox" class="custom-control-input" id="switchTipo" :true-value="1" :false-value="0" v-model="form.activo">
+								<label class="custom-control-label" for="switchTipo">Activo</label>
+							</div>
 						</div>
 						<div class="col-sm-12 mt-2 text-right">
 							<button type="submit" :disabled="btnGuardando" class="btn btn-primary">
@@ -88,8 +94,8 @@
 			</div>
 		</div>
 		<div id="contenedorPublicaciones" v-if="actual == 2">
-			<div class="modal fade" id="modalDocente" ref="modalDocente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
+			<div class="modal fade bd-example-modal-lg" id="modalDocente" ref="modalDocente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="exampleModalLabel">Configurar Docente</h5>
@@ -156,15 +162,35 @@
 								<input type="text" class="form-control" v-model="form.nombre" required>
 							</div>
 							<div class="col-sm-6 mt-2">
-								<div class="custom-file mt-4">
+								<div class="custom-control custom-switch">
+									<input type="checkbox" class="custom-control-input" id="switchTipo" :true-value="1" :false-value="0" v-model="form.link">
+									<label class="custom-control-label" for="switchTipo">LINK</label>
+								</div>
+								<div v-if="form.link == 1">
+									<input type="text" class="form-control" placeholder="Link del recurso" v-model="form.archivo">
+								</div>
+								<div class="custom-file" v-else>
 									<input type="file" class="custom-file-input" id="archivo" name="archivo" @change="_cargarImagen">
 									<label class="custom-file-label" for="archivo">{{txt_imagen}}</label>
 								</div>
 							</div>
 						</div>
+						<div class="form-row col-sm-12 mt-2" v-if="form.link == 1">
+							<label class="control-label">Tipo de Recurso</label>
+							<select class="custom-select" v-model="form.tipo_recurso_id">
+								<option value="">Seleccione una opción</option>
+								<option v-for="(i, key) in select.tipo_recurso" :key="key" :value="i.id">{{i.nombre}}</option>
+							</select>
+						</div>
 						<div class="form-row col-sm-12 mt-2">
 							<label class="control-label">Descripción</label>
 							<wysiwyg id="descripcion" v-model="form.descripcion" class="border bg-white"/>
+						</div>
+						<div class="form-row col-sm-4" v-if="reg">
+							<div class="custom-control custom-switch">
+								<input type="checkbox" class="custom-control-input" id="switchActivo" :true-value="1" :false-value="0" v-model="form.activo">
+								<label class="custom-control-label" for="switchActivo">Activo</label>
+							</div>
 						</div>
 						<div class="col-sm-12 mt-2 text-right">
 							<button type="submit" :disabled="btnGuardando" class="btn btn-primary">
@@ -220,7 +246,7 @@
 			</div>
 		</div>
 		<div v-if="modal" class="modal fade" id="modalPadres" ref="modalPadres" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
+			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Activar contenido</h5>
@@ -228,29 +254,36 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form @submit.prevent="activarPadres()">
-						<div class="modal-body">
-							<Multiselect
-								track-by="nombre_completo"
-								label="nombre_completo"
-								:multiple="true"
-								placeholder="Selecciona usuarios para activar" 
-								:searchable="true" 
-								:allow-empty="false"
-								v-model="selected"
-								deselect-label="Click para remover"
-								select-label="Click para agregar"
-								:options="select.padres">
-							</Multiselect>
+					<div class="col-sm-12">
+						<form @submit.prevent="activarPadres()" :key="componentKey">
+							<div class="modal-body">
+								<div class="form-group" :key="selectKey">
+									<Multiselect
+										track-by="nombre_completo"
+										label="nombre_completo"
+										:multiple="true"
+										placeholder="Selecciona usuarios para activar" 
+										:searchable="true" 
+										:allow-empty="false"
+										v-model="selected"
+										deselect-label="Click para remover"
+										select-label="Click para agregar"
+										:options="select.padres">
+									</Multiselect>
+								</div>
+								<div class="form-group text-right">
+									<button type="submit" :disabled="btnGuardando" class="btn btn-primary">
+										<span v-if="btnGuardando" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+										<i class="fas fa-save" v-else></i>
+										<span> {{ btnGuardando ? 'Activando...' : 'Activar'}}</span>
+									</button>
+								</div>
+							</div>
+						</form>
+						<div>
+							<listapadres :key="selectKey" />
 						</div>
-						<div class="modal-footer">
-							<button type="submit" :disabled="btnGuardando" class="btn btn-primary">
-								<span v-if="btnGuardando" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-								<i class="fas fa-save" v-else></i>
-								<span> {{ btnGuardando ? 'Activando...' : 'Activar'}}</span>
-							</button>
-						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -260,10 +293,11 @@
 <script>
 	import GlobalMixin from "../../mixins/Formulario.js";
 	import Multiselect from 'vue-multiselect';
+	import listapadres from "@/components/contenido/listapadres.vue"
 	export default {
 		name: "ConfigContenido",
 		mixins: [GlobalMixin],
-		components: { Multiselect },
+		components: { Multiselect ,listapadres },
 		data: () => {
 			return {
 				actual : 1,
@@ -272,7 +306,12 @@
 				padres_act: {},
 				selected: null,
 				modal: false,
-				txt_imagen: "Elegir recurso"
+				txt_imagen: "Elegir recurso",
+				form:{
+					archivo:{}
+				},
+				contenidoReg: null,
+				selectKey : 0
 			}
 		},
 		created(){
@@ -284,6 +323,7 @@
 			this.form.activo = 1;
 			this.docente.usuario_id = ""
 			this._getDatos()
+			this.fEspecial = false
 		},
 		methods: {
 			configContenido(idt){
@@ -295,17 +335,26 @@
 				this._getDatos()
 			},
 			guardarPublicacion(){
+				this.fEspecial = true
 				this.form.contenido_id = this.contenido.id
 				this.form.recurso      = this.form.recurso_link
-				this.fEspecial = true
 				this._guardar()
-				this.fEspecial = false
+			},
+			eliminarPublicacion(idx){
+				if(confirm("¿Seguro que quiere eliminar esta publicación?")){
+					this.reg = idx.id
+					this.fEspecial = true
+					this.form = idx
+					this.form.activo = 0
+					this._guardar();
+				}
 			},
 			cerrarFormulario(){
 				this.txt_imagen = "Elegir imagen"
 				this._cerrarFormulario();
 			},
 			guardarDocente(){
+				this.fEspecial = false
 				this.btnGuardando = true
 				this.docente.contenido_id = this.contenido.id
 				let datos = this.docente
@@ -330,6 +379,8 @@
 				let dato = this.lista[idt]
 				this.contenido = dato
 				this.modal = true
+				this.contenidoReg = dato.id
+				this.selectKey++
 			},
 			activarPadres(){
 				this.url    = "/mantenimiento/contenido_publicacion"
@@ -342,9 +393,11 @@
 					arg: '',
 					data: datos
 				}).then((response) => {
+					this.componentKey++
 					this.url = "/mantenimiento/contenido"
 					this.btnGuardando = false
 					if (response.exito) {
+						this.selected = null
 						this._notificarSuccess(response.mensaje)
 					}else{
 						if (response.nivel == 2) {

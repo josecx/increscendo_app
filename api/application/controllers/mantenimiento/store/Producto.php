@@ -19,6 +19,13 @@ class Producto extends CI_Controller {
 		]));
 	}
 	
+	public function getProductoImagen()
+	{
+		$this->output->set_output(json_encode([
+			"lista" => $this->Producto_model->buscar_producto_imagen($_GET)
+		]));
+	}
+
     public function guardar($id = "")
 	{
 		$response  = ['exito' => 0, 'warning' => 0];
@@ -47,6 +54,40 @@ class Producto extends CI_Controller {
 			} else {
 				$response['exito']   = 2;
 				$response["mensaje"] = $producto->getMensaje();
+			}
+		}
+		$this->output->set_output(json_encode($response));
+	}
+
+	public function productoImagen($id="")
+	{
+		$response  = ['exito' => 0, 'warning' => 0];
+		$continuar = true;
+		$producto  = new Producto_model();
+		$datos 	   = new stdClass();
+		$datos->producto_id = $id;
+
+		if (isset($_FILES["archivo"]) && !empty($_FILES["archivo"]["tmp_name"])) {
+			$_FILES["archivo"]["carpeta"] = "Store";
+			$imagen = subirArchivo($_FILES["archivo"]);
+
+			if ($imagen) {
+				$datos->imagen_link = $imagen->link;
+				$datos->imagen = $imagen->key;	
+			} else {
+				$continuar = false;
+				$response["mensaje"] = "No fue posible guardar la imagen, por favor intenta de nuevo";
+			}
+		}
+
+		if ($continuar) {
+			if ($producto->guardar_producto_imagen($datos)) {
+				$accion = (!empty($id)) ? "actualizado" : "guardando";
+				$response['exito']   = true;
+				$response['mensaje'] = "Se ha {$accion} correctamente";
+			} else {
+				$response['exito']   = 2;
+				$response["mensaje"] = "Error en BD";
 			}
 		}
 		$this->output->set_output(json_encode($response));

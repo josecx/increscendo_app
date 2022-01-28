@@ -61,27 +61,15 @@
                 <div class="row-midlecart">
                     <div class="cart-img-content">
                         <div class="cart-img-box">
-                            <div class="imag-product-box imag-product-box-active">
+                            <div @click="ximagen = producto.imagen" class="imag-product-box imag-product-box-active">
                                 <img  :src="'https://drive.google.com/uc?id='+producto.imagen">
                             </div>
-                            <div class="imag-product-box">
-                                <img  :src="'https://drive.google.com/uc?id='+producto.imagen">
-                            </div>
-                            <div class="imag-product-box">
-                                <img  :src="'https://drive.google.com/uc?id='+producto.imagen">
-                            </div>
-                            <div class="imag-product-box">
-                                <img  :src="'https://drive.google.com/uc?id='+producto.imagen">
-                            </div>
-                            <div class="imag-product-box">
-                                <img  :src="'https://drive.google.com/uc?id='+producto.imagen">
-                            </div>
-                            <div class="imag-product-box">
-                                <img :src="'https://drive.google.com/uc?id='+producto.imagen">
+                            <div @click="ximagen = i.imagen" class="imag-product-box imag-product-box-active" v-for="(i, key) in listaExtra" :key="key">
+                                <img  :src="'https://drive.google.com/uc?id='+i.imagen">
                             </div>
                         </div>
                         <div class="cart-img-box-principal">
-                            <img :src="'https://drive.google.com/uc?id='+producto.imagen">
+                            <img :src="'https://drive.google.com/uc?id='+ximagen">
                         </div>
                     </div>
                     <div class="cart-detail">
@@ -158,7 +146,8 @@ export default {
         actual: 1,
         producto: null,
         itemKey:0,
-        usuario: null
+        usuario: null,
+        ximagen: null
     }),
     props: {
         subCat: {
@@ -180,6 +169,8 @@ export default {
             this.producto = item
             this.form.cantidad = 1;
             this.form.total = this.producto.precio_venta
+            this.getListaImagen(this.producto.id)
+            this.ximagen = this.producto.imagen
         },
         agregar_carrito(){
             if(this.usuario){
@@ -209,6 +200,11 @@ export default {
         },
         regresarFavoritos(){
             this.actual = 3
+        },
+        getListaImagen(id){
+            this.bform.producto_id = id
+            this.guardarExtra = true
+            this._getDatos()
         }
     },
     created(){
@@ -218,6 +214,7 @@ export default {
         this.form.cantidad = 1
         this.bform.subcategoria = this.subCat
         this.url = "/mantenimiento/store/producto"
+        this.buscarExtra  = "/getProductoImagen/"
         if(this.setActual){
             this.actual = this.setActual
             this.producto = this.setProducto

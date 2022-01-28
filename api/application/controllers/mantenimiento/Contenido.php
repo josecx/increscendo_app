@@ -18,6 +18,9 @@ class Contenido extends CI_Controller {
 		$cont = new Contenido_model($id);
 		if ($cont->guardar($datos)) {
 			$accion = (!empty($id)) ? "actualizado" : "creado";
+			if (isset($contenido->activo) && $datos->activo == 0) {
+				$accion = "eliminado";
+			}
 			$response['exito']   = true;
 			$response['mensaje'] = "Se ha {$accion} correctamente el contenido: {$datos->nombre}";
 		} else {

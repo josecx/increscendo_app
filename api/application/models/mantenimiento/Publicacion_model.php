@@ -7,7 +7,8 @@ class Publicacion_model extends General_model {
 	public $recurso;
 	public $activo=1;
 	public $usuario_id;
-	public $tipo_recurso_id;
+	public $tipo_recurso_id=3;
+	public $link=0;
 
 	public function __construct($id="")
 	{
@@ -29,7 +30,8 @@ class Publicacion_model extends General_model {
 		->join("tipo_recurso b", "a.tipo_recurso_id = b.id")
 		->order_by("a.fecha_sys", "DESC")
 		->where("a.activo", 1)
-		->get("publicacion a")->result();
+		->get("publicacion a")
+		->result();
 	}
 }
 

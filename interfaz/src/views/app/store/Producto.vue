@@ -23,7 +23,7 @@
 				<button type="button" class="close pr-2" aria-label="Close" @click="cerrarFormulario">
 					<span aria-hidden="true">&times;</span>
 				</button>
-                <form @submit.prevent="_guardar()">
+                <form @submit.prevent="guardarProducto">
                     <small class="text-primary ml-2"><i class="fas fa-exclamation-circle"></i> Información general</small> 
                     <div class="form-row col-sm-12 mt-2">
                         <div class="col-sm-6">
@@ -37,7 +37,7 @@
                     </div>
 					<div class="form-row col-sm-12 mt-2">
 						<label class="control-label">Descripción</label>
-						<wysiwyg id="descripcion" v-model="form.descripcion" class="border bg-white"/>
+						<wysiwyg required id="descripcion" v-model="form.descripcion" class="border bg-white"/>
 					</div>
                     <div class="form-row col-sm-12 mt-2">
                         <div class="col-sm-6">
@@ -94,7 +94,7 @@
         </div>
 
         <div class="card mt-2">
-            <div class="car-body">
+            <div class="card-body">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -107,6 +107,7 @@
                             <th>Precio de venta</th>
                             <th>Fecha</th>
                             <th>Favorito</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody v-if="!buscando && lista.length > 0">
@@ -125,7 +126,12 @@
                             <td class="align-middle">{{i.precio_compra}}</td>
                             <td class="align-middle">{{i.precio_venta}}</td>
                             <td class="align-middle">{{i.fecha_sys}}</td>
-                            <td class="align-middle"><i v-if="i.favorito == 1" class="fas fa-star"></i></td>
+                            <td class="align-middle text-center"><i v-if="i.favorito == 1" class="fas fa-star"></i></td>
+                            <td class="align-middle">
+                                <button @click="getListaImagen(i.id)" v-b-modal.modal-1 class="btn btn-outline-primary" title="Detalle de imágenes">
+                                    <i class="fas fa-images"></i>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -150,6 +156,67 @@
                 </div>
             </div>
         </div>
+        <b-modal hide-footer size="lg" id="modal-1" title="Detalle de imágenes">
+            <div class="card mt-2">
+                <div class="card-body">
+                    <form @submit.prevent="guardarProductoImagen">
+                        <div class="col-12">
+                            <div class="custom-file">
+                                <input accept="image/*" type="file" class="custom-file-input" id="archivo" name="archivo" @change="cargarImagen">
+                                <label class="custom-file-label" for="archivo">{{txt_imagen}}</label>
+                            </div>
+                        </div>
+                        <div class="col-12 text-right">
+                            <button type="submit" :disabled="btnGuardando" class="btn btn-primary mr-0 mb-0">
+                                <span v-if="btnGuardando" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <i class="fas fa-save" v-else></i>
+                                <span> {{ btnGuardando ? 'Guardando...' : 'Guardar'}}</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card mt-2">
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Link</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody v-if="!buscandoExtra">
+                            <tr  v-for="(i, key) in listaExtra" :key="key">
+                                <td class="text-center">
+                                    <img :src="'https://drive.google.com/uc?id='+i.imagen" class="img-thumbnail avatar m-0 p-0">
+                                </td>
+                                <td class="align-middle">
+                                    <a :href="i.imagen_link" target="_blank">
+                                        {{i.imagen_link}}
+                                    </a>
+                                </td>
+                                <td class="align-middle">
+                                    <button class="btn btn-outline-red">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr v-if="buscandoExtra">
+                                <td colspan="100">
+                                    <div class="text-center">
+                                        <div class="spinner-border" role="status">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </b-modal>
     </div>
 </template>
 <script>
@@ -163,11 +230,14 @@ export default {
             subcategoria_id: '',
             archivo:[]
         },
-        imagen: null,
-        txt_imagen: "Elegir imagen"
+        imagen:     null,
+        txt_imagen: "Elegir imagen",
+        xproducto:  null,
     }),
     created(){
         this.url = "/mantenimiento/store/producto"
+        this.buscarExtra  = "/getProductoImagen/"
+        this.guardarExtra = false
         this._getSelect(['subcategoria','categoria'])
         this._getDatos()
         this.fEspecial = true
@@ -181,6 +251,25 @@ export default {
         cerrarFormulario(){
             this.txt_imagen = "Elegir imagen"
             this._cerrarFormulario();
+        },
+        guardarProducto(){
+            this.guardarExtra = false
+            if (this.form.descripcion.trim() == "" || this.form.descripcion.trim() == null) {
+                this._notificarWarning("La descripción es obligatoria")
+            } else {
+                this._guardar();
+            }
+        },
+        guardarProductoImagen(){
+            this.guardarExtra = true
+            this.accionExtra  = "/productoImagen/"+this.xproducto
+            this._guardar()
+        },
+        getListaImagen(id){
+            this.xproducto    = id
+            this.bform.producto_id = id
+            this.guardarExtra = true
+            this._getDatos()
         }
     },
     computed: {

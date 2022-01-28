@@ -15,14 +15,21 @@ export default{
 		btnGuardando: false,
 		verForm:      false,
 		buscando:     false,
+		buscandoExtra:false,
+		guardarExtra: false,
+		accionExtra:  null,
+		buscarExtra:  "",
 		componentKey: 0,
 		fEspecial: false,
 		reg: 		  '',
 		txt_imagen: "Elegir Recurso",
-		form:   {},
+		form:   {
+			archivo: {}
+		},
 		bform:  {},
 		select: {},
 		lista:  {},
+		listaExtra: {}
 	}),
 	methods: {
 		// FORM BACKEND
@@ -48,7 +55,7 @@ export default{
 		},
 		_guardar(){
 			this.btnGuardando = true
-			this.componentKey += 1;
+			this.componentKey += 1
 			let datos = this.form
 
 			if (this.fEspecial) {
@@ -60,9 +67,11 @@ export default{
 			if(this.fEspecial && !this.reg){
 				this._notificarWarning("Esto podría tardar unos minutos...")
 			}
+			
+			let accion = (this.guardarExtra) ? this.accionExtra : "/guardar/"
 
 			this._enviarPeticionPost({
-				url: this.url+"/guardar/",
+				url: this.url + accion,
 				arg: this.reg,
 				data: datos
 			}).then((response)=> {
@@ -95,14 +104,27 @@ export default{
 
 		// FORMULARIO SELECT, LISTA, VALIDACIONES
 		_getDatos(){
-			this.buscando = true
-			let datos = this.bform
+			if (this.guardarExtra) {
+				this.buscandoExtra = true
+			} else {
+				this.buscando = true
+			}
+			let datos  = this.bform
+			let accion = (this.guardarExtra) ? this.buscarExtra : "/getLista/"
 			this._enviarPeticionGet({
-				url: this.url+"/getLista/",
+				url: this.url+accion,
 				data: {params:datos}
 			}).then((response) => {
-				this.buscando = false
-				this.lista = response.lista
+				if (this.guardarExtra) {
+					this.buscandoExtra = false
+				} else {
+					this.buscando = false
+				}
+				if (this.guardarExtra) {
+					this.listaExtra = response.lista
+				} else {
+					this.lista = response.lista
+				}
 			})
 		},
 		_getSelect(select){

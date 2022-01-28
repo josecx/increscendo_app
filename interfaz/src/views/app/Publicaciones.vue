@@ -76,6 +76,11 @@
 	export default{
 		name: "Publicaciones",
 		mixins: [GlobalMixin],
+		data:() =>({
+			form:{
+				drive: 1
+			}
+		}),
 		created(){
 			this.url = "/mantenimiento/publicacion"
 			this.form.activo = 1;

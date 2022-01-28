@@ -48,16 +48,22 @@
 			</div>
 		</div>
 		<div class="card mt-4" v-if="actual == 2">
-			<div class="mt-2 mb-4" v-if="lista.length > 0">
+			<div class="col-sm-12 form-row" v-if="lista.length > 0 && !buscando">
 				<div v-for="(i, key) in lista" :key="key" class="col-sm-6 mt-2" v-bind:class="{ 'col-sm-12' : i.tipo_recurso_id == 3 }" >
 					<div class="card" style="max-height: 100%; height: 100%">
 						<div class="card-body">
 							<h5 class="card-title">{{ i.nombre }}</h5>
-							<div class="contain-iframe-qs" v-if="i.tipo_recurso_id == 1">
+							<div class="contain-iframe-qs" v-if="i.tipo_recurso_id == 1 && i.link == 0">
 								<iframe width="560" height="315" :src="'https://drive.google.com/uc?id='+i.recurso" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 							</div>
-							<div class="text-center" v-if="i.tipo_recurso_id==2">
+							<div class="contain-iframe-qs" v-if="i.tipo_recurso_id == 1 && i.link == 1">
+								<iframe width="560" height="315" :src="i.recurso" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+							</div>
+							<div class="text-center" v-if="i.tipo_recurso_id==2 && i.link == 0">
 								<img :src="'https://drive.google.com/uc?id='+i.recurso" class="img-fluid" alt="Responsive image">
+							</div>
+							<div class="text-center" v-if="i.tipo_recurso_id==2 && i.link == 1">
+								<img :src="i.recurso" class="img-fluid" alt="Responsive image">
 							</div>
 							<p class="card-text mt-2" v-html="i.descripcion" ></p>
 							<div class="text-right">

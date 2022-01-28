@@ -6,10 +6,11 @@ class Contenido_publicacion_model extends General_model {
 	public $nombre;
 	public $descripcion;
 	public $recurso;
-	public $tipo_recurso_id;
-	public $activo;
+	public $tipo_recurso_id=3;
+	public $activo=1;
 	public $usuario_id;
 	public $recurso_link;
+	public $link=0;
 
 	public function __construct($id="")
 	{
@@ -43,6 +44,7 @@ class Contenido_publicacion_model extends General_model {
 			b.icono
 		")
 		->join("tipo_recurso b", "b.id = a.tipo_recurso_id")
+		->where("a.activo",1)
 		->get("contenido_publicacion a")->$method();
 	}
 

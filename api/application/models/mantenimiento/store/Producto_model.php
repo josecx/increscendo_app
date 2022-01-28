@@ -53,4 +53,22 @@ class Producto_model extends General_model {
 		return verConsulta($tmp, $args);
 	}
 
+	public function buscar_producto_imagen($args=[])
+	{
+		if (elemento($args, "producto_id")) {
+			$this->db->where("producto_id", $args["producto_id"]);
+		}
+
+		return $this->db->get("producto_imagen")->result();
+	}
+
+	public function guardar_producto_imagen($args=[])
+	{
+		if ($this->db->insert("producto_imagen", $args)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }
