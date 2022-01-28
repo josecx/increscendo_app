@@ -8,6 +8,10 @@
 	z-index: 10;
 }
 
+.contain-items-home a {
+	text-decoration: none
+}
+
 .contain-panel-lateral::-webkit-scrollbar 
 {display: none;}
 
@@ -51,6 +55,7 @@
 }
 
 .text-bx-menu {
+	text-align: center;
 	color: #fff;
 	display: none;
 }
@@ -68,6 +73,15 @@
 	box-shadow: 0px 5px 10px rgba(0,0,0,0.3);
 }
 
+#menu-home-top a {
+	text-decoration: none;
+}
+
+#menu-home-top {
+	display: flex;
+	flex-direction: row;
+}
+
 .contain-menu-home {
 	width: calc(100% - 70px);
 	display: flex;
@@ -75,11 +89,30 @@
 	align-items: center;
 }
 
-#icon-help-home {
+.icon-help-home {
 	color: rgba(255,255,255,0.5);
 	font-size: 1.5rem;
 	text-align: center;
 	margin-top: 5px;
+}
+
+.cont-men-modulos {
+	display: flex;
+	flex-direction: column;
+	margin: 0px 5px;
+	padding: 2px 10px;
+	border-radius: 6px;
+	transition: all 0.3s ease;
+}
+
+.cont-men-modulos:hover {
+	background: rgba(255,255,255,0.5);
+}
+
+.icon-mnu-option {
+	color: white;
+	font-size: 12px;
+	display: none;
 }
 
 .main-home {
@@ -105,7 +138,11 @@
 }
 
 @media (min-width: 576px) {
-	
+	.icon-mnu-option {
+		color: white;
+		font-size: 12px;
+		display: block;
+	}
 }
 
 @media (min-width: 748px) {
@@ -131,6 +168,7 @@
 	.text-bx-menu {
 		color: #fff;
 		display: block;
+		font-size: 8px;
 	}
 
 	.box-menu-icons {
@@ -153,7 +191,7 @@
 	}
 
 	.text-bx-menu {
-		font-size: 1rem;
+		font-size: 10px;
 	}
 
 	.main-home {

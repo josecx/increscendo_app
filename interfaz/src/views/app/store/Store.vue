@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <ul class="list-unstyled components" :key="componentKey">
-                    <li v-if="select.categoria"><a @click="verInicio" data-toggle="collapse" aria-expanded="false">Inicio</a></li>
+                    <!-- <li v-if="select.categoria"><a @click="verInicio" data-toggle="collapse" aria-expanded="false">Inicio</a></li> -->
                     <!-- <p>Productos</p> -->
                     <li v-for="(i, key) in select.categoria" :key="key">
                         <a :href="'#submenu'+i.nombre" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">{{i.nombre}}</a>
