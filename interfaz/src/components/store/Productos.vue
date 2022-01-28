@@ -21,8 +21,10 @@
             </div>
         </div> -->
 
-
-    <div class="gallery_store" v-if="actual == 1 && !buscando">
+    <div class="gallery_store" v-if="xorden">
+        <router-view/>
+    </div>
+    <div class="gallery_store" v-if="actual == 1 && !buscando && !xorden">
         <div class="content_categoria" v-for="(i, key) in lista" :key="key">
             <img class="product_img_categoria" :src="'https://drive.google.com/uc?id='+i.imagen">
             <h3 class="categoria_h3">{{i.nombre}}</h3>
@@ -146,7 +148,8 @@ export default {
         producto: null,
         itemKey:0,
         usuario: null,
-        ximagen: null
+        ximagen: null,
+        xorden: false
     }),
     props: {
         subCat: {
@@ -227,6 +230,7 @@ export default {
         } else {
             this._getDatos()
         }
+        this.xorden = (this.$route.name != "Store") ? true : false
     },
     watch:{
         btnGuardando(){

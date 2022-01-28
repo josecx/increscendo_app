@@ -91,7 +91,19 @@ const routes = [
 	{
 		path: '/store',
 		name: 'Store',
-		component: () => import('../views/app/store/Store.vue')
+		component: () => import('../views/app/store/Store.vue'),
+		children:[
+			{
+				path: '/orden-venta',
+				name: 'OrdenVenta',
+				component: () => import('../views/app/store/OrdenVenta.vue')
+			},
+			{
+				path: '/tracking',
+				name: 'Tracking',
+				component: () => import('../views/app/store/Tracking.vue')
+			}
+		]
 	}
 ]
 
