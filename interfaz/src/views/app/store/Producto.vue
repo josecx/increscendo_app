@@ -197,7 +197,7 @@
                                     </a>
                                 </td>
                                 <td class="align-middle">
-                                    <button class="btn btn-outline-red">
+                                    <button class="btn btn-outline-red" @click="eliminarImagen(i.id)">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
@@ -260,9 +260,9 @@ export default {
                 this._guardar();
             }
         },
-        guardarProductoImagen(){
+        guardarProductoImagen(idx){
             this.guardarExtra = true
-            this.accionExtra  = "/productoImagen/"+this.xproducto
+            this.accionExtra  = "/productoImagen/"+this.xproducto+"/"+idx
             this._guardar()
         },
         getListaImagen(id){
@@ -270,6 +270,12 @@ export default {
             this.bform.producto_id = id
             this.guardarExtra = true
             this._getDatos()
+        },
+        eliminarImagen(idx){
+            if (confirm("¿Está seguro?")) {
+                this.reg = idx
+                this.guardarProductoImagen(idx)
+            }
         }
     },
     computed: {

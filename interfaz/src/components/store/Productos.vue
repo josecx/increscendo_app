@@ -23,7 +23,6 @@
 
 
     <div class="gallery_store" v-if="actual == 1 && !buscando">
-        <!--  -->
         <div class="content_categoria" v-for="(i, key) in lista" :key="key">
             <img class="product_img_categoria" :src="'https://drive.google.com/uc?id='+i.imagen">
             <h3 class="categoria_h3">{{i.nombre}}</h3>
@@ -161,6 +160,10 @@ export default {
         setProducto:{
             type: Object,
             required: false
+        },
+        verFavorito:{
+            type: Array,
+            required: false
         }
     },
     methods:{
@@ -219,6 +222,8 @@ export default {
             this.actual = this.setActual
             this.producto = this.setProducto
             this.calcular_total()
+        } else if(this.verFavorito){
+            this.lista = this.verFavorito
         } else {
             this._getDatos()
         }

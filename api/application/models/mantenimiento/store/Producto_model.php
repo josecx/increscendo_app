@@ -59,16 +59,25 @@ class Producto_model extends General_model {
 			$this->db->where("producto_id", $args["producto_id"]);
 		}
 
-		return $this->db->get("producto_imagen")->result();
+		return $this->db
+			->where("activo", 1)
+			->get("producto_imagen")
+			->result();
 	}
 
-	public function guardar_producto_imagen($args=[])
+	public function guardar_producto_imagen($args=[], $idx="")
 	{
-		if ($this->db->insert("producto_imagen", $args)) {
-			return true;
+		if (!empty($idx)) {
+			if ($this->db->where("id", $idx)->update("producto_imagen", ["activo" => 0])) {
+				return true;
+			}
 		} else {
-			return false;
+			if ($this->db->insert("producto_imagen", $args)) {
+				return true;
+			}
 		}
+
+		return false;
 	}
 
 }

@@ -4,13 +4,13 @@
 			<div class="contain-menu-home">
 				<img src="../assets/img/logo_secundario_en_fondo_oscuro.svg" height="50px" alt="logo increscendo">
 				<nav id="menu-home-top">
-					<a href="">
+					<a href="javascript:;" @click="modulo = 1">
 						<div class="cont-men-modulos">
 							<i class="fas fa-chalkboard-teacher icon-help-home"></i>
 							<span class="icon-mnu-option">School</span>
 						</div>
 					</a>
-					<a href="">
+					<a href="javascript:;" @click="modulo = 2">
 						<div class="cont-men-modulos">
 							<i class="fas fa-shopping-cart icon-help-home"></i>
 							<span class="icon-mnu-option">E-Commerce</span>
@@ -39,51 +39,52 @@
 		<div class="panel-lateral">
 			<div class="contain-panel-lateral">
 				<div class="contain-items-home">
-					<router-link :to="{ name:'Home_app' }">
-						<div class="box-menu-icons" title="Home">
-							<span class="icon-bx-menu"><i class="fas fa-home"></i></span>
-							<span class="text-bx-menu">Home</span>
-						</div>
-					</router-link>
-					<router-link :to="{ name:'Config_contenido' }" v-if="usuario.rol_id == 2 || usuario.rol_id == 1">
-						<div class="box-menu-icons" title="Configurar Contenido">
-							<span class="icon-bx-menu"><i class="fas fa-cogs"></i></span>
-							<span class="text-bx-menu">Config</span>
-						</div>
-					</router-link>
-					<router-link :to="{ name:'Contenido' }">
-						<div class="box-menu-icons" title="Contenido">
-							<span class="icon-bx-menu"><i class="fas fa-play"></i></span>
-							<span class="text-bx-menu">Contenido</span>
-						</div>
-					</router-link>
-
-
-
-					<router-link :to="{ name:'Categoria' }" v-if="usuario.rol_id == 1">
-						<div class="box-menu-icons" title="Categoría">
-							<span class="icon-bx-menu"><i class="fas fa-box"></i></span>
-							<span class="text-bx-menu">Categoría</span>
-						</div>
-					</router-link>
-					<router-link :to="{ name:'SubCategoria' }" v-if="usuario.rol_id == 1">
-						<div class="box-menu-icons" title="Sub-categoría">
-							<span class="icon-bx-menu"><i class="fas fa-boxes"></i></span>
-							<span class="text-bx-menu">Sub Categoría</span>
-						</div>
-					</router-link>
-					<router-link :to="{ name:'Producto' }" v-if="usuario.rol_id == 1">
-						<div class="box-menu-icons" title="Productos">
-							<span class="icon-bx-menu"><i class="fas fa-box-open"></i></span>
-							<span class="text-bx-menu">Producto</span>
-						</div>
-					</router-link>
-					<router-link :to="{ name:'Usuario' }" v-if="usuario.rol_id == 1">
-						<div class="box-menu-icons" title="Usuarios">
-							<span class="icon-bx-menu"><i class="fas fa-user"></i></span>
-							<span class="text-bx-menu">Usuario</span>
-						</div>
-					</router-link>
+					<div v-if="modulo == 1">
+						<router-link :to="{ name:'Home_app' }">
+							<div class="box-menu-icons" title="Home">
+								<span class="icon-bx-menu"><i class="fas fa-home"></i></span>
+								<span class="text-bx-menu">Home</span>
+							</div>
+						</router-link>
+						<router-link :to="{ name:'Config_contenido' }" v-if="usuario.rol_id == 2 || usuario.rol_id == 1">
+							<div class="box-menu-icons" title="Configurar Contenido">
+								<span class="icon-bx-menu"><i class="fas fa-cogs"></i></span>
+								<span class="text-bx-menu">Config</span>
+							</div>
+						</router-link>
+						<router-link :to="{ name:'Contenido' }">
+							<div class="box-menu-icons" title="Contenido">
+								<span class="icon-bx-menu"><i class="fas fa-play"></i></span>
+								<span class="text-bx-menu">Contenido</span>
+							</div>
+						</router-link>
+						<router-link :to="{ name:'Usuario' }" v-if="usuario.rol_id == 1">
+							<div class="box-menu-icons" title="Usuarios">
+								<span class="icon-bx-menu"><i class="fas fa-user"></i></span>
+								<span class="text-bx-menu">Usuario</span>
+							</div>
+						</router-link>
+					</div>
+					<div v-if="modulo == 2">
+						<router-link :to="{ name:'Categoria' }" v-if="usuario.rol_id == 1">
+							<div class="box-menu-icons" title="Categoría">
+								<span class="icon-bx-menu"><i class="fas fa-box"></i></span>
+								<span class="text-bx-menu">Categoría</span>
+							</div>
+						</router-link>
+						<router-link :to="{ name:'SubCategoria' }" v-if="usuario.rol_id == 1">
+							<div class="box-menu-icons" title="Sub-categoría">
+								<span class="icon-bx-menu"><i class="fas fa-boxes"></i></span>
+								<span class="text-bx-menu">Sub Categoría</span>
+							</div>
+						</router-link>
+						<router-link :to="{ name:'Producto' }" v-if="usuario.rol_id == 1">
+							<div class="box-menu-icons" title="Productos">
+								<span class="icon-bx-menu"><i class="fas fa-box-open"></i></span>
+								<span class="text-bx-menu">Producto</span>
+							</div>
+						</router-link>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -128,7 +129,8 @@
 		data: () => {
 			return {
 				usuario: null,
-				key: 0
+				key: 0,
+				modulo: 1
 			}
 		},
 		created(){

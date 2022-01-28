@@ -59,7 +59,7 @@ class Producto extends CI_Controller {
 		$this->output->set_output(json_encode($response));
 	}
 
-	public function productoImagen($id="")
+	public function productoImagen($id="", $id_imagen="")
 	{
 		$response  = ['exito' => 0, 'warning' => 0];
 		$continuar = true;
@@ -81,8 +81,8 @@ class Producto extends CI_Controller {
 		}
 
 		if ($continuar) {
-			if ($producto->guardar_producto_imagen($datos)) {
-				$accion = (!empty($id)) ? "actualizado" : "guardando";
+			if ($producto->guardar_producto_imagen($datos, $id_imagen)) {
+				$accion = (!empty($id_imagen)) ? "eliminado" : "guardando";
 				$response['exito']   = true;
 				$response['mensaje'] = "Se ha {$accion} correctamente";
 			} else {
