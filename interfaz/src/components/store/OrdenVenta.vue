@@ -1,112 +1,129 @@
 <template>
-    <div>
-        <div class="card">
-            <div class="card-body">
-                <form @submit.prevent="comprar">
-                    <div class="form-row col-sm-12 mt-2">
-                        <div class="col-sm-6">
-                            <label class="control-label">Nombre</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                v-model="form.nombre"
-                                required
-                            />
+    <div id="bg-order-venta" class="p-0">
+        <div class="content-ord-venta p-0 shadow"> 
+            <div class="box-venta-uno">
+                <div class="content-venta-mesaje">
+                    
+                </div>
+            </div>
+            <div class="box-venta-dos">
+                <!-- start form -->
+                <div class="card border-0">
+                    <div class="card-body">
+                        <div class="form-row pt-4">
+                            <!-- <i class="fas fa-receipt"></i> -->
+                            <p>Llena tus datos en el formulario para que te enviemos tu producto.</p>
                         </div>
-                        <div class="col-sm-6">
-                            <label class="control-label">Correo</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                v-model="form.correo"
-                                required
-                            />
-                        </div>
+                        <form @submit.prevent="comprar">
+                            <div class="form-row col-sm-12 mt-2">
+                                <div class="col-sm-6">
+                                    <label class="control-label">Nombre</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        v-model="form.nombre"
+                                        required
+                                    />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="control-label">Correo</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        v-model="form.correo"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-row col-sm-12 mt-2">
+                                <div class="col-sm-6">
+                                    <label class="control-label">Departamento</label>
+                                    <select 
+                                        class="custom-select"
+                                        v-model="form.departamento_id"
+                                    >
+                                        <option value="">----------</option>
+                                        <option
+                                            v-for="(i,key) in departamentos"
+                                            :value="i.id"
+                                            :key="key"
+                                        >
+                                            {{i.nombre}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="control-label">Municipio</label>
+                                    <select 
+                                        class="custom-select"
+                                        v-model="form.municipio_id"
+                                    >
+                                        <option value="">----------</option>
+                                        <option
+                                            v-for="(i,key) in municipio"
+                                            :value="i.id"
+                                            :key="key"
+                                        >
+                                            {{i.nombre}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row col-sm-12 mt-2">
+                                <label class="control-label">Dirección</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    v-model="form.direccion"
+                                    required
+                                />
+                            </div>
+                            <div class="form-row col-sm-12 mt-2">
+                                <div class="col-sm-6">
+                                    <label class="control-label">Teléfono</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        v-model="telefono"
+                                        required
+                                    />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="control-label">NIT</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        v-model="form.nit"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-row col-sm-12 mt-2">
+                                <label class="control-label">Observaciones</label>
+                                <wysiwyg
+                                    required
+                                    id="descripcion"
+                                    v-model="form.observaciones"
+                                    class="border bg-white"
+                                />
+                            </div>
+                            <div class="col-sm-12 mt-2 text-right">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Comprar
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-row col-sm-12 mt-2">
-                        <div class="col-sm-6">
-                            <label class="control-label">Departamento</label>
-                            <select 
-                                class="custom-select"
-                                v-model="form.departamento_id"
-                            >
-                                <option value="">----------</option>
-                                <option
-                                    v-for="(i,key) in departamentos"
-                                    :value="i.id"
-                                    :key="key"
-                                >
-                                    {{i.nombre}}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="control-label">Municipio</label>
-                            <select 
-                                class="custom-select"
-                                v-model="form.municipio_id"
-                            >
-                                <option value="">----------</option>
-                                <option
-                                    v-for="(i,key) in municipio"
-                                    :value="i.id"
-                                    :key="key"
-                                >
-                                    {{i.nombre}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row col-sm-12 mt-2">
-                        <label class="control-label">Dirección</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            v-model="form.direccion"
-                            required
-                        />
-                    </div>
-                    <div class="form-row col-sm-12 mt-2">
-                        <div class="col-sm-6">
-                            <label class="control-label">Teléfono</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                v-model="telefono"
-                                required
-                            />
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="control-label">NIT</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                v-model="form.nit"
-                                required
-                            />
-                        </div>
-                    </div>
-                    <div class="form-row col-sm-12 mt-2">
-                        <label class="control-label">Observaciones</label>
-                        <wysiwyg
-                            required
-                            id="descripcion"
-                            v-model="form.observaciones"
-                            class="border bg-white"
-                        />
-                    </div>
-                    <div class="col-sm-12 mt-2 text-right">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-save"></i> Comprar
-                        </button>
-                    </div>
-                </form>
+        </div>
+        <!-- fin form -->
             </div>
         </div>
+        
     </div>
 </template>
 <script>
 import Formulario from "@/mixins/Formulario.js";
+import "../../assets/css/ordenventa.css";
 export default {
     name: "OrdenVenta",
     mixins: [Formulario],
