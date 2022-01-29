@@ -17,7 +17,7 @@ export default{
 		buscando:     false,
 		buscandoExtra:false,
 		guardarExtra: false,
-		accionExtra:  null,
+		accionExtra:  "",
 		buscarExtra:  "",
 		componentKey: 0,
 		fEspecial: false,
@@ -68,8 +68,7 @@ export default{
 				this._notificarWarning("Esto podría tardar unos minutos...")
 			}
 			
-			let accion = (this.guardarExtra) ? this.accionExtra : "/guardar/"
-
+			let accion = (this.guardarExtra === true) ? this.accionExtra : "/guardar/"
 			this._enviarPeticionPost({
 				url: this.url + accion,
 				arg: this.reg,

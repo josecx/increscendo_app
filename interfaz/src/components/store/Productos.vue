@@ -180,6 +180,7 @@ export default {
         },
         agregar_carrito(){
             if(this.usuario){
+                this.guardarExtra = false
                 this.url = "/mantenimiento/store/carrito"
                 this.form.producto_id = this.producto.id
                 this._guardar()

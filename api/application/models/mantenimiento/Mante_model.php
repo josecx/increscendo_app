@@ -60,6 +60,14 @@ class Mante_model extends CI_Model {
 		->result();
 		
 	}
+	public function _getdepartamento()
+	{
+		return $this->db->get("departamento")->result();
+	}
+	public function _getmunicipio()
+	{
+		return $this->db->get("municipio")->result();
+	}
 }
 
 /* End of file Mante_model.php */
