@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg rounded border">
+    <nav class="navbar navbar-expand-lg rounded border shadow-sm bg-white rounded border-0 mb-2 py-3">
       <a class="navbar-brand" href="javascript:;">PUBLICACIONES</a>
       <div class="container-fluid">
         <button
@@ -187,10 +187,10 @@
         <div
           v-for="(i, key) in lista"
           :key="key"
-          class="col-12 col-sm-10"
-          v-bind:class="{ 'col-sm-12': i.tipo_recurso_id == 3 }"
+          class="col-12 col-sm-10 mt-3"
+          v-bind:class="{ 'col-12 col-sm-10': i.tipo_recurso_id == 3 }"
         >
-          <div class="card" style="max-height: 100%; height: 100%">
+          <div class="card border-0 shadow" style="max-height: 100%; height: 100%">
             <!-- <div class="card-header text-right" v-if="usuario.rol_id == 1">
 						<button class="btn btn-outline-danger" @click="eliminarPublicacion(i)">
 							<i class="fas fa-trash"></i>

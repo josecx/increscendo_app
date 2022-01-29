@@ -20,7 +20,7 @@
 			</nav>
 
 			<div v-if="verForm && actual == 1" class="card mt-2">
-				<div class="card-body">
+				<div class="card-body border-0">
 					<button type="button" class="close pr-2" aria-label="Close" @click="_cerrarFormulario">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -51,7 +51,7 @@
 				</div>
 			</div>
 
-			<div class="card mt-2">
+			<div class="card mt-2 border-0">
 				<div class="card-body">
 					<div class="col-sm-12 form-row" v-if="lista.length > 0 && !buscando">
 						<div v-for="(i, key) in lista" :key="key" class="col-sm-3 mt-2">
